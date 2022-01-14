@@ -1,0 +1,135 @@
+#view_99 #kn-input-field_8, #view_99 #kn-input-field_9, #view_99 #kn-input-field_14, #view_130, #view_127 #kn-input-field_125, #view_131, #view_104 #kn-input-field_125 {
+    visibility: hidden;
+    position: absolute;
+}
+
+#view_98 .control {
+    display: flex;
+    justify-content: space-between;
+}
+
+#view_98 .header-logout {
+    color: #43a1c6;
+    text-decoration: underline;
+    align-self: center;
+}
+
+.kn-modal-bg .kn-modal {
+    margin: 100px 0 !important;
+}
+
+#view_110 .content {
+    text-align: center;
+}
+
+#view_110 .kn-log-out {
+    min-width: 30%;
+    display: inline-block;
+    text-decoration: none;
+    padding: 16px 8px;
+    background: linear-gradient(0deg, rgba(255, 0, 0, 0.1), rgba(255, 0, 0, 0.1)),
+        #ffffff;
+    border-radius: 4px;
+    margin: 50px 0px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 14px;
+    color: #444444;
+    text-align: center;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+#view_110 .kn-log-out:hover {
+    background: #ffd2ce;
+}
+
+#view_113 .kn-detail-label {
+    min-width: 50% !important;
+    max-width: 50% !important;
+}
+
+#view_113 section .kn-details-group {
+    width: 50%;
+    margin: auto;
+}
+
+#view_113 section .kn-details-group .kn-table {
+    border: 1px solid;
+}
+
+#view_116 .control {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#view_117 {
+    width: 50%;
+    margin: auto;
+    border: 1px solid;
+}
+
+#kn-scene_25 h2.kn-title {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+#view_113 h2.kn-title {
+    margin-top: auto !important;
+}
+
+#view_111 h2.kn-title {
+    margin-bottom: auto !important;
+}
+
+#view_111 p.kn-description {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#kn-scene_25 .kn-report-content h3.kn-title {
+    text-align: center;
+    width: 500px;
+}
+
+#view_41 section.columns {
+    margin-top: 0 !important;
+}
+
+#view_103 section.columns {
+    margin-top: 0 !important;
+}
+
+#kn-scene_15 > div {
+    margin-bottom: 30px;
+}
+
+#view_98, #view_42, #view_115 {
+    margin-bottom: 30px !important;
+}
+
+#view_42 {
+    margin-top: 30px !important;
+}
+
+#view_101 {
+    padding-top: 50px;
+}
+
+#kn-scene_11 .kn-table ::-webkit-scrollbar {
+    display: none;
+}
+
+#view_124 {
+    margin: auto;
+    margin-top: 30px;
+}
+
+#view_126 .content {
+    display: flex;
+    float: right;
+    margin-bottom: 30px;
+}

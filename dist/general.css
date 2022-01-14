@@ -1,0 +1,239 @@
+/* General */
+
+#kn-app-mobile-container #knack-logo {
+  display: none !important;
+}
+
+#knack-body, body {
+  font-family: "Inter", sans-serif !important;
+  background-color: #f8f8f8 !important;
+}
+
+#knack-body .kn-content {
+  height: 100vh;
+  width: 100%;
+  margin: auto;
+  display: flex !important;
+  flex-direction: column !important;
+  position: relative;
+}
+
+.kn-scenes.kn-section .kn-container {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.kn-scenes.kn-section {
+  padding: 0px;
+  height: 100%;
+  max-width: 330px;
+  width: 100%;
+  margin: auto;
+}
+
+.kn-view {
+  margin-bottom: 0px !important;
+}
+
+@media only screen and (max-width: 412px) {
+  #knack-body .kn-content {
+    max-width: unset;
+  }
+}
+
+.btn {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  font-family: "Inter" !important;
+  font-weight: 400;
+  font-size: 14px;
+  font-style: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Header Styles */
+.kn-info-bar {
+  visibility: hidden !important;
+}
+
+header#kn-app-header {
+  width: 100%;
+  height: 64px;
+  margin: auto;
+  background: #fff !important;
+  color: #444 !important;
+  padding: 0px !important;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+}
+
+header#kn-app-header .kn-container {
+  width: 100%;
+  height: 100%;
+  max-width: unset !important;
+  margin: auto !important;
+  display: flex;
+  align-items: center;
+  padding: 4px 24px;
+  justify-content: start;
+  flex-direction: row !important;
+}
+
+@media only screen and (max-width: 768px) {
+  header#kn-app-header .kn-container {
+    padding: 4px 16px;
+  }
+}
+
+header#kn-app-header .kn-container #app-menu-container {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto 0px auto 45px;
+}
+
+header#kn-app-header .kn-container #kn-app-menu {
+  width: 100%;
+}
+
+header#kn-app-header .kn-container #knack-logo-custom .kn-title {
+  font-family: "Inter" !important;
+  font-style: normal;
+  font-weight: 900 !important;
+  font-size: 22px;
+  line-height: 26px;
+  letter-spacing: 0.08em;
+  color: #004685 !important;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+header#kn-app-header .kn-container #knack-logo-custom {
+  margin: 0;
+}
+
+header#kn-app-header .kn-container .kn-mobile-controls {
+  display: none !important;
+}
+
+.kn-content .kn-navigation-bar .buttons.is-nav #app-menu-list {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.kn-content .kn-navigation-bar .buttons.is-nav #app-menu-list li {
+  margin: auto 8px;
+}
+
+.kn-content .kn-navigation-bar .buttons.is-nav #app-menu-list li a {
+  font-family: "Inter" !important;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px !important;
+  line-height: 19px !important;
+  color: #999 !important;
+  background: white !important;
+  transition: all 0.2s ease-in-out;
+}
+
+.kn-content .kn-navigation-bar .buttons.is-nav #app-menu-list li a:hover {
+  color: #333 !important;
+}
+
+.kn-content .kn-navigation-bar .buttons.is-nav #app-menu-list li.is-active {
+  border-radius: 0px !important;
+  border-bottom: 2px solid #7f3e3b !important;
+}
+
+.kn-content .kn-navigation-bar .buttons.is-nav #app-menu-list li.is-active a {
+  font-weight: 600 !important;
+  color: #7f3e3b !important;
+}
+
+.kn-content .kn-navigation-bar a.header-logout {
+  padding: 10px 20px;
+  border-radius: 500px;
+  text-decoration: none !important;
+  font-family: "Inter" !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  border: 2px solid #eee;
+  color: #888 !important;
+  background: transparent !important;
+  transition: all 0.3s ease-in-out;
+  margin: auto 8px auto auto;
+}
+
+.kn-content .kn-navigation-bar a.header-logout:hover {
+  color: #027470 !important;
+  border-color: #027470 !important;
+}
+
+/* bottom navigation */
+.mobile-nav {
+  position: fixed !important;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: 36px;
+  background: #020674;
+  box-shadow: 0px -2px 4px rgba(187, 187, 187, 0.4);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media only screen and (min-width: 768px) {
+  .mobile-nav {
+    display: none;
+  }
+}
+
+.mobile-nav > ul > a.header-logout {
+  display: none !important;
+}
+
+.mobile-nav ul {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style-type: none !important;
+  padding: 0px !important;
+}
+
+.mobile-nav ul li {
+  flex-grow: 1;
+  flex-basis: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-nav ul li a {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none !important;
+  cursor: pointer;
+  color: #7e80b8;
+}
+
+.mobile-nav ul li.is-active a {
+  color: #fff;
+}

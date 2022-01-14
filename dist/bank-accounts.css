@@ -1,0 +1,87 @@
+/* Bank Accounts */
+.view_45, .view_69 {
+  display: none !important;
+}
+
+.main-accounts-container {
+  width: 100%;
+  margin: 16px auto;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: 1px solid #eeeeee;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+.main-accounts-container .accounts-header {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 52px;
+  padding: 20px 16px;
+}
+
+.main-accounts-container .accounts-header .ah-title {
+  font-family: "Inter" !important;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #838383;
+}
+
+.bank-account-item {
+  width: 100%;
+  margin: auto;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.bank-account-item.bordered {
+  border-top: 1px solid #eee;
+}
+
+.bank-account-item .img-bank {
+  border-radius: 64px;
+  border: 1px solid #eee;
+  width: 56px;
+  height: 56px;
+  padding: 9px;
+}
+
+.bank-account-item .bci-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 16px;
+}
+
+.bank-account-item .bci-content .bci-bank-name {
+  width: 100%;
+  margin: auto auto 8px auto;
+  text-align: left;
+  font-family: "Inter" !important;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+}
+
+.bank-account-item .bci-content .bci-account {
+  width: 100%;
+  margin: auto;
+  text-align: left;
+  font-family: "Courier New" !important;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: 0.1em;
+  color: #777;
+}
