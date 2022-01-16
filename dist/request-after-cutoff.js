@@ -148,7 +148,9 @@ if (cutoff_fee_setting == 0) {
   var cutoff_fee_message = "There is a fee of " + cutoff_fee_setting + " " + currency + " per disbursement";
 }
 
-$('.view_133 form .kn-input .kn-radio .control').each(function () {
+// Withdrawal Speed
+
+$('.view_133 form #kn-input-field_92.kn-input .kn-radio .control').each(function () {
   let radioContent = $(this).find('.option.radio div');
   let radioContentText = $(radioContent).text().trim().split('-');
 
@@ -157,11 +159,11 @@ $('.view_133 form .kn-input .kn-radio .control').each(function () {
       var withdrawal_speed = normal_withdrawal_speed;
       var speed_type = "normal";
   } else if ($(radioContent).text().toLowerCase().indexOf("fast") > -1) {
+    $(this).addClass("selected");
     var fee_message = fast_fee_message;
     var withdrawal_speed = fast_withdrawal_speed;
     var speed_type = "fast";
   } else {
-    $(this).addClass("selected");
     $(this).find( "input" ).prop("checked", true);
     var fee_message = cutoff_fee_message;
     var withdrawal_speed = cutoff_withdrawal_speed;

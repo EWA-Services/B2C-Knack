@@ -107,16 +107,18 @@ if (cutoff_fee_setting == 0) {
   var cutoff_fee_message = "There is a fee of " + cutoff_fee_setting + " " + currency + " per disbursement";
 }
 
-$('.view_105 form .kn-input .kn-radio .control').each(function () {
+// Withdrawal Speed
+
+$('.view_105 form #kn-input-field_92.kn-input .kn-radio .control').each(function () {
     let radioContent = $(this).find('.option.radio div');
     let radioContentText = $(radioContent).text().trim().split('-');
 
     if ($(radioContent).text().toLowerCase().indexOf("normal") > -1) {
-        $(this).addClass("selected");
         var fee_message = normal_fee_message;
         var withdrawal_speed = normal_withdrawal_speed;
         var speed_type = "normal";
     } else if ($(radioContent).text().toLowerCase().indexOf("fast") > -1) {
+      $(this).addClass("selected");
       var fee_message = fast_fee_message;
       var withdrawal_speed = fast_withdrawal_speed;
       var speed_type = "fast";
@@ -137,13 +139,42 @@ $('.view_105 form .kn-input .kn-radio .control').each(function () {
     $(radioContent).html(newContentTemplate);
 });
 
-$('.view_105 form .kn-radio input[type=radio][name=view_105-field_92]').change(function (e) {
+$('.view_105 form #kn-input-field_92.kn-radio input[type=radio][name=view_105-field_92]').change(function (e) {
     $('.view_105 form .kn-radio input').each(function () {
         $(this).closest('.control').removeClass('selected');
     });
 
     if (!$(e.target).closest('.control').hasClass('selected'))
         $(e.target).closest('.control').addClass('selected');
+});
+
+// Tipping Feature
+
+$('.view_105 form #kn-input-field_126.kn-input .kn-radio .control').each(function () {
+  let radioContent = $(this).find('.option.radio div');
+
+  if ($(radioContent).text().toLowerCase().indexOf("10%") > -1) {
+    $(this).addClass("selected");
+  }
+
+  /* let newContentTemplate = `
+      <div class='${speed_type}'>
+          <span class='widthdrawl-radio'>
+              <span class='wr-title'>${radioContentText[0]}</span>
+              <span class='wr-desc'>${radioContentText[1].replace('{withdrawal_fee}', fee_message).replace('{withdrawal_speed}', withdrawal_speed)}</span>
+          </span>
+      </div>
+  `;
+  $(radioContent).html(newContentTemplate); */
+});
+
+$('.view_105 form #kn-input-field_126.kn-radio input[type=radio][name=view_105-field_92]').change(function (e) {
+  $('.view_105 form .kn-radio input').each(function () {
+      $(this).closest('.control').removeClass('selected');
+  });
+
+  if (!$(e.target).closest('.control').hasClass('selected'))
+      $(e.target).closest('.control').addClass('selected');
 });
 
 // Hide error and validation message on form submit
@@ -206,6 +237,7 @@ if (max_allowed_employee > 0 && max_allowed_company > 0) {
 }
 
 // Get withdrawal fee value
+
 var speed = $('input[name="view_105-field_92"]:checked').val();
 if (speed.toLowerCase().indexOf("normal") > -1) {
   var withdrawal_fee = normal_fee_setting;
@@ -216,6 +248,37 @@ if (speed.toLowerCase().indexOf("normal") > -1) {
 }
 $("#view_105 #field_63").attr("value", withdrawal_fee);
 var available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
+
+// Tipping amount
+
+var tipping_options = $('input[name="view_105-field_126"]:checked').val();
+if (tipping_options.toLowerCase().indexOf("5%") > -1) {
+  var tip_perc = 0.05;
+} else if (speed.toLowerCase().indexOf("10%") > -1) {
+  var tip_perc = 0.1;
+} else if (speed.toLowerCase().indexOf("20%") > -1) {
+  var tip_perc = 0.2;
+} else {
+  var tip_perc = 0;
+}
+
+$("#view_105 #field_127").attr("value", (Math.round(requested_amount*tip_perc*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+
+$("input[type=radio][name=view_105-field_92]").change(function () {
+  var input_val = $("#field_18").val();
+  var tipping_options = $('input[name="view_105-field_126"]:checked').val();
+  if (tipping_options.toLowerCase().indexOf("5%") > -1) {
+    var tip_perc = 0.05;
+  } else if (speed.toLowerCase().indexOf("10%") > -1) {
+    var tip_perc = 0.1;
+  } else if (speed.toLowerCase().indexOf("20%") > -1) {
+    var tip_perc = 0.2;
+  } else {
+    var tip_perc = 0;
+  }
+  $("#view_105 #field_127").attr("value", (Math.round(requested_amount*tip_perc*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+  console.log((Math.round(requested_amount*tip_perc*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+});
 
 if (max_allowed > 0) {
   var max_allowed_bis = Math.min(max_allowed, available_amount);

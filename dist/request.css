@@ -17,12 +17,13 @@
   margin: 0 0 0 4% !important;
 }
 
+#view_105 #kn-input-field_92 div.kn-radio .control:nth-child(1),
 #view_105 #kn-input-field_92 div.kn-radio .control:nth-child(3) {
   display: none;
 }
 
 #view_133 #kn-input-field_92 div.kn-radio .control:nth-child(1),
-#view_133 #kn-input-field_92 div.kn-radio .control:nth-child(2) {
+#view_133 #kn-input-field_92 div.kn-radio .control:nth-child(3) {
   display: none;
 }
 
@@ -138,8 +139,8 @@
   width: 100%;
 }
 
-.view_105 form .kn-input .kn-radio .control,
-.view_133 form .kn-input .kn-radio .control {
+.view_105 form #kn-input-field_92.kn-input .kn-radio .control,
+.view_133 form #kn-input-field_92.kn-input .kn-radio .control {
   width: 100%;
   margin: auto auto 8px auto;
   padding: 12px;
@@ -320,4 +321,35 @@
   font-size: 16px;
   color: #000000;
   font-weight: 500;
+}
+
+#kn-input-field_126 div.kn-radio {
+  display: flex;
+}
+
+.view_105 form #kn-input-field_126.kn-input .kn-radio .control,
+.view_133 form #kn-input-field_126.kn-input .kn-radio .control {
+  width: 100%;
+  margin: auto auto 8px auto;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1.5px solid #eee;
+  background: transparent;
+  transition: all 0.2s ease-in-out;
+  margin: 0 2px;
+}
+
+.view_105 form #kn-input-field_126.kn-input .kn-radio .control label,
+.view_133 form #kn-input-field_126.kn-input .kn-radio .control label {
+  font-size: 12px !important;
+}
+
+.view_105 form #kn-input-field_126.kn-input .kn-radio .control input,
+.view_133 form #kn-input-field_126.kn-input .kn-radio .control input {
+  margin-right: 5px;
+}
+
+#view_105 #kn-input-field_127, #view_133 #kn-input-field_127 {
+  visibility: hidden;
+  position: absolute;
 }
