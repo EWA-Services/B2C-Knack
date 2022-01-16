@@ -159,7 +159,7 @@ $('.view_105 form #kn-input-field_126.kn-input .kn-radio .control').each(functio
 });
 
 $('.view_105 form #kn-input-field_126 .kn-radio input[type=radio][name=view_105-field_126]').change(function (e) {
-  $('.view_105 form .kn-radio input').each(function () {
+  $('.view_105 form #kn-input-field_126 .kn-radio input').each(function () {
       $(this).closest('.control').removeClass('selected');
   });
 
@@ -248,9 +248,9 @@ var available_amount = calculate_withdrawable(base_salary, requested_amount, wit
 var tipping_options = $('input[name="view_105-field_126"]:checked').val();
 if (tipping_options.toLowerCase().indexOf("5%") > -1) {
   var tip_perc = 0.05;
-} else if (speed.toLowerCase().indexOf("10%") > -1) {
+} else if (tipping_options.toLowerCase().indexOf("10%") > -1) {
   var tip_perc = 0.1;
-} else if (speed.toLowerCase().indexOf("20%") > -1) {
+} else if (tipping_options.toLowerCase().indexOf("20%") > -1) {
   var tip_perc = 0.2;
 } else {
   var tip_perc = 0;
@@ -263,9 +263,9 @@ $("input[type=radio][name=view_105-field_126]").change(function () {
   var tipping_options = $('input[name="view_105-field_126"]:checked').val();
   if (tipping_options.toLowerCase().indexOf("5%") > -1) {
     var tip_perc = 0.05;
-  } else if (speed.toLowerCase().indexOf("10%") > -1) {
+  } else if (tipping_options.toLowerCase().indexOf("10%") > -1) {
     var tip_perc = 0.1;
-  } else if (speed.toLowerCase().indexOf("20%") > -1) {
+  } else if (tipping_options.toLowerCase().indexOf("20%") > -1) {
     var tip_perc = 0.2;
   } else {
     var tip_perc = 0;

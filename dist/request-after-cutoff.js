@@ -200,7 +200,7 @@ $('.view_133 form #kn-input-field_126.kn-input .kn-radio .control').each(functio
 });
 
 $('.view_133 form #kn-input-field_126 .kn-radio input[type=radio][name=view_133-field_126]').change(function (e) {
-  $('.view_133 form .kn-radio input').each(function () {
+  $('.view_133 form #kn-input-field_126 .kn-radio input').each(function () {
       $(this).closest('.control').removeClass('selected');
   });
 
@@ -329,9 +329,9 @@ var max_allowed_bis = Math.min.apply(null, arr.filter(Boolean));
 var tipping_options = $('input[name="view_133-field_126"]:checked').val();
 if (tipping_options.toLowerCase().indexOf("5%") > -1) {
   var tip_perc = 0.05;
-} else if (speed.toLowerCase().indexOf("10%") > -1) {
+} else if (tipping_options.toLowerCase().indexOf("10%") > -1) {
   var tip_perc = 0.1;
-} else if (speed.toLowerCase().indexOf("20%") > -1) {
+} else if (tipping_options.toLowerCase().indexOf("20%") > -1) {
   var tip_perc = 0.2;
 } else {
   var tip_perc = 0;
@@ -344,9 +344,9 @@ $("input[type=radio][name=view_133-field_126]").change(function () {
   var tipping_options = $('input[name="view_133-field_126"]:checked').val();
   if (tipping_options.toLowerCase().indexOf("5%") > -1) {
     var tip_perc = 0.05;
-  } else if (speed.toLowerCase().indexOf("10%") > -1) {
+  } else if (tipping_options.toLowerCase().indexOf("10%") > -1) {
     var tip_perc = 0.1;
-  } else if (speed.toLowerCase().indexOf("20%") > -1) {
+  } else if (tipping_options.toLowerCase().indexOf("20%") > -1) {
     var tip_perc = 0.2;
   } else {
     var tip_perc = 0;
