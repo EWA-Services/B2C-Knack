@@ -156,19 +156,9 @@ $('.view_105 form #kn-input-field_126.kn-input .kn-radio .control').each(functio
   if ($(radioContent).text().toLowerCase().indexOf("10%") > -1) {
     $(this).addClass("selected");
   }
-
-  /* let newContentTemplate = `
-      <div class='${speed_type}'>
-          <span class='widthdrawl-radio'>
-              <span class='wr-title'>${radioContentText[0]}</span>
-              <span class='wr-desc'>${radioContentText[1].replace('{withdrawal_fee}', fee_message).replace('{withdrawal_speed}', withdrawal_speed)}</span>
-          </span>
-      </div>
-  `;
-  $(radioContent).html(newContentTemplate); */
 });
 
-$('.view_105 form #kn-input-field_126.kn-radio input[type=radio][name=view_105-field_92]').change(function (e) {
+$('.view_105 form #kn-input-field_126.kn-radio input[type=radio][name=view_105-field_126]').change(function (e) {
   $('.view_105 form .kn-radio input').each(function () {
       $(this).closest('.control').removeClass('selected');
   });
@@ -178,15 +168,18 @@ $('.view_105 form #kn-input-field_126.kn-radio input[type=radio][name=view_105-f
 });
 
 // Hide error and validation message on form submit
+
 $(document).on("knack-form-submit.view_105", function (event, view, record) {
   $(".error-message-custom").hide();
   $(".validation-message-custom").hide();
 });
 
 // Disable the Submission Button
+
 $("#view_105 .kn-button.is-primary").prop("disabled", true);
 
 // Variables for Global Conditions
+
 var requested_transactions = parseInt($("#view_66 .kn-pivot-calc:eq(1)").text().replace(/,/g, "") == "" ? 0 : $("#view_66 .kn-pivot-calc:eq(1)").text().replace(/,/g, ""));
 var max_number_requests = parseFloat($("#view_64 .field_91 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_64 .field_91 .kn-detail-body").text().replace(/,/g, ""));
 var input_val = 0;
@@ -206,6 +199,7 @@ $.each(months, function(i,v) {
 var cutoff_day = cutoff_day == "" ? "-" : cutoff_day;
 
 // Calculate Withdrawable Amount Variables
+
 var base_salary = parseFloat($("#view_65 .field_44 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_65 .field_44 .kn-detail-body").text().replace(/,/g, ""));
 var requested_amount = parseFloat($("#view_66 .kn-pivot-calc:eq(0)").text().replace(/,/g, "") == "" ? 0 : $("#view_66 .kn-pivot-calc:eq(0)").text().replace(/,/g, ""));
 var withdrawable_threshold = parseFloat($("#view_64 .field_89 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_64 .field_89 .kn-detail-body").text().replace(/,/g, ""));
@@ -264,7 +258,7 @@ if (tipping_options.toLowerCase().indexOf("5%") > -1) {
 
 $("#view_105 #field_127").attr("value", (Math.round(requested_amount*tip_perc*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
-$("input[type=radio][name=view_105-field_92]").change(function () {
+$("input[type=radio][name=view_105-field_126]").change(function () {
   var input_val = $("#field_18").val();
   var tipping_options = $('input[name="view_105-field_126"]:checked').val();
   if (tipping_options.toLowerCase().indexOf("5%") > -1) {
