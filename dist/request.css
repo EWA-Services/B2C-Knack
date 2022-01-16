@@ -152,8 +152,8 @@
 
 .view_105 form .kn-input .kn-radio .control.selected,
 .view_133 form .kn-input .kn-radio .control.selected {
-  background: #FFFFFF;
-  border: 1.5px solid rgba(38, 50, 56, 0.1);
+  background: #FFFFFF !important;
+  border: 1.5px solid rgba(38, 50, 56, 0.1) !important;
 }
 
 .view_105 form .kn-input .kn-radio .option.radio,
@@ -164,8 +164,8 @@
   justify-content: center;
 }
 
-.view_105 form .kn-input .kn-radio .option.radio div,
-.view_133 form .kn-input .kn-radio .option.radio div {
+.view_105 form #kn-input-field_92.kn-input .kn-radio .option.radio div,
+.view_133 form #kn-input-field_92.kn-input .kn-radio .option.radio div {
   flex-grow: 1;
   display: flex;
   margin-left: 12px;
