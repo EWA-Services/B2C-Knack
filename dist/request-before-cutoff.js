@@ -139,14 +139,14 @@ $('.view_105 form #kn-input-field_92.kn-input .kn-radio .control').each(function
     $(radioContent).html(newContentTemplate);
 });
 
-$('.view_105 form #kn-input-field_92.kn-radio input[type=radio][name=view_105-field_92]').change(function (e) {
+/* $('.view_105 form #kn-input-field_92 .kn-radio input[type=radio][name=view_105-field_92]').change(function (e) {
     $('.view_105 form .kn-radio input').each(function () {
         $(this).closest('.control').removeClass('selected');
     });
 
     if (!$(e.target).closest('.control').hasClass('selected'))
         $(e.target).closest('.control').addClass('selected');
-});
+}); */
 
 // Tipping Feature
 
@@ -158,7 +158,7 @@ $('.view_105 form #kn-input-field_126.kn-input .kn-radio .control').each(functio
   }
 });
 
-$('.view_105 form #kn-input-field_126.kn-radio input[type=radio][name=view_105-field_126]').change(function (e) {
+$('.view_105 form #kn-input-field_126 .kn-radio input[type=radio][name=view_105-field_126]').change(function (e) {
   $('.view_105 form .kn-radio input').each(function () {
       $(this).closest('.control').removeClass('selected');
   });
@@ -270,8 +270,8 @@ $("input[type=radio][name=view_105-field_126]").change(function () {
   } else {
     var tip_perc = 0;
   }
-  $("#view_105 #field_127").attr("value", (Math.round(requested_amount*tip_perc*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-  console.log((Math.round(requested_amount*tip_perc*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+  $("#view_105 #field_127").attr("value", (Math.round(input_val*tip_perc*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+  console.log((Math.round(input_val*tip_perc*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 });
 
 if (max_allowed > 0) {

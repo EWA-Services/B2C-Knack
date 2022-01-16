@@ -199,7 +199,7 @@ $('.view_133 form #kn-input-field_126.kn-input .kn-radio .control').each(functio
   }
 });
 
-$('.view_133 form #kn-input-field_126.kn-radio input[type=radio][name=view_133-field_126]').change(function (e) {
+$('.view_133 form #kn-input-field_126 .kn-radio input[type=radio][name=view_133-field_126]').change(function (e) {
   $('.view_133 form .kn-radio input').each(function () {
       $(this).closest('.control').removeClass('selected');
   });
@@ -351,8 +351,8 @@ $("input[type=radio][name=view_133-field_126]").change(function () {
   } else {
     var tip_perc = 0;
   }
-  $("#view_133 #field_127").attr("value", (Math.round(requested_amount*tip_perc*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-  console.log((Math.round(requested_amount*tip_perc*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+  $("#view_133 #field_127").attr("value", (Math.round(input_val*tip_perc*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+  console.log((Math.round(input_val*tip_perc*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 });
 
 if (max_allowed > 0) {
