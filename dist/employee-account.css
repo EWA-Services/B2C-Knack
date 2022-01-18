@@ -72,3 +72,26 @@
 #view_57 .kn-log-out:hover {
   background: #ffd2ce;
 }
+
+#view_134 .line-widget {
+  text-align: center;
+}
+
+#view_134 .line-widget .line-question {
+  font-family: Inter!important;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  color: #000;
+  margin: 10px auto 5px auto;
+}
+
+#view_134 .line-widget .line-cta {
+  font-family: Inter!important;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 16px;
+  color: #000;
+  margin: auto auto 10px auto;
+}
+    
