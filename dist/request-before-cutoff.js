@@ -74,6 +74,10 @@ display_message = function (json_obj) {
   }
 };
 
+// Wrapping the tips amount for styling purposes
+
+$("#kn-input-field_126 .kn-radio .control:lt(3)").wrapAll('<div class="wrapper-tips"></div>');
+
 // Adding tip amounts on load -> all zeros
 
 $('.view_105 form #kn-input-field_126 .wrapper-tips .control').each(function () {
@@ -81,10 +85,6 @@ $('.view_105 form #kn-input-field_126 .wrapper-tips .control').each(function () 
   console.log($(this));
   $("<span class='tip-amt'>0</span>").insertAfter($(this).find("label"));
 });
-
-// Wrapping the tips amount for styling purposes
-
-$("#kn-input-field_126 .kn-radio .control:lt(3)").wrapAll('<div class="wrapper-tips"></div>');
 
 // Add placeholders + classes to the form view (view_105)
 
