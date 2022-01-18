@@ -72,6 +72,12 @@ function display_message (json_obj) {
 
 $("#kn-input-field_126 .kn-radio .control:lt(3)").wrapAll('<div class="wrapper-tips"></div>');
 
+// Adding tip amounts on load -> all zeros
+
+$('.view_133 form #kn-input-field_126 .wrapper-tips .control').each(function () {
+  $("<span class='tip-amt'>0</span>").insertAfter($(this).find("label"));
+});
+
 // Function that updates the proceed button state on jsignature field change
 
 $("#view_133-field_119").change(function () {
@@ -354,8 +360,9 @@ $("input[type=radio][name=view_133-field_126]").change(function () {
   } else {
     var tip_perc = 0;
   }
-  $("#view_133 #field_127").attr("value", (Math.round(input_val*tip_perc*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-  console.log((Math.round(input_val*tip_perc*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+  // $("#view_133 #field_127").attr("value", (Math.round(input_val*tip_perc*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+  // console.log((Math.round(input_val*tip_perc*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+  $("#view_133 #field_127").attr("value", input_val*tip_perc);
 });
 
 if (max_allowed > 0) {
@@ -399,5 +406,11 @@ $("input#field_18").on("input", function (e) {
   var output = amount_requested_checks(base_salary, employed_since_days, available_amount, min_allowed, max_allowed, max_cutoff_allowed, requested_transactions, max_number_requests, input_val);
   display_message(output);
 
-  console.log(tip_perc*input_val);
+  $('.view_133 form #kn-input-field_126 .wrapper-tips .control').each(function () {
+    var perc = $(this).find("label div").text().replace("%","")/100;
+    var tip_amount = perc*input_val;
+    $(this).find("span.tip-amt").text((Math.round(tip_amount*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+  });
+
+  $("#view_133 #field_127").attr("value", input_val*perc);
 });
