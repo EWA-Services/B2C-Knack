@@ -323,8 +323,9 @@
   font-weight: 500;
 }
 
-#kn-input-field_126 div.kn-radio {
+#kn-input-field_126 div.kn-radio .wrapper-tips {
   display: flex;
+  margin-bottom: 10px;
 }
 
 .view_105 form #kn-input-field_126.kn-input .kn-radio .control,
@@ -336,12 +337,19 @@
   border: 1.5px solid #eee;
   background: transparent;
   transition: all 0.2s ease-in-out;
-  margin: 0 2px;
 }
 
-.view_105 form #kn-input-field_126.kn-input .kn-radio .control label,
-.view_133 form #kn-input-field_126.kn-input .kn-radio .control label {
-  font-size: 12px !important;
+.view_105 form #kn-input-field_126.kn-input .kn-radio .control:nth-child(1),
+.view_105 form #kn-input-field_126.kn-input .kn-radio .control:nth-child(3),
+.view_133 form #kn-input-field_126.kn-input .kn-radio .control:nth-child(1),
+.view_133 form #kn-input-field_126.kn-input .kn-radio .control:nth-child(3) {
+  padding: 22px 8px;
+}
+
+.view_105 form #kn-input-field_126.kn-input .kn-radio .control:nth-child(2),
+.view_133 form #kn-input-field_126.kn-input .kn-radio .control:nth-child(2) {
+  margin: 0 2px;
+  padding: 22px 8px;
 }
 
 .view_105 form #kn-input-field_126.kn-input .kn-radio .control input,

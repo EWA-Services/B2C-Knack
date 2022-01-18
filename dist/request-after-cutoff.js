@@ -68,8 +68,11 @@ function display_message (json_obj) {
   }
 };
 
-// Function that updates the proceed button state on jsignature field change
+// Wrapping the tips amount for styling purposes
 
+$("#kn-input-field_126 .kn-radio .control:lt(3)").wrapAll('<div class="wrapper-tips"></div>');
+
+// Function that updates the proceed button state on jsignature field change
 
 $("#view_133-field_119").change(function () {
   var base30Data = $("#view_133-field_119").jSignature('getData','base30')[1];
@@ -395,4 +398,6 @@ $("input#field_18").on("input", function (e) {
   available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
   var output = amount_requested_checks(base_salary, employed_since_days, available_amount, min_allowed, max_allowed, max_cutoff_allowed, requested_transactions, max_number_requests, input_val);
   display_message(output);
+
+  console.log(tip_perc*input_val);
 });

@@ -74,6 +74,10 @@ display_message = function (json_obj) {
   }
 };
 
+// Wrapping the tips amount for styling purposes
+
+$("#kn-input-field_126 .kn-radio .control:lt(3)").wrapAll('<div class="wrapper-tips"></div>');
+
 // Add placeholders + classes to the form view (view_105)
 
 ($('.view_105 form #field_18').attr("placeholder", "Amount"));
@@ -315,4 +319,6 @@ $("input#field_18").on("input", function (e) {
   available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
   var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, requested_transactions, max_number_requests, input_val);
   display_message(output);
+
+  console.log(tip_perc*input_val);
 });
