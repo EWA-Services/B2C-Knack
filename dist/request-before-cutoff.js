@@ -250,8 +250,6 @@ var available_amount = calculate_withdrawable(base_salary, requested_amount, wit
 // Tipping amount
 
 var tipping_options = $('input[name="view_105-field_126"]:checked').val();
-console.log("test1");
-console.log(tipping_options);
 if (tipping_options.toLowerCase().indexOf("5%") > -1) {
   var tip_perc = 0.05;
 } else if (tipping_options.toLowerCase().indexOf("10%") > -1) {
@@ -267,8 +265,6 @@ $("#view_105 #field_127").attr("value", (Math.round(requested_amount*tip_perc*10
 $("input[type=radio][name=view_105-field_126]").change(function () {
   var input_val = $("#field_18").val();
   var tipping_options = $('input[name="view_105-field_126"]:checked').val();
-  console.log("test2");
-  console.log(tipping_options);
   if (tipping_options.toLowerCase().indexOf("5%") > -1) {
     var tip_perc = 0.05;
   } else if (tipping_options.toLowerCase().indexOf("10%") > -1) {
@@ -325,4 +321,7 @@ $("input#field_18").on("input", function (e) {
   display_message(output);
 
   console.log(tip_perc*input_val);
+  $('.view_105 form #kn-input-field_126 .wrapper-tips .control div').each(function () {
+    console.log($(this).val());
+  });
 });
