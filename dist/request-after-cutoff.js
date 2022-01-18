@@ -410,5 +410,15 @@ $("input#field_18").on("input", function (e) {
     $(this).find("span.tip-amt").text((Math.round(tip_amount*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
   });
 
+  var tipping_options = $('input[name="view_133-field_126"]:checked').val();
+  if (tipping_options.toLowerCase().indexOf("5%") > -1) {
+    var tip_perc = 0.05;
+  } else if (tipping_options.toLowerCase().indexOf("10%") > -1) {
+    var tip_perc = 0.1;
+  } else if (tipping_options.toLowerCase().indexOf("20%") > -1) {
+    var tip_perc = 0.2;
+  } else {
+    var tip_perc = 0;
+  }
   $("#view_133 #field_127").attr("value", (input_val*tip_perc).toFixed(2));
 });
