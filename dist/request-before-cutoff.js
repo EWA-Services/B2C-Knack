@@ -74,6 +74,14 @@ display_message = function (json_obj) {
   }
 };
 
+// Adding tip amounts on load -> all zeros
+
+$('.view_105 form #kn-input-field_126 .wrapper-tips .control').each(function () {
+  console.log("test");
+  console.log($(this));
+  $("<span class='tip-amt'>0</span>").insertAfter($(this).find("label"));
+});
+
 // Wrapping the tips amount for styling purposes
 
 $("#kn-input-field_126 .kn-radio .control:lt(3)").wrapAll('<div class="wrapper-tips"></div>');
@@ -320,8 +328,9 @@ $("input#field_18").on("input", function (e) {
   var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, requested_transactions, max_number_requests, input_val);
   display_message(output);
 
-  console.log(tip_perc*input_val);
-  $('.view_105 form #kn-input-field_126 .wrapper-tips .control div').each(function () {
-    console.log($(this).val());
-  });
+  /* console.log(tip_perc*input_val);
+  $('.view_105 form #kn-input-field_126 .wrapper-tips .control').each(function () {
+    $($(this).closest("div").val()*tip_perc).insertAfter("#kn-input-field_18 label");
+    console.log($(this).closest("div").val());
+  }); */
 });

@@ -337,6 +337,7 @@
   border: 1.5px solid #eee;
   background: transparent;
   transition: all 0.2s ease-in-out;
+  text-align: center;
 }
 
 .view_105 form #kn-input-field_126.kn-input .kn-radio .wrapper-tips .control:nth-child(1),
