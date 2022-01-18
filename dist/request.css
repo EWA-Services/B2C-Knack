@@ -164,6 +164,11 @@
   justify-content: center;
 }
 
+.view_105 form .kn-input .kn-radio .wrapper-tips .option.radio,
+.view_133 form .kn-input .kn-radio .wrapper-tips .option.radio {
+  margin-bottom: 2px;
+}
+
 .view_105 form #kn-input-field_92.kn-input .kn-radio .option.radio div,
 .view_133 form #kn-input-field_92.kn-input .kn-radio .option.radio div {
   flex-grow: 1;
@@ -325,7 +330,6 @@
 
 #kn-input-field_126 div.kn-radio .wrapper-tips {
   display: flex;
-  margin-bottom: 10px;
 }
 
 .view_105 form #kn-input-field_126.kn-input .kn-radio .control,
@@ -361,4 +365,12 @@
 #view_105 #kn-input-field_127, #view_133 #kn-input-field_127 {
   visibility: hidden;
   position: absolute;
+}
+
+.view_105 form #kn-input-field_126.kn-input .kn-radio .wrapper-tips span.tip-amt,
+.view_133 form #kn-input-field_126.kn-input .kn-radio .wrapper-tips span.tip-amt {
+  font-weight: 300;
+  font-style: oblique;
+  margin-top: 2px;
+  font-size: 13px;
 }
