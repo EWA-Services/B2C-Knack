@@ -360,9 +360,7 @@ $("input[type=radio][name=view_133-field_126]").change(function () {
   } else {
     var tip_perc = 0;
   }
-  // $("#view_133 #field_127").attr("value", (Math.round(input_val*tip_perc*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-  // console.log((Math.round(input_val*tip_perc*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-  $("#view_133 #field_127").attr("value", input_val*tip_perc);
+  $("#view_133 #field_127").attr("value", (input_val*tip_perc).toFixed(2));
 });
 
 if (max_allowed > 0) {
@@ -412,5 +410,5 @@ $("input#field_18").on("input", function (e) {
     $(this).find("span.tip-amt").text((Math.round(tip_amount*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
   });
 
-  $("#view_133 #field_127").attr("value", input_val*perc);
+  $("#view_133 #field_127").attr("value", (input_val*tip_perc).toFixed(2));
 });
