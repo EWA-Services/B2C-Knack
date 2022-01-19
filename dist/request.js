@@ -39,6 +39,25 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
     var cond4 = input_val > 0 && input_val >= min_allowed && input_val <= withdrawable_amount;
   }
 
+  // condition5: terms and conditions checked
+
+
+  // condition6: signature filled in
+  var base30Data = $("#view_133-field_119").jSignature('getData','base30')[1];
+  if (base30Data.trim() == "") {
+    var cond6 = false;
+  } else {
+    var cond6 = true;
+  }
+
+  // condition7: security clause not empty
+  var clause_input = $("#view_133 #security-clause .sc-input-field").val();
+  if (clause_input.length <= 5) {
+    var cond7 = false;
+  } else {
+    var cond7 = true;
+  }
+
   // compiling all
   if (cond1 == false) {
     return {status: false, error: "Please wait until next month to submit new requests"};
@@ -68,11 +87,16 @@ function display_message (json_obj) {
     $(".error-message-custom").hide();
     $(".validation-message-custom").hide();
     $("<div class='validation-message-custom'><strong>All inputs are correct</strong></div>").insertBefore($("#view_133 form > ul"));
-    $("#view_133 #submission-btn").prop("disabled", false);
+    $("#view_133 form .kn-submit .kn-button.is-primary").prop("disabled", false);
   } else {
-    $("#view_133 #submission-btn").prop("disabled", true);
+    $("#view_133 form .kn-submit .kn-button.is-primary").prop("disabled", true);
   }
 };
+
+// Terms and conditions
+var terms_content = `<input id="terms" type="checkbox">
+                     <label for="terms">I accept the <a href="#">Terms & Conditions</a> of EWA Services</label>`
+$(terms_content).append($("#view_133 #terms_and_conditions"));
 
 // Wrapping the tips amount for styling purposes
 
@@ -97,56 +121,13 @@ $("#view_133-field_119").change(function () {
   }
 });
 
-var buttons_html = `<div id="security-clause">
-                      <hr>
-                      <p class="sc-instructions">Please write <span class="clause">I will pay back the salary advance on {payday_current} before 10am</span> below to proceed</p>
-                      <input class="sc-input-field" type="text">
-                    </div>
-                    <div id="buttons-wrapper" class="buttons-wrapper">
-                      <button id="next-cutoff-btn" class="disabled" disabled="">Proceed</button>
-                      <button id="back-cutoff-btn">Back</button>
-                      <button id="submission-btn" disabled="">Submit</button>
-                    </div>`;
+var security_clause = `<div id="security-clause">
+                        <hr>
+                        <p class="sc-instructions">Please write <span class="clause">I will pay back the salary advance on {payday_current} before 10am</span> below to proceed</p>
+                        <input class="sc-input-field" type="text">
+                      </div>`;
 
-$(buttons_html).insertAfter($("#view_133 form"))
-
-proceed_to_from = function() {
-  $("#view_133 #kn-input-field_18").css({"visibility":"unset", "position":"unset"});
-  $("#view_133 #kn-input-field_59").css({"visibility":"unset", "position":"unset"});
-  $("#view_133 #kn-input-field_92").css({"visibility":"unset", "position":"unset"});
-  $("#view_133 #kn-input-field_80").css({"visibility":"unset", "position":"unset"});
-  $("#view_133 #kn-input-field_126").css({"visibility":"unset", "position":"unset"});
-  $("#view_133 form .kn-section-break").css({"visibility":"hidden", "position":"absolute"});
-  $("#view_133 #kn-input-field_119").css({"visibility":"hidden", "position":"absolute"});
-  $("#view_133 .buttons-wrapper #next-cutoff-btn").css({"display":"none"});
-  $("#view_133 .buttons-wrapper #back-cutoff-btn").css({"display":"unset"});
-  $("#view_133 .buttons-wrapper #submission-btn").css({"display":"unset"});
-  $("#view_133 #security-clause").css({"display":"unset"});
-}
-$("#view_133 #next-cutoff-btn").on("click", proceed_to_from);
-
-back_to_conditions = function() {
-  $("#view_133 #kn-input-field_18").css({"visibility":"hidden", "position":"absolute"});
-  $("#view_133 #kn-input-field_59").css({"visibility":"hidden", "position":"absolute"});
-  $("#view_133 #kn-input-field_92").css({"visibility":"hidden", "position":"absolute"});
-  $("#view_133 #kn-input-field_80").css({"visibility":"hidden", "position":"absolute"});
-  $("#view_133 #kn-input-field_126").css({"visibility":"hidden", "position":"absolute"});
-  $("#view_133 form .kn-section-break").css({"visibility":"unset", "position":"unset"});
-  $("#view_133 #kn-input-field_119").css({"visibility":"unset", "position":"unset"});
-  $("#view_133 .buttons-wrapper #next-cutoff-btn").css({"display":"unset"});
-  $("#view_133 .buttons-wrapper #back-cutoff-btn").css({"display":"none"});
-  $("#view_133 .buttons-wrapper #submission-btn").css({"display":"none"});
-  $("#view_133 #security-clause").css({"display":"none"});
-}
-$("#view_133 #back-cutoff-btn").on("click", back_to_conditions);
-
-submit_request_form = function() {
-  $("#view_133 form .kn-button.is-primary").click();
-  $("#view_133 .buttons-wrapper #submission-btn").css({"display":"none"});
-  $("#view_133 #security-clause").css({"display":"none"});
-  $("#view_133 .buttons-wrapper #back-cutoff-btn").css({"display":"none"});
-}
-$("#view_133 #submission-btn").on("click", submit_request_form);
+$(security_clause).insertBefore($("#view_133 form .kn-submit .kn-button.is-primary"))
 
 // Add placeholders + classes to the form view (view_133)
 
@@ -248,7 +229,7 @@ $(document).on("knack-form-submit.view_133", function (event, view, record) {
 });
 
 // Disable the Submission Button
-$("#view_133 #submission-btn").prop("disabled", true);
+$("#view_133 form .kn-submit .kn-button.is-primary").prop("disabled", true);
 
 // Variables for Global Conditions
 var requested_transactions = parseInt($("#view_66 .kn-pivot-calc:eq(1)").text().replace(/,/g, "") == "" ? 0 : $("#view_66 .kn-pivot-calc:eq(1)").text().replace(/,/g, ""));
@@ -315,16 +296,6 @@ if (max_allowed_employee > 0 && max_allowed_company > 0) {
   var max_allowed = 0;
 }
 
-/* if (max_cutoff_allowed_employee > 0 && max_cutoff_allowed_company > 0) {
-  var max_cutoff_allowed = Math.min(max_cutoff_allowed_employee, max_cutoff_allowed_company);
-} else if (max_cutoff_allowed_employee > 0) {
-  var max_cutoff_allowed = max_cutoff_allowed_employee;
-} else if (max_cutoff_allowed_company > 0) {
-  var max_cutoff_allowed = max_cutoff_allowed_company;
-} else {
-  var max_cutoff_allowed = 0;
-} */
-
 // Get withdrawal fee value
 
 var speed = $('input[name="view_133-field_92"]:checked').val();
@@ -337,19 +308,6 @@ if (speed.toLowerCase().indexOf("normal") > -1) {
 }
 $("#view_133 #field_63").attr("value", withdrawal_fee);
 var available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
-
-/* var arr = [available_amount, max_allowed, max_cutoff_allowed, base_salary*0.1];
-
-console.log("available amount:");
-console.log(available_amount);
-console.log("max allowed before cutoff:");
-console.log(max_allowed);
-console.log("max allowed after cutoff:");
-console.log(max_cutoff_allowed);
-console.log("10% of salary:");
-console.log(base_salary*0.1);
-
-var max_allowed_bis = Math.min.apply(null, arr.filter(Boolean)); */
 
 // Tipping amount
 
@@ -384,12 +342,12 @@ $("input[type=radio][name=view_133-field_126]").change(function () {
 if (max_allowed > 0) {
   var max_allowed_bis = Math.min(max_allowed, available_amount);
   if (max_allowed_bis >= min_allowed) {
-    var request_amount = '<span class="amount-info-message">Amount should be between <span>' + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span> and <span>' + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></span>';
+    var request_amount = '<span class="amount-info-message">Amount should be between <span>฿' + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span> and <span>฿' + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></span><div class="information-increase"><span class="material-icons-outlined">info</span><span>Your limit will gradually increase up to ฿4,000 if you pay back your salary advance on time every month.</span></div>';
   } else {
-    var request_amount = '<span class="amount-info-message">The remaining balance (<span>' + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span>) is lower than the minimum withdrawal amount allowed (<span>" + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span>)</span>";
+    var request_amount = '<span class="amount-info-message">The remaining balance (<span>฿' + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span>) is lower than the minimum withdrawal amount allowed (<span>฿" + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span>)</span>";
   }
 } else {
-  var request_amount = '<span class="amount-info-message">Amount should be greater than <span>' + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></span>';
+  var request_amount = '<span class="amount-info-message">Amount should be greater than <span>฿' + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></span><div class="information-increase"><span class="material-icons-outlined">info</span><span>Your limit will gradually increase up to ฿4,000 if you pay back your salary advance on time every month.</span></div>';
 }
 $(request_amount).insertAfter("#kn-input-field_18 label");
 
@@ -426,7 +384,7 @@ $("input#field_18").on("input", function (e) {
   $('.view_133 form #kn-input-field_126 .wrapper-tips .control').each(function () {
     var perc = $(this).find("label div").text().replace("%","")/100;
     var tip_amount = perc*input_val;
-    $(this).find("span.tip-amt").text((Math.round(tip_amount*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+    $(this).find("span.tip-amt").text("฿" + (Math.round(tip_amount*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
   });
 
   var tipping_options = $('input[name="view_133-field_126"]:checked').val();
@@ -446,6 +404,4 @@ $("input#field_18").on("input", function (e) {
 
 $("#view_133 #security-clause .sc-input-field").on("input", function (e) {
   console.log($("#view_133 #security-clause .sc-input-field").val());
-  console.log($("this").val());
-  console.log($(new_clause_html));
 });

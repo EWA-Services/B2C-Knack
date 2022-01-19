@@ -14,20 +14,6 @@
   position: absolute;
 }
 
-#view_133 .buttons-wrapper {
-  margin-top: 25px;
-}
-
-#view_133 .buttons-wrapper #back-cutoff-btn,
-#view_133 .buttons-wrapper #submission-btn,
-#view_133 #security-clause {
-  display: none;
-}
-
-#view_133 .buttons-wrapper #submission-btn {
-  margin: 0 0 0 4% !important;
-}
-
 #view_133 #kn-input-field_92 div.kn-radio .control:nth-child(1),
 #view_133 #kn-input-field_92 div.kn-radio .control:nth-child(3) {
   display: none;
@@ -119,7 +105,7 @@
   border: 2px solid #f4f4f4 !important;
 }
 
-.view_133 form #submission-btn {
+.view_133 form .kn-submit .kn-button.is-primary {
   outline: none !important;
   box-shadow: none !important;
   border: none !important;
@@ -140,12 +126,8 @@
   background: #8e4842 !important;
 }
 
-.view_133 form #submission-btn:hover {
+.view_133 form .kn-submit .kn-button.is-primary:hover {
   background: #663530 !important;
-}
-
-.view_133 #submission-btn:disabled, .view_133 #submission-btn[disabled] {
-  background: #C5A09E !important;
 }
 
 #kn-input-field_80 label span span {
@@ -277,35 +259,7 @@
   color: #004685;
 }
 
-#view_133 #next-cutoff-btn {
-  background: #8E4842;
-  border: none;
-  border-radius: 6px;
-  width: 100%;
-  color: #FFFFFF;
-  padding: 14px 12px;
-  font-size: 16px;
-  font-weight: normal;
-}
-
-#view_133 #next-cutoff-btn.disabled {
-  background: #AAAAAA;
-  color: #FFFFFF;
-}
-
-#view_133 #back-cutoff-btn {
-  background: #EBEBEB;
-  border: none;
-  border-radius: 6px;
-  width: 45%;
-  color: #000000;
-  padding: 14px 12px;
-  font-size: 16px;
-  font-weight: normal;
-  margin-right: 4%;
-}
-
-#view_133 #submission-btn {
+#view_133 form .kn-submit .kn-button.is-primary {
   background: #8E4842;
   border: none;
   border-radius: 6px;
@@ -358,12 +312,12 @@
 
 .view_133 form #kn-input-field_126.kn-input .kn-radio .wrapper-tips .control:nth-child(1),
 .view_133 form #kn-input-field_126.kn-input .kn-radio .wrapper-tips .control:nth-child(3) {
-  padding: 22px 8px;
+  padding: 16px 8px;
 }
 
 .view_133 form #kn-input-field_126.kn-input .kn-radio .wrapper-tips .control:nth-child(2) {
   margin: 0 2px 8px 2px;
-  padding: 22px 8px;
+  padding: 16px 8px;
 }
 
 .view_133 form #kn-input-field_126.kn-input .kn-radio .control input {
