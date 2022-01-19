@@ -104,11 +104,13 @@ $("#view_133-field_119").change(function () {
 // $("#buttons-wrapper").prepend("<button id='back-cutoff-btn'>Back</button>");
 // $("#buttons-wrapper").prepend("<button id='next-cutoff-btn' class='disabled' disabled>Proceed</button>");
 
-(`<div id="buttons-wrapper" class="buttons-wrapper">
-  <button id="next-cutoff-btn" class="disabled" disabled="">Proceed</button>
-  <button id="back-cutoff-btn">Back</button>
-  <button id="submission-btn" disabled="">Submit</button>
-</div>`).insertAfter($("#view_133 form"))
+var buttons_html = `<div id="buttons-wrapper" class="buttons-wrapper">
+                      <button id="next-cutoff-btn" class="disabled" disabled="">Proceed</button>
+                      <button id="back-cutoff-btn">Back</button>
+                      <button id="submission-btn" disabled="">Submit</button>
+                    </div>`;
+
+$(buttons_html).insertAfter($("#view_133 form"))
 
 proceed_to_from = function() {
   $("#view_133 #kn-input-field_18").css({"visibility":"unset", "position":"unset"});
