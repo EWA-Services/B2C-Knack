@@ -135,6 +135,8 @@ $("#view_133 #back-cutoff-btn").on("click", back_to_conditions);
 
 submit_request_form = function() {
   $("#view_133 form .kn-button.is-primary").click();
+  $("#view_133 .buttons-wrapper #submission-btn").css({"display":"none"});
+  $("#view_133 .buttons-wrapper #back-cutoff-btn").css({"display":"none"});
 }
 $("#view_133 #submission-btn").on("click", submit_request_form);
 
