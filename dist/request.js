@@ -127,7 +127,7 @@ var security_clause = `<div id="security-clause">
                         <input class="sc-input-field" type="text">
                       </div>`;
 
-$(security_clause).insertBefore($("#view_133 form .kn-submit .kn-button.is-primary"))
+$(security_clause).insertBefore($("#view_133 form .kn-submit .kn-button.is-primary"));
 
 // Add placeholders + classes to the form view (view_133)
 
