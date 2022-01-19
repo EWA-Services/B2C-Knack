@@ -97,7 +97,11 @@ $("#view_133-field_119").change(function () {
   }
 });
 
-var buttons_html = `<div id="buttons-wrapper" class="buttons-wrapper">
+var buttons_html = `<div id="security-clause">
+                      <span class="sc-instructions">Please write <span>"I will pay back the salary advance on {payday_current} before 10am"</span> below to proceed</span>
+                      <input class="sc-input-field" type="text">
+                    </div>
+                    <div id="buttons-wrapper" class="buttons-wrapper">
                       <button id="next-cutoff-btn" class="disabled" disabled="">Proceed</button>
                       <button id="back-cutoff-btn">Back</button>
                       <button id="submission-btn" disabled="">Submit</button>
@@ -116,6 +120,7 @@ proceed_to_from = function() {
   $("#view_133 .buttons-wrapper #next-cutoff-btn").css({"display":"none"});
   $("#view_133 .buttons-wrapper #back-cutoff-btn").css({"display":"unset"});
   $("#view_133 .buttons-wrapper #submission-btn").css({"display":"unset"});
+  $("#view_133 #security-clause").css({"display":"unset"});
 }
 $("#view_133 #next-cutoff-btn").on("click", proceed_to_from);
 
@@ -130,12 +135,14 @@ back_to_conditions = function() {
   $("#view_133 .buttons-wrapper #next-cutoff-btn").css({"display":"unset"});
   $("#view_133 .buttons-wrapper #back-cutoff-btn").css({"display":"none"});
   $("#view_133 .buttons-wrapper #submission-btn").css({"display":"none"});
+  $("#view_133 #security-clause").css({"display":"none"});
 }
 $("#view_133 #back-cutoff-btn").on("click", back_to_conditions);
 
 submit_request_form = function() {
   $("#view_133 form .kn-button.is-primary").click();
   $("#view_133 .buttons-wrapper #submission-btn").css({"display":"none"});
+  $("#view_133 #security-clause").css({"display":"none"});
   $("#view_133 .buttons-wrapper #back-cutoff-btn").css({"display":"none"});
 }
 $("#view_133 #submission-btn").on("click", submit_request_form);
@@ -248,26 +255,23 @@ var max_number_requests = parseFloat($("#view_64 .field_91 .kn-detail-body").tex
 var input_val = 0;
 
 var current_month = new Date().getFullYear() + "-" + ((new Date().getMonth() + 1) < 10 ? "0" + (new Date().getMonth() + 1) : (new Date().getMonth() + 1));
-/* var next_month = (new Date().getMonth() == 11
-               ? (new Date().getFullYear() + 1) + "-01"
-               : new Date().getFullYear() + "-" + ((new Date().getMonth() + 2) < 10 ? "0" + (new Date().getMonth() + 2) : (new Date().getMonth() + 2))); */
 var cutoff_day = "-";
 
 var months = $("#view_97 .kn-table tbody td.field_88 span");
 var cutoffs = $("#view_97 .kn-table tbody td.field_82 span");
-// var paydays = $("#view_97 .kn-table tbody td.field_76 span");
+var paydays = $("#view_97 .kn-table tbody td.field_76 span");
 
 $.each(months, function(i,v) {
   if (v.textContent.trim() == current_month) {
     cutoff_day = cutoffs[i].textContent.trim();
+    payday = paydays[i].textContent.trim();
   }
 });
 
 var cutoff_day = cutoff_day == "" ? "-" : cutoff_day;
-/* var payday = payday == "" ? "-" : payday;
-var next_payday = next_payday == "" ? "-" : next_payday;
+var payday = payday == "" ? "-" : payday;
 
-$("#view_133 form .kn-input.kn-input-section_break.control").replaceWith($("#view_133 form .kn-input.kn-input-section_break.control").html().replace("{payday_current}", payday).replace("{payday_next}", next_payday)); */
+$("#view_133 #security-clause .sc-instructions span").replaceWith($("#view_133 #security-clause .sc-instructions span").html().replace("{payday_current}", payday));
 
 // Calculate Withdrawable Amount Variables
 var base_salary = parseFloat($("#view_65 .field_44 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_65 .field_44 .kn-detail-body").text().replace(/,/g, ""));
@@ -433,4 +437,10 @@ $("input#field_18").on("input", function (e) {
     var tip_perc = 0;
   }
   $("#view_133 #field_127").attr("value", (input_val*tip_perc).toFixed(2));
+});
+
+// Validation of the security clause
+
+$("#view_133 #security-clause .sc-input-field").on("input", function (e) {
+  console.log($(this).text());
 });

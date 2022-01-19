@@ -15,7 +15,8 @@
 }
 
 #view_133 .buttons-wrapper #back-cutoff-btn,
-#view_133 .buttons-wrapper #submission-btn {
+#view_133 .buttons-wrapper #submission-btn,
+#view_133 #security-clause {
   display: none;
 }
 
