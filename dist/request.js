@@ -75,7 +75,7 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
     return {status: false, error: "Please provide an amount between " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " and " + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
   } else if (cond4 == false) {
     return {status: false, error: "Please provide an amount greater than " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
-  } else if (cond5 == true || cond7 == true) {
+  } else if (cond5 == false || cond7 == false) {
     return {status: false, error: "Please accept the terms & conditions to proceed"};
   } else {
     return { status: true };
