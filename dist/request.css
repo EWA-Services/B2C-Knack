@@ -2,14 +2,8 @@
   margin-bottom: 50px!important;
 }
 
-#view_97, #view_105,
-#view_133 #kn-input-field_18,
-#view_133 #kn-input-field_59,
-#view_133 #kn-input-field_92,
-#view_133 #kn-input-field_80,
-#view_133 #kn-input-field_126,
-#view_133 .kn-message.is-error,
-#view_133 .kn-button.is-primary {
+#view_97,
+#view_133 .kn-message.is-error {
   visibility: hidden;
   position: absolute;
 }
