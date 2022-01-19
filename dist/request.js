@@ -63,8 +63,8 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
   }
 
   // compiling all
-  if (cond5 == false || cond6 == false || cond7 == false) {
-    return {status: false, error: "Please accept our Terms & Conditions and Sign the form to proceed"};
+  if (cond6 == false) {
+    return {status: false, error: "Please sign the form to proceed"};
   } else if (cond1 == false) {
     return {status: false, error: "Please wait until next month to submit new requests"};
   } else if (cond2 == false) {
@@ -75,6 +75,8 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
     return {status: false, error: "Please provide an amount between " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " and " + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
   } else if (cond4 == false) {
     return {status: false, error: "Please provide an amount greater than " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
+  } else if (cond5 == true || cond7 == true) {
+    return {status: false, error: "Please accept the terms & conditions to proceed"};
   } else {
     return { status: true };
   }
@@ -406,20 +408,55 @@ $("input#field_18").on("input", function (e) {
 // Validation of the security clause, T&C checkbox and signature
 
 $("#view_133 #kn-input-field_141 input").on("input", function (e) {
-  // console.log("debug: consignment clause change");
-  // console.log($("#view_133 #kn-input-field_141 input").val().length);
+  var input_val = $("#field_18").val();
+  var speed = $('input[name="view_133-field_92"]:checked').val();
+  if (speed.toLowerCase().indexOf("normal") > -1) {
+    withdrawal_fee = normal_fee_setting;
+  } else if (speed.toLowerCase().indexOf("fast") > -1) {
+    withdrawal_fee = fast_fee_setting;
+  } else if (speed.toLowerCase().indexOf("cutoff") > -1) {
+    withdrawal_fee = cutoff_fee_setting;
+  }
+  $("#view_133 #field_63").attr("value", withdrawal_fee);
+  available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
+  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, requested_transactions, max_number_requests, input_val);
+  display_message(output);
   var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, requested_transactions, max_number_requests, input_val);
   display_message(output);
 });
 
 $("#view_133 #kn-input-field_142 input").change(function () {
-  // console.log("debug: T&C checkbox change");
+  var input_val = $("#field_18").val();
+  var speed = $('input[name="view_133-field_92"]:checked').val();
+  if (speed.toLowerCase().indexOf("normal") > -1) {
+    withdrawal_fee = normal_fee_setting;
+  } else if (speed.toLowerCase().indexOf("fast") > -1) {
+    withdrawal_fee = fast_fee_setting;
+  } else if (speed.toLowerCase().indexOf("cutoff") > -1) {
+    withdrawal_fee = cutoff_fee_setting;
+  }
+  $("#view_133 #field_63").attr("value", withdrawal_fee);
+  available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
+  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, requested_transactions, max_number_requests, input_val);
+  display_message(output);
   var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, requested_transactions, max_number_requests, input_val);
   display_message(output);
 })
 
 $("#view_133-field_119").change(function () {
-  // console.log("debug: signature change");
+  var input_val = $("#field_18").val();
+  var speed = $('input[name="view_133-field_92"]:checked').val();
+  if (speed.toLowerCase().indexOf("normal") > -1) {
+    withdrawal_fee = normal_fee_setting;
+  } else if (speed.toLowerCase().indexOf("fast") > -1) {
+    withdrawal_fee = fast_fee_setting;
+  } else if (speed.toLowerCase().indexOf("cutoff") > -1) {
+    withdrawal_fee = cutoff_fee_setting;
+  }
+  $("#view_133 #field_63").attr("value", withdrawal_fee);
+  available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
+  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, requested_transactions, max_number_requests, input_val);
+  display_message(output);
   var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, requested_transactions, max_number_requests, input_val);
   display_message(output);
 })
