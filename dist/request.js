@@ -56,14 +56,16 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
 
   // condition7: security clause not empty
   var clause_input = $("#view_133 #kn-input-field_141 input").val();
-  if (clause_input.length <= 5) {
+  if (clause_input.length <= 10) {
     var cond7 = false;
   } else {
     var cond7 = true;
   }
 
   // compiling all
-  if (cond1 == false) {
+  if (cond5 == false || cond6 == false || cond7 == false) {
+    return {status: false, error: "Please accept our Terms & Conditions and Sign the form to proceed"};
+  } else if (cond1 == false) {
     return {status: false, error: "Please wait until next month to submit new requests"};
   } else if (cond2 == false) {
     return {status: false, error: "You have exceeded the maximum number of requests allowed per month"};
@@ -104,7 +106,7 @@ $("#kn-input-field_126 .kn-radio .control:lt(3)").wrapAll('<div class="wrapper-t
 // Adding tip amounts on load -> all zeros
 
 $('.view_133 form #kn-input-field_126 .wrapper-tips .control').each(function () {
-  $("<span class='tip-amt'>0</span>").insertAfter($(this).find("label"));
+  $("<span class='tip-amt'>฿0</span>").insertAfter($(this).find("label"));
 });
 
 // Function that updates the proceed button state on jsignature field change
@@ -121,7 +123,6 @@ $('.view_133 form #kn-input-field_126 .wrapper-tips .control').each(function () 
 }); */
 
 var security_clause = `<div id="security-clause">
-                        <hr>
                         <p class="sc-instructions">Please write <span class="clause">"I will pay back the salary advance on {payday_current} before 10am"</span> below to proceed</p>
                       </div>`;
 
@@ -405,14 +406,20 @@ $("input#field_18").on("input", function (e) {
 // Validation of the security clause, T&C checkbox and signature
 
 $("#view_133 #kn-input-field_141 input").on("input", function (e) {
-  console.log("debug: consignment clause change");
-  console.log($("#view_133 #kn-input-field_141 input").val().length);
+  // console.log("debug: consignment clause change");
+  // console.log($("#view_133 #kn-input-field_141 input").val().length);
+  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, requested_transactions, max_number_requests, input_val);
+  display_message(output);
 });
 
 $("#view_133 #kn-input-field_142 input").change(function () {
-  console.log("debug: T&C checkbox change");
+  // console.log("debug: T&C checkbox change");
+  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, requested_transactions, max_number_requests, input_val);
+  display_message(output);
 })
 
 $("#view_133-field_119").change(function () {
-  console.log("debug: signature change");
+  // console.log("debug: signature change");
+  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, requested_transactions, max_number_requests, input_val);
+  display_message(output);
 })

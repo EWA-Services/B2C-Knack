@@ -94,15 +94,25 @@
   border: 2px solid #f4f4f4 !important;
 }
 
-.view_133 form .kn-submit .kn-button.is-primary {
-  background: #8e4842 !important;
-  border: none;
-  border-radius: 6px;
-  width: 100%;
-  color: #fff;
-  padding: 14px 12px;
-  font-size: 16px;
+.view_133 form .kn-submit .kn-button {
+  outline: 0!important;
+  box-shadow: none!important;
+  border: none!important;
+  font-family: Inter!important;
   font-weight: 400;
+  font-size: 14px;
+  font-style: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 100%;
+  margin: 8px auto!important;
+  border-radius: 6px;
+  padding: 12px;
+  height: 46px;
+  color: #fff!important;
+  background: #8e4842!important;
 }
 
 .view_133 form .kn-submit .kn-button.is-primary:hover {
@@ -317,4 +327,21 @@
   font-weight: 400;
   font-size: 11px;
   color: #666;
+}
+
+#view_133 #kn-input-field_142 > label,
+#view_133 #kn-input-field_141 > label {
+  display: none;
+}
+
+#view_133 #kn-input-field_142 .control label {
+  font-size: 13px !important;
+}
+
+#view_133 #kn-input-field_59 {
+  margin-top: 50px;
+}
+
+#view_133 #security-clause {
+  margin-top: 50px;
 }
