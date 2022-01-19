@@ -97,13 +97,6 @@ $("#view_133-field_119").change(function () {
   }
 });
 
-// Append a "Proceed" button to the form
-
-// $("#view_133 .kn-button.is-primary").wrap('<div id="buttons-wrapper" class="buttons-wrapper"></div>');
-
-// $("#buttons-wrapper").prepend("<button id='back-cutoff-btn'>Back</button>");
-// $("#buttons-wrapper").prepend("<button id='next-cutoff-btn' class='disabled' disabled>Proceed</button>");
-
 var buttons_html = `<div id="buttons-wrapper" class="buttons-wrapper">
                       <button id="next-cutoff-btn" class="disabled" disabled="">Proceed</button>
                       <button id="back-cutoff-btn">Back</button>

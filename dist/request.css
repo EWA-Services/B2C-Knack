@@ -4,13 +4,14 @@
 #view_133 #kn-input-field_92,
 #view_133 #kn-input-field_80,
 #view_133 #kn-input-field_126,
-#view_133 .kn-message.is-error {
+#view_133 .kn-message.is-error,
+#view_133 .kn-button.is-primary {
   visibility: hidden;
   position: absolute;
 }
 
 #view_133 .buttons-wrapper #back-cutoff-btn,
-#view_133 .kn-button.is-primary, #view_133 #submission-btn {
+#view_133 .buttons-wrapper #submission-btn {
   display: none;
 }
 
@@ -92,7 +93,7 @@
   border: 2px solid #f4f4f4 !important;
 }
 
-.view_133 form .kn-button {
+.view_133 form #submission-btn {
   outline: none !important;
   box-shadow: none !important;
   border: none !important;
@@ -113,7 +114,7 @@
   background: #8e4842 !important;
 }
 
-.view_133 form .kn-button:hover {
+.view_133 form #submission-btn:hover {
   background: #663530 !important;
 }
 
@@ -280,6 +281,7 @@
   border-radius: 6px;
   width: 45%;
   color: #FFFFFF;
+  padding: 14px 12px;
   font-size: 16px;
   font-weight: normal;
   margin-left: 4%;
