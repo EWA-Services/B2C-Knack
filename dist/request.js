@@ -97,8 +97,9 @@ $("#view_133-field_119").change(function () {
   }
 });
 
-var buttons_html = `<div id="security-clause">
-                      <span class="sc-instructions">Please write <span>"I will pay back the salary advance on {payday_current} before 10am"</span> below to proceed</span>
+var buttons_html = `<hr>
+                    <div id="security-clause">
+                      <span class="sc-instructions">Please write <span class="clause">"I will pay back the salary advance on {payday_current} before 10am"</span> below to proceed</span>
                       <input class="sc-input-field" type="text">
                     </div>
                     <div id="buttons-wrapper" class="buttons-wrapper">
@@ -271,7 +272,8 @@ $.each(months, function(i,v) {
 var cutoff_day = cutoff_day == "" ? "-" : cutoff_day;
 var payday = payday == "" ? "-" : payday;
 
-$("#view_133 #security-clause .sc-instructions span").replaceWith($("#view_133 #security-clause .sc-instructions span").html().replace("{payday_current}", payday));
+var new_clause_html = $("#view_133 #security-clause .sc-instructions span").html().replace("{payday_current}", payday);
+$("#view_133 #security-clause .sc-instructions span").replaceWith(new_clause_html);
 
 // Calculate Withdrawable Amount Variables
 var base_salary = parseFloat($("#view_65 .field_44 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_65 .field_44 .kn-detail-body").text().replace(/,/g, ""));
@@ -442,5 +444,6 @@ $("input#field_18").on("input", function (e) {
 // Validation of the security clause
 
 $("#view_133 #security-clause .sc-input-field").on("input", function (e) {
-  console.log($(this).text());
+  console.log($("this").val());
+  console.log($(new_clause_html));
 });

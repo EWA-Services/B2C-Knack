@@ -14,6 +14,10 @@
   position: absolute;
 }
 
+#view_133 .buttons-wrapper {
+  margin-top: 25px;
+}
+
 #view_133 .buttons-wrapper #back-cutoff-btn,
 #view_133 .buttons-wrapper #submission-btn,
 #view_133 #security-clause {
@@ -44,7 +48,8 @@
   color: #222222 !important;
 }
 
-.view_133 form .kn-input .input {
+.view_133 form .kn-input .input,
+#view_133 #security-clause .sc-input-field {
   width: 100%;
   margin: auto;
   box-shadow: none !important;
@@ -60,6 +65,22 @@
   align-items: center;
   transition: all 0.3s ease-in-out;
   border: 2px solid #f4f4f4 !important;
+}
+
+#view_133 #security-clause .sc-input-field {
+  margin-top: 10px;
+}
+
+#view_133 #security-clause span.sc-instructions {
+  font-weight: 300!important;
+  color: #7a6e6e!important;
+}
+
+#view_133 #security-clause span.sc-instructions span {
+  font-family: Inter!important;
+  font-weight: 600;
+  font-size: 14px!important;
+  color: #222!important;
 }
 
 .view_133 form .kn-input .kn-textarea {
