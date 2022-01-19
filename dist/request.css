@@ -10,11 +10,11 @@
 }
 
 #view_133 .buttons-wrapper #back-cutoff-btn,
-#view_133 .buttons-wrapper .kn-button.is-primary {
+#view_133 .kn-button.is-primary, #view_133 #submission-btn {
   display: none;
 }
 
-#view_133 .buttons-wrapper .kn-button.is-primary {
+#view_133 .buttons-wrapper #submission-btn {
   margin: 0 0 0 4% !important;
 }
 
