@@ -68,9 +68,9 @@ function display_message (json_obj) {
     $(".error-message-custom").hide();
     $(".validation-message-custom").hide();
     $("<div class='validation-message-custom'><strong>All inputs are correct</strong></div>").insertBefore($("#view_133 form > ul"));
-    $("#view_133 .kn-button.is-primary").prop("disabled", false);
+    $("#view_133 #submission-btn").prop("disabled", false);
   } else {
-    $("#view_133 .kn-button.is-primary").prop("disabled", true);
+    $("#view_133 #submission-btn").prop("disabled", true);
   }
 };
 
@@ -245,7 +245,7 @@ $(document).on("knack-form-submit.view_133", function (event, view, record) {
 });
 
 // Disable the Submission Button
-$("#view_133 .kn-button.is-primary").prop("disabled", true);
+$("#view_133 #submission-btn").prop("disabled", true);
 
 // Variables for Global Conditions
 var requested_transactions = parseInt($("#view_66 .kn-pivot-calc:eq(1)").text().replace(/,/g, "") == "" ? 0 : $("#view_66 .kn-pivot-calc:eq(1)").text().replace(/,/g, ""));
