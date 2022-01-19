@@ -273,6 +273,7 @@ var cutoff_day = cutoff_day == "" ? "-" : cutoff_day;
 var payday = payday == "" ? "-" : payday;
 
 var new_clause_html = $("#view_133 #security-clause p.sc-instructions span").html().replace("{payday_current}", payday);
+console.log(new_clause_html);
 $("#view_133 #security-clause p.sc-instructions span").replaceWith(new_clause_html);
 
 // Calculate Withdrawable Amount Variables
@@ -444,6 +445,7 @@ $("input#field_18").on("input", function (e) {
 // Validation of the security clause
 
 $("#view_133 #security-clause .sc-input-field").on("input", function (e) {
+  console.log($("#view_133 #security-clause .sc-input-field").val());
   console.log($("this").val());
   console.log($(new_clause_html));
 });
