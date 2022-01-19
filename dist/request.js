@@ -94,9 +94,11 @@ function display_message (json_obj) {
 };
 
 // Terms and conditions
-var terms_content = `<input id="terms" type="checkbox">
-                     <label for="terms">I accept the <a href="#">Terms & Conditions</a> of EWA Services</label>`
-$(terms_content).append($("#view_133 #terms_and_conditions"));
+var terms_content = `<div id="terms_and_conditions">
+                        <input id="terms" type="checkbox">
+                        <label for="terms">I accept the <a href="#">Terms & Conditions</a> of EWA Services</label>
+                     </div>`
+$(terms_content).insertBefore($("#view_133 #kn-input-field_119"));
 
 // Wrapping the tips amount for styling purposes
 
@@ -127,7 +129,7 @@ var security_clause = `<div id="security-clause">
                         <input class="sc-input-field" type="text">
                       </div>`;
 
-$(security_clause).insertBefore($("#view_133 form .kn-submit .kn-button.is-primary"));
+$(security_clause).insertBefore($("#view_133 #kn-input-field_141"));
 
 // Add placeholders + classes to the form view (view_133)
 
@@ -253,9 +255,8 @@ $.each(months, function(i,v) {
 var cutoff_day = cutoff_day == "" ? "-" : cutoff_day;
 var payday = payday == "" ? "-" : payday;
 
-var new_clause_html = $("#view_133 #security-clause p.sc-instructions span").html().replace("{payday_current}", payday);
-console.log(new_clause_html);
-$("#view_133 #security-clause p.sc-instructions span").replaceWith(new_clause_html);
+var new_clause_html = $("#view_133 #security-clause p.sc-instructions").html().replace("{payday_current}", payday);
+$("#view_133 #security-clause p.sc-instructions").replaceWith(new_clause_html);
 
 // Calculate Withdrawable Amount Variables
 var base_salary = parseFloat($("#view_65 .field_44 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_65 .field_44 .kn-detail-body").text().replace(/,/g, ""));
@@ -342,14 +343,19 @@ $("input[type=radio][name=view_133-field_126]").change(function () {
 if (max_allowed > 0) {
   var max_allowed_bis = Math.min(max_allowed, available_amount);
   if (max_allowed_bis >= min_allowed) {
-    var request_amount = '<span class="amount-info-message">Amount should be between <span>฿' + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span> and <span>฿' + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></span><div class="information-increase"><span class="material-icons-outlined">info</span><span>Your limit will gradually increase up to ฿4,000 if you pay back your salary advance on time every month.</span></div>';
+    var request_amount = '<span class="amount-info-message">Amount should be between <span>฿' + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span> and <span>฿' + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></span>';
   } else {
     var request_amount = '<span class="amount-info-message">The remaining balance (<span>฿' + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span>) is lower than the minimum withdrawal amount allowed (<span>฿" + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span>)</span>";
   }
 } else {
-  var request_amount = '<span class="amount-info-message">Amount should be greater than <span>฿' + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></span><div class="information-increase"><span class="material-icons-outlined">info</span><span>Your limit will gradually increase up to ฿4,000 if you pay back your salary advance on time every month.</span></div>';
+  var request_amount = '<span class="amount-info-message">Amount should be greater than <span>฿' + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></span>';
 }
 $(request_amount).insertAfter("#kn-input-field_18 label");
+var increase_statement = `<div class="information-increase">
+                            <span class="material-icons">info</span>
+                            <span class="text-info">Your limit will gradually increase up to ฿4,000 if you pay back your salary advance on time every month.</span>
+                          </div>`;
+$(increase_statement).insertAfter("#view_133 #field_18");
 
 $("input[type=radio][name=view_133-field_92]").change(function () {
   var input_val = $("#field_18").val();
