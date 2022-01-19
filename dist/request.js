@@ -99,10 +99,16 @@ $("#view_133-field_119").change(function () {
 
 // Append a "Proceed" button to the form
 
-$("#view_133 .kn-button.is-primary").wrap('<div id="buttons-wrapper" class="buttons-wrapper"></div>');
+// $("#view_133 .kn-button.is-primary").wrap('<div id="buttons-wrapper" class="buttons-wrapper"></div>');
 
-$("#buttons-wrapper").prepend("<button id='back-cutoff-btn'>Back</button>");
-$("#buttons-wrapper").prepend("<button id='next-cutoff-btn' class='disabled' disabled>Proceed</button>");
+// $("#buttons-wrapper").prepend("<button id='back-cutoff-btn'>Back</button>");
+// $("#buttons-wrapper").prepend("<button id='next-cutoff-btn' class='disabled' disabled>Proceed</button>");
+
+(`<div id="buttons-wrapper" class="buttons-wrapper">
+  <button id="next-cutoff-btn" class="disabled" disabled="">Proceed</button>
+  <button id="back-cutoff-btn">Back</button>
+  <button id="submission-btn" disabled="">Submit</button>
+</div>`).insertAfter($("#view_133 form"))
 
 proceed_to_from = function() {
   $("#view_133 #kn-input-field_18").css({"visibility":"unset", "position":"unset"});
@@ -114,7 +120,7 @@ proceed_to_from = function() {
   $("#view_133 #kn-input-field_119").css({"visibility":"hidden", "position":"absolute"});
   $("#view_133 .buttons-wrapper #next-cutoff-btn").css({"display":"none"});
   $("#view_133 .buttons-wrapper #back-cutoff-btn").css({"display":"unset"});
-  $("#view_133 .buttons-wrapper .kn-button.is-primary").css({"display":"unset"});
+  $("#view_133 .buttons-wrapper #submission-btn").css({"display":"unset"});
 }
 $("#view_133 #next-cutoff-btn").on("click", proceed_to_from);
 
@@ -128,9 +134,14 @@ back_to_conditions = function() {
   $("#view_133 #kn-input-field_119").css({"visibility":"unset", "position":"unset"});
   $("#view_133 .buttons-wrapper #next-cutoff-btn").css({"display":"unset"});
   $("#view_133 .buttons-wrapper #back-cutoff-btn").css({"display":"none"});
-  $("#view_133 .buttons-wrapper .kn-button.is-primary").css({"display":"none"});
+  $("#view_133 .buttons-wrapper #submission-btn").css({"display":"none"});
 }
 $("#view_133 #back-cutoff-btn").on("click", back_to_conditions);
+
+submit_request_form = function() {
+  $("#view_133 form .kn-button.is-primary").click();
+}
+$("#view_133 #submission-btn").on("click", submit_request_form);
 
 // Add placeholders + classes to the form view (view_133)
 
