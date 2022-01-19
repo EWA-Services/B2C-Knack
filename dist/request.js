@@ -97,9 +97,9 @@ $("#view_133-field_119").change(function () {
   }
 });
 
-var buttons_html = `<hr>
-                    <div id="security-clause">
-                      <span class="sc-instructions">Please write <span class="clause">"I will pay back the salary advance on {payday_current} before 10am"</span> below to proceed</span>
+var buttons_html = `<div id="security-clause">
+                      <hr>
+                      <p class="sc-instructions">Please write <span class="clause">\"I will pay back the salary advance on {payday_current} before 10am\"</span> below to proceed</p>
                       <input class="sc-input-field" type="text">
                     </div>
                     <div id="buttons-wrapper" class="buttons-wrapper">

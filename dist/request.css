@@ -71,12 +71,12 @@
   margin-top: 10px;
 }
 
-#view_133 #security-clause span.sc-instructions {
+#view_133 #security-clause p.sc-instructions {
   font-weight: 300!important;
   color: #7a6e6e!important;
 }
 
-#view_133 #security-clause span.sc-instructions span {
+#view_133 #security-clause p.sc-instructions span {
   font-family: Inter!important;
   font-weight: 600;
   font-size: 14px!important;
