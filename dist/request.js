@@ -40,7 +40,11 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
   }
 
   // condition5: terms and conditions checked
-
+  if($("#view_133 #kn-input-field_142 input").is(":checked")) {
+    var cond5 = true;
+  } else {
+    var cond5 = false;
+  }
 
   // condition6: signature filled in
   var base30Data = $("#view_133-field_119").jSignature('getData','base30')[1];
@@ -51,7 +55,7 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
   }
 
   // condition7: security clause not empty
-  var clause_input = $("#view_133 #security-clause .sc-input-field").val();
+  var clause_input = $("#view_133 #kn-input-field_141 input").val();
   if (clause_input.length <= 5) {
     var cond7 = false;
   } else {
@@ -93,13 +97,6 @@ function display_message (json_obj) {
   }
 };
 
-// Terms and conditions
-var terms_content = `<div id="terms_and_conditions">
-                        <input id="terms" type="checkbox">
-                        <label for="terms">I accept the <a href="#">Terms & Conditions</a> of EWA Services</label>
-                     </div>`
-$(terms_content).insertBefore($("#view_133 #kn-input-field_119"));
-
 // Wrapping the tips amount for styling purposes
 
 $("#kn-input-field_126 .kn-radio .control:lt(3)").wrapAll('<div class="wrapper-tips"></div>');
@@ -112,7 +109,7 @@ $('.view_133 form #kn-input-field_126 .wrapper-tips .control').each(function () 
 
 // Function that updates the proceed button state on jsignature field change
 
-$("#view_133-field_119").change(function () {
+/* $("#view_133-field_119").change(function () {
   var base30Data = $("#view_133-field_119").jSignature('getData','base30')[1];
   if (base30Data.trim() == "") {
     $('#next-cutoff-btn').prop("disabled", true);
@@ -121,12 +118,11 @@ $("#view_133-field_119").change(function () {
     $('#next-cutoff-btn').prop("disabled", false);
     $('#next-cutoff-btn').removeClass("disabled");
   }
-});
+}); */
 
 var security_clause = `<div id="security-clause">
                         <hr>
-                        <p class="sc-instructions">Please write <span class="clause">I will pay back the salary advance on {payday_current} before 10am</span> below to proceed</p>
-                        <input class="sc-input-field" type="text">
+                        <p class="sc-instructions">Please write <span class="clause">"I will pay back the salary advance on {payday_current} before 10am"</span> below to proceed</p>
                       </div>`;
 
 $(security_clause).insertBefore($("#view_133 #kn-input-field_141"));
@@ -172,16 +168,16 @@ $('.view_133 form #kn-input-field_92.kn-input .kn-radio .control').each(function
 
   if ($(radioContent).text().toLowerCase().indexOf("normal") > -1) {
       var fee_message = normal_fee_message;
-      var withdrawal_speed = normal_withdrawal_speed;
+      var withdrawal_speed = normal_withdrawal_speed.trim();
       var speed_type = "normal";
   } else if ($(radioContent).text().toLowerCase().indexOf("fast") > -1) {
     $(this).addClass("selected");
     var fee_message = fast_fee_message;
-    var withdrawal_speed = fast_withdrawal_speed;
+    var withdrawal_speed = fast_withdrawal_speed.trim();
     var speed_type = "fast";
   } else {
     var fee_message = cutoff_fee_message;
-    var withdrawal_speed = cutoff_withdrawal_speed;
+    var withdrawal_speed = cutoff_withdrawal_speed.trim();
     var speed_type = "cutoff";
   }
 
@@ -256,7 +252,7 @@ var cutoff_day = cutoff_day == "" ? "-" : cutoff_day;
 var payday = payday == "" ? "-" : payday;
 
 var new_clause_html = $("#view_133 #security-clause p.sc-instructions").html().replace("{payday_current}", payday);
-$("#view_133 #security-clause p.sc-instructions").replaceWith(new_clause_html);
+$("#view_133 #security-clause p.sc-instructions").replaceWith('<p class="sc-instructions">' + new_clause_html + "</p>");
 
 // Calculate Withdrawable Amount Variables
 var base_salary = parseFloat($("#view_65 .field_44 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_65 .field_44 .kn-detail-body").text().replace(/,/g, ""));
@@ -353,7 +349,7 @@ if (max_allowed > 0) {
 $(request_amount).insertAfter("#kn-input-field_18 label");
 var increase_statement = `<div class="information-increase">
                             <span class="material-icons">info</span>
-                            <span class="text-info">Your limit will gradually increase up to ฿4,000 if you pay back your salary advance on time every month.</span>
+                            <span class="text-info">Your limit will gradually increase up to <b>฿4,000</b> if you pay back your salary advance on time every month.</span>
                           </div>`;
 $(increase_statement).insertAfter("#view_133 #field_18");
 
@@ -406,8 +402,17 @@ $("input#field_18").on("input", function (e) {
   $("#view_133 #field_127").attr("value", (input_val*tip_perc).toFixed(2));
 });
 
-// Validation of the security clause
+// Validation of the security clause, T&C checkbox and signature
 
-$("#view_133 #security-clause .sc-input-field").on("input", function (e) {
-  console.log($("#view_133 #security-clause .sc-input-field").val());
+$("#view_133 #kn-input-field_141 input").on("input", function (e) {
+  console.log("debug: consignment clause change");
+  console.log($("#view_133 #kn-input-field_141 input").val().length);
 });
+
+$("#view_133 #kn-input-field_142 input").change(function () {
+  console.log("debug: T&C checkbox change");
+})
+
+$("#view_133-field_119").change(function () {
+  console.log("debug: signature change");
+})
