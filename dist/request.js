@@ -344,6 +344,8 @@ $("input[type=radio][name=view_133-field_126]").change(function () {
 });
 
 if (max_allowed > 0) {
+  console.log(max_allowed);
+  console.log(available_amount);
   var max_allowed_bis = Math.min(max_allowed, available_amount);
   if (max_allowed_bis >= min_allowed) {
     var request_amount = '<span class="amount-info-message">Amount should be between <span>฿' + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span> and <span>฿' + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></span>';
