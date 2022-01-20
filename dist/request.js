@@ -175,7 +175,6 @@ $('.view_133 form #kn-input-field_92.kn-input .kn-radio .control').each(function
       var withdrawal_speed = normal_withdrawal_speed.trim();
       var speed_type = "normal";
   } else if ($(radioContent).text().toLowerCase().indexOf("fast") > -1) {
-    $(radioContent).closest("input").attr("disabled", true);
     var fee_message = fast_fee_message;
     var withdrawal_speed = fast_withdrawal_speed.trim();
     var speed_type = "fast";
@@ -195,6 +194,10 @@ $('.view_133 form #kn-input-field_92.kn-input .kn-radio .control').each(function
   `;
   $(radioContent).html(newContentTemplate);
 });
+
+// Disabling the fast withdrawal option
+
+$("div.fast").parents("label").find("input").attr("disabled", true);
 
 /* $('.view_133 form .kn-radio input[type=radio][name=view_133-field_92]').change(function (e) {
   $('.view_133 form .kn-radio input').each(function () {

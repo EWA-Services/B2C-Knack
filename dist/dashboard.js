@@ -68,8 +68,8 @@ var html = '<section id="custom-view-scene1">' +
   '<span>' + (check === true ? (Math.round((available_amount * withdrawable_threshold)*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0) + '</span>' +
   '<a' + (check === true ? ' href="' + window.location.pathname + '#request"' : ' style="pointer-events:none;" class="disabled"') + '>Withdraw</a>' +
   // '<a href="' + window.location.pathname + "#request\"" + '>Withdraw</a>' +
-  (check === true ? "<span class='max-reached'>You have reached the maximum number of advance requests for this month. Come back next month to request more.</span>" : "") +
   '</div>' +
+  (check === true ? "" : "<span class='max-reached'>You have reached the maximum number of advance requests for this month. Come back next month to request more.</span>") +
   '</div>' +
   '</section>';
 
