@@ -63,9 +63,7 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
   }
 
   // compiling all
-  if (cond6 == false) {
-    return {status: false, error: "Please sign the form to proceed"};
-  } else if (cond1 == false) {
+  if (cond1 == false) {
     return {status: false, error: "Please wait until next month to submit new requests"};
   } else if (cond2 == false) {
     return {status: false, error: "You have exceeded the maximum number of requests allowed per month"};
@@ -77,6 +75,8 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
     return {status: false, error: "Please provide an amount greater than " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
   } else if (cond5 == false || cond7 == false) {
     return {status: false, error: "Please accept the terms & conditions to proceed"};
+  } else if (cond6 == false) {
+    return {status: false, error: "Please sign the form to proceed"};
   } else {
     return { status: true };
   }
@@ -170,11 +170,12 @@ $('.view_133 form #kn-input-field_92.kn-input .kn-radio .control').each(function
   let radioContentText = $(radioContent).text().trim().split('-');
 
   if ($(radioContent).text().toLowerCase().indexOf("normal") > -1) {
+      $(this).addClass("selected");
       var fee_message = normal_fee_message;
       var withdrawal_speed = normal_withdrawal_speed.trim();
       var speed_type = "normal";
   } else if ($(radioContent).text().toLowerCase().indexOf("fast") > -1) {
-    $(this).addClass("selected");
+    $(radioContent).closest("input").attr("disabled", true);
     var fee_message = fast_fee_message;
     var withdrawal_speed = fast_withdrawal_speed.trim();
     var speed_type = "fast";
