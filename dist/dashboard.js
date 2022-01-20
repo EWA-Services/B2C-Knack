@@ -69,7 +69,7 @@ var html = '<section id="custom-view-scene1">' +
   '<a' + (check === true ? ' href="' + window.location.pathname + '#request"' : ' style="pointer-events:none;" class="disabled"') + '>Withdraw</a>' +
   // '<a href="' + window.location.pathname + "#request\"" + '>Withdraw</a>' +
   '</div>' +
-  (check === true ? "" : "<span class='max-reached'>You have reached the maximum number of advance requests for this month. Come back next month to request more.</span>") +
+  (check === true ? "" : "<p class='max-reached'>You have reached the maximum number of advance requests for this month. Come back next month to request more.</p>") +
   '</div>' +
   '</section>';
 
