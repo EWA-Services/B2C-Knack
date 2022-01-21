@@ -65,7 +65,7 @@ var html = '<section id="custom-view-scene1">' +
   '<div class="max-withdrawable">' +
   '<div class="max-withdrawable-label">Maximum Withdrawable Amount</div>' +
   '<div class="max-amount-button">' +
-  '<span>' + (check === true ? (Math.round((Math.min(2000, available_amount * withdrawable_threshold))*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0) + '</span>' +
+  '<span>' + (check === true ? (Math.round((Math.min(1000, available_amount * withdrawable_threshold))*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0) + '</span>' +
   '<a' + (check === true ? ' href="' + window.location.pathname + '#request"' : ' style="pointer-events:none;" class="disabled"') + '>Withdraw</a>' +
   // '<a href="' + window.location.pathname + "#request\"" + '>Withdraw</a>' +
   '</div>' +
