@@ -101,6 +101,10 @@ function display_message (json_obj) {
   }
 };
 
+// Change the type of the input field of the amount to "number"
+
+$("#view_133 #field_18").prop("type", "number");
+
 // Wrapping the tips amount for styling purposes
 
 $("#kn-input-field_126 .kn-radio .control:lt(3)").wrapAll('<div class="wrapper-tips"></div>');
