@@ -1,15 +1,9 @@
 requests_check = function (cutoff_day, nb_requests, max_nb_requests) {
-  console.log(cutoff_day);
-  console.log(nb_requests);
-  console.log(max_nb_requests);
-  console.log(new Date());
-  console.log(new Date(cutoff_day.split("/")[2], cutoff_day.split("/")[1] - 1, cutoff_day.split("/")[0]));
-  console.log(new Date() <= new Date(cutoff_day.split("/")[2], cutoff_day.split("/")[1] - 1, cutoff_day.split("/")[0]));
-  // condition1 : cutoff date
+    // condition1 : cutoff date
   if (cutoff_day == "-") {
     var cond1 = false;
   } else {
-    var cond1 = new Date() <= new Date(cutoff_day.split("/")[2], cutoff_day.split("/")[1] - 1, cutoff_day.split("/")[0]);
+    var cond1 = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()) <= new Date(cutoff_day.split("/")[2], cutoff_day.split("/")[1] - 1, cutoff_day.split("/")[0]);
   }
 
   // condition2: total number of requests per month
