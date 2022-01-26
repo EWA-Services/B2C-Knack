@@ -19,7 +19,7 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
   if (cutoff_day == "-") {
     var cond1 = false;
   } else {
-    var cond1 = new Date() <= new Date(cutoff_day.split("/")[2], cutoff_day.split("/")[1] - 1, cutoff_day.split("/")[0]);
+    var cond1 = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()) <= new Date(cutoff_day.split("/")[2], cutoff_day.split("/")[1] - 1, cutoff_day.split("/")[0]);
   }
 
   // condition2: total number of requests per month
