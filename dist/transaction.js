@@ -149,7 +149,7 @@ function createTransactionList() {
     transactions.forEach(transaction => {
 
         let formattedDate = formatDate(transaction.field_24.value.substring(0, 10));
-        var payback_link_display = transaction.field_98.value == "Not Paid Back" ? "" : "display: none;";
+        var payback_link_display = transaction.field_98.value == "Not Paid Back" && transaction.field_23.value == "Paid Out" ? "" : "display: none;";
 
         let transactionTemplate = `
             <div class="transaction-item ${getStatusClass(transaction.field_23.class)}">
@@ -220,7 +220,7 @@ function setupEventHandlers() {
 
 }
 
-// Main method: creates transaction list  and calls the event handlers
+// Main method: creates transaction list and calls the event handlers
 function loadCustomTrasactionView() {
     createTransactionList();
     setupEventHandlers();
