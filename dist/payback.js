@@ -14,7 +14,7 @@ function formatDate(stringDate) {
 }
 
 
-let information = {};
+var information = {};
 
 $("#view_114 .kn-table").find('.kn-detail').each(function () {
     let classes = $(this).attr('class').split(' ');
