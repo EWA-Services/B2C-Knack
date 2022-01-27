@@ -62,7 +62,7 @@ function parseTransactions() {
                 detailVal = $(this).find('.kn-detail-body span span span').text();
 
             let statusClass  = "";
-            if(detailKey === 'field_23')
+            if(detailKey === 'field_23' || detailKey === 'field_98')
                 statusClass = $(this).find('.kn-detail-body span span span').attr('class');
 
             transaction[detailKey] = {
@@ -149,22 +149,23 @@ function createTransactionList() {
     transactions.forEach(transaction => {
 
         let formattedDate = formatDate(transaction.field_24.value.substring(0, 10));
-        var payback_link_display = transaction.field_98.value == "Not Paid Back" && transaction.field_23.value == "Paid Out" ? "" : "display: none;";
+        var payback_link_display = transaction.field_98.class == "not-paid" && transaction.field_23.class == "paid-out" ? "" : "display: none;";
+        var progress_display = transaction.field_98.class == "uploaded" && transaction.field_23.class == "paid-out" ? "" : "display: none;";
+        var paid_display = transaction.field_98.class == "paid" && transaction.field_23.class == "paid-out" ? "" : "display: none;";
 
         let transactionTemplate = `
             <div class="transaction-item ${getStatusClass(transaction.field_23.class)}">
                 <div class="ti-header">
                     <div class="ti-header-tgl">
                         <span class="ti-withdrawal-date">${formattedDate}</span>
-
-                        <span class="btn-toggle material-icons">
-                            expand_more
-                        </span>
+                        <span class="btn-toggle material-icons">expand_more</span>
                     </div>
 
                     <div class="ti-header-amount">
                         <span class="ti-amount">${transaction.field_18.value}</span>
                         <a class="upload-payslip" style="${payback_link_display}" href="${transaction.edit}">Payback</a>
+                        <a class="pending-approval" style="${progress_display}">Pending Approval</a>
+                        <a class="paid" style="${paid_display}">Paid</a>
                         ${setStatusIcon(transaction.field_23.class)}
                     </div>
                 </div>
