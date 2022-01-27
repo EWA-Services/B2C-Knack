@@ -102,7 +102,7 @@ function createDetailRows(transaction) {
     let detailRows = "";
     for (const detail in transaction) {
 
-        if (detail === 'field_64') continue;
+        if (detail === 'field_64' || detail === 'edit') continue;
 
         let value = transaction[detail].value;
         if (detail === 'field_24') {
@@ -149,6 +149,7 @@ function createTransactionList() {
     transactions.forEach(transaction => {
 
         let formattedDate = formatDate(transaction.field_24.value.substring(0, 10));
+        var payback_link_display = transaction.field_98.value == "Not Paid Back" ? "" : "display: none;";
 
         let transactionTemplate = `
             <div class="transaction-item ${getStatusClass(transaction.field_23.class)}">
@@ -163,7 +164,7 @@ function createTransactionList() {
 
                     <div class="ti-header-amount">
                         <span class="ti-amount">${transaction.field_18.value}</span>
-                        <a class="upload-payslip" href="${transaction.edit}">Upload Pay Slip</a>
+                        <a class="upload-payslip" style="${payback_link_display}" href="${transaction.edit}">Payback</a>
                         ${setStatusIcon(transaction.field_23.class)}
                     </div>
                 </div>
@@ -171,8 +172,8 @@ function createTransactionList() {
                 <div class="ti-contnet hidden-detail">
                     ${createDetailRows(transaction)}
                 </div>
-            </div>
-        `
+            </div>`
+
         transactionsCont.append(transactionTemplate);
     });
 }
