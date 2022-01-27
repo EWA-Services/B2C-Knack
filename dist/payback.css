@@ -19,7 +19,7 @@
 }
 
 #view_115 .bank-details .bank-logo {
-    width: 20%;
+    width: 17%;
     margin-right: 20px;
 }
 
@@ -41,6 +41,7 @@
     line-height: 17px;
     color: #666;
     display: block;
+    margin-right: 10px;
 }
 
 #view_115 .bank-details .account-details .account-name .value,
@@ -71,15 +72,7 @@
 }
 
 #view_114 {
-    display: none;
-}
-
-#view_113 {
-    margin-bottom: 30px;
-}
-
-#view_113 .kn-back-link {
-    display: none;
+    display: none !important;
 }
 
 #view_113 #kn-input-field_101 div.control {
@@ -129,4 +122,16 @@
     height: 46px;
     color: #fff!important;
     background: #8e4842!important;
+}
+
+#kn-scene_22 {
+    margin-bottom: 30px;
+}
+
+#kn-scene_22 .kn-back-link {
+    display: none;
+}
+
+#view_118 {
+    display: none;
 }
