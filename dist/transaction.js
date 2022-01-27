@@ -72,6 +72,9 @@ function parseTransactions() {
             };
         });
 
+        var edit_link = $(this).find('.kn-details-link a').attr('href');
+        transaction["edit"] = edit_link;
+
         transactions.push(transaction);
     });
 
@@ -160,7 +163,7 @@ function createTransactionList() {
 
                     <div class="ti-header-amount">
                         <span class="ti-amount">${transaction.field_18.value}</span>
-
+                        <a href="${transaction.edit}>
                         ${setStatusIcon(transaction.field_23.class)}
                     </div>
                 </div>
