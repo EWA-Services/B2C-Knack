@@ -62,13 +62,18 @@ function parseTransactions() {
                 detailVal = $(this).find('.kn-detail-body span span span').text();
 
             let statusClass  = "";
-            if(detailKey === 'field_23' || detailKey === 'field_98')
+            if(detailKey === 'field_23')
                 statusClass = $(this).find('.kn-detail-body span span span').attr('class');
+
+            let paybackClass  = "";
+            if(detailKey === 'field_98')
+                paybackClass = $(this).find('.kn-detail-body span span span').attr('class');
 
             transaction[detailKey] = {
                 "label": label,
                 "value": detailVal,
                 ...(detailKey === 'field_23') && {"class": statusClass},
+                ...(detailKey === 'field_98') && {"class": paybackClass},
             };
         });
 
