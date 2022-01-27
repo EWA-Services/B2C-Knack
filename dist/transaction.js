@@ -108,6 +108,7 @@ function createDetailRows(transaction) {
     for (const detail in transaction) {
 
         if (detail === 'field_64' || detail === 'edit') continue;
+        if (detail === 'field_98' && transaction['field_23'].class != 'paid-out') continue;
 
         let value = transaction[detail].value;
         if (detail === 'field_24') {
