@@ -163,7 +163,7 @@ function createTransactionList() {
 
                     <div class="ti-header-amount">
                         <span class="ti-amount">${transaction.field_18.value}</span>
-                        <a href="${transaction.edit}">
+                        <a class="upload-payslip" href="${transaction.edit}">Upload Pay Slip</a>
                         ${setStatusIcon(transaction.field_23.class)}
                     </div>
                 </div>
