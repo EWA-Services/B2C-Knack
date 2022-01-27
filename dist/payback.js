@@ -37,8 +37,8 @@ $("#view_114 .kn-table").find('.kn-detail').each(function () {
     };
 });
 
-let formatted_date = formatDate(information.field_24.value.substring(0, 10));
-let information_container = $('#view_117 .information-container');
+var formatted_date = formatDate(information.field_24.value.substring(0, 10));
+var information_container = $('#view_117 .information-container');
 
 var details = "";
 
@@ -61,6 +61,6 @@ for (const detail in information) {
     details += row;
 }
 
-let template = `<div class="ti-content">${details}</div>`;
+var template = `<div class="ti-content">${details}</div>`;
 information_container.append(template);
 
