@@ -58,7 +58,7 @@ function parseTransactions() {
             let detailKey = classes.find(cls => cls.includes('field'));
             let detailVal = $(this).find('.kn-detail-body span span').text();
 
-            if (detailKey === 'field_59' || detailKey === 'field_23')
+            if (detailKey === 'field_59' || detailKey === 'field_23' || detailKey === 'field_98')
                 detailVal = $(this).find('.kn-detail-body span span span').text();
 
             let statusClass  = "";

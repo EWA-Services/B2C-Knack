@@ -288,6 +288,30 @@
 
 #view_74 .transaction-list-container a.upload-payslip {
     padding: 5px 10px;
+    background: #8b0000;
+    border-radius: 40px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+    min-width: 85px;
+    text-align: center;
+    font-weight: 600;
+}
+
+#view_74 .transaction-list-container a.pending-approval {
+    padding: 5px 10px;
+    background: #d79c05;
+    border-radius: 40px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+    min-width: 85px;
+    text-align: center;
+    font-weight: 600;
+}
+
+#view_74 .transaction-list-container a.paid {
+    padding: 5px 10px;
     background: #027470;
     border-radius: 40px;
     color: #fff;
