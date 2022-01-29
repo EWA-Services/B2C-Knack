@@ -11,8 +11,8 @@ function searchTransactions(queryString) {
 
 //  Resets the search bar state if there's not input
 function resetSearchBar() {
-    let searchInputCont = $('#transaction-search-bar .search-input-cont');
-    let clearInput = $('#transaction-search-bar #clear');
+    var searchInputCont = $('#transaction-search-bar .search-input-cont');
+    var clearInput = $('#transaction-search-bar #clear');
 
     if (!$(clearInput).hasClass('hidden')) $(clearInput).addClass('hidden');
 
@@ -46,26 +46,26 @@ function setStatusIcon(statusClass) {
 
 // Parses transaction list from form
 function parseTransactions() {
-    let transactions = [];
+    var transactions = [];
 
     $("#view_61 .kn-list-content .kn-list-item-container, #view_62 .kn-list-content .kn-list-item-container").each(function () {
-        let transaction = {};
+        var transaction = {};
 
         $(this).find('.kn-detail').each(function () {
-            let classes = $(this).attr('class').split(' ');
-            let label = $(this).find('.kn-detail-label span span').text();
+            var classes = $(this).attr('class').split(' ');
+            var label = $(this).find('.kn-detail-label span span').text();
 
-            let detailKey = classes.find(cls => cls.includes('field'));
-            let detailVal = $(this).find('.kn-detail-body span span').text();
+            var detailKey = classes.find(cls => cls.includes('field'));
+            var detailVal = $(this).find('.kn-detail-body span span').text();
 
             if (detailKey === 'field_59' || detailKey === 'field_23' || detailKey === 'field_148')
                 detailVal = $(this).find('.kn-detail-body span span span').text();
 
-            let statusClass  = "";
+            var statusClass  = "";
             if(detailKey === 'field_23')
                 statusClass = $(this).find('.kn-detail-body span span span').attr('class');
 
-            let paybackClass  = "";
+            var paybackClass  = "";
             if(detailKey === 'field_148')
                 paybackClass = $(this).find('.kn-detail-body span span span').attr('class');
 
@@ -88,32 +88,32 @@ function parseTransactions() {
 
 // Parses and returns formatted date
 function formatDate(stringDate) {
-    let dateArray = stringDate.split('/');
-    let date = new Date(+dateArray[2], dateArray[1] - 1, +dateArray[0]);
+    var dateArray = stringDate.split('/');
+    var date = new Date(+dateArray[2], dateArray[1] - 1, +dateArray[0]);
 
-    let year = date.getFullYear();
+    var year = date.getFullYear();
 
-    let month = date.toLocaleString('default', {
+    var month = date.toLocaleString('default', {
         month: 'long'
     });
 
-    let day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+    var day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
 
     return `${month} ${day}, ${year}`;
 }
 
 // Creates content detail rows
 function createDetailRows(transaction) {
-    let detailRows = "";
+    var detailRows = "";
     for (const detail in transaction) {
 
         if (detail === 'field_64' || detail === 'edit') continue;
         if (detail === 'field_148' && transaction['field_23'].class != 'paid-out') continue;
 
-        let value = transaction[detail].value;
+        var value = transaction[detail].value;
         if (detail === 'field_24') {
-            let formattedDate = formatDate(value.substring(0, 10));
-            let time = value.substring(10, value.length);
+            var formattedDate = formatDate(value.substring(0, 10));
+            var time = value.substring(10, value.length);
 
             value = formattedDate.concat(' at', time);
         }
@@ -129,7 +129,7 @@ function createDetailRows(transaction) {
             `
         } */
 
-        let row = `
+        var row = `
             <div class="ti-content-row">
                 <span class="ti-row-label">
                     ${transaction[detail].label}
@@ -148,18 +148,17 @@ function createDetailRows(transaction) {
 
 // Creates the transaction list 
 function createTransactionList() {
-    let transactions = parseTransactions();
-
-    let transactionsCont = $('.transaction-list-container');
+    var transactions = parseTransactions();
+    var transactionsCont = $('.transaction-list-container');
 
     transactions.forEach(transaction => {
 
-        let formattedDate = formatDate(transaction.field_24.value.substring(0, 10));
+        var formattedDate = formatDate(transaction.field_24.value.substring(0, 10));
         var payback_link_display = transaction.field_148.class == "not-paid" && transaction.field_23.class == "paid-out" ? "" : "display: none;";
         var progress_display = transaction.field_148.class == "uploaded" && transaction.field_23.class == "paid-out" ? "" : "display: none;";
         var paid_display = transaction.field_148.class == "paid" && transaction.field_23.class == "paid-out" ? "" : "display: none;";
 
-        let transactionTemplate = `
+        var transactionTemplate = `
             <div class="transaction-item ${getStatusClass(transaction.field_23.class)}">
                 <div class="ti-header">
                     <div class="ti-header-tgl">
@@ -170,7 +169,7 @@ function createTransactionList() {
                     <div class="ti-header-amount">
                         <span class="ti-amount">${transaction.field_18.value}</span>
                         <a class="upload-payslip" style="${payback_link_display}" href="${transaction.edit}">Payback</a>
-                        <a class="pending-approval" style="${progress_display}">Pending Approval</a>
+                        <a class="pending-approval" style="${progress_display}">Checking Slip</a>
                         <a class="paid" style="${paid_display}">Paid</a>
                         ${setStatusIcon(transaction.field_23.class)}
                     </div>
@@ -188,7 +187,7 @@ function createTransactionList() {
 // Setup event handlers
 function setupEventHandlers() {
     $('.transaction-item .btn-toggle').click(function () {
-        let ti = $(this).parents('.transaction-item');
+        var ti = $(this).parents('.transaction-item');
 
         $(this).toggleClass('selected')
         $(ti).find('.ti-contnet').toggleClass('hidden-detail');
@@ -199,10 +198,10 @@ function setupEventHandlers() {
     });
 
     $('#transaction-search-bar input').keyup(function () {
-        let searchBar = $(this).parents('.custom-search-bar');
-        let searchInputCont = $(searchBar).find('.search-input-cont');
-        let clearInput = $(searchBar).find('#clear');
-        let searchString = $(this).val().trim();
+        var searchBar = $(this).parents('.custom-search-bar');
+        var searchInputCont = $(searchBar).find('.search-input-cont');
+        var clearInput = $(searchBar).find('#clear');
+        var searchString = $(this).val().trim();
 
         if (searchString !== "") {
             $(clearInput).removeClass('hidden');
@@ -218,8 +217,8 @@ function setupEventHandlers() {
     });
 
     $('#transaction-search-bar #clear').click(function () {
-        let searchBar = $(this).parents('.custom-search-bar');
-        let input = $(searchBar).find('input.form-input');
+        var searchBar = $(this).parents('.custom-search-bar');
+        var input = $(searchBar).find('input.form-input');
 
         $(input).val('');
         resetSearchBar();

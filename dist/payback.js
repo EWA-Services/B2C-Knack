@@ -1,14 +1,14 @@
 function formatDate(stringDate) {
-    let dateArray = stringDate.split('/');
-    let date = new Date(+dateArray[2], dateArray[1] - 1, +dateArray[0]);
+    var dateArray = stringDate.split('/');
+    var date = new Date(+dateArray[2], dateArray[1] - 1, +dateArray[0]);
 
-    let year = date.getFullYear();
+    var year = date.getFullYear();
 
-    let month = date.toLocaleString('default', {
+    var month = date.toLocaleString('default', {
         month: 'long'
     });
 
-    let day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+    var day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
 
     return `${month} ${day}, ${year}`;
 }
@@ -17,16 +17,16 @@ function formatDate(stringDate) {
 var information = {};
 
 $("#view_142 .kn-table").find('.kn-detail').each(function () {
-    let classes = $(this).attr('class').split(' ');
-    let label = $(this).find('.kn-detail-label span span').text();
+    var classes = $(this).attr('class').split(' ');
+    var label = $(this).find('.kn-detail-label span span').text();
 
-    let detailKey = classes.find(cls => cls.includes('field'));
-    let detailVal = $(this).find('.kn-detail-body span span').text();
+    var detailKey = classes.find(cls => cls.includes('field'));
+    var detailVal = $(this).find('.kn-detail-body span span').text();
 
     if (detailKey === 'field_59' || detailKey === 'field_23')
         detailVal = $(this).find('.kn-detail-body span span span').text();
 
-    let statusClass  = "";
+    var statusClass  = "";
     if(detailKey === 'field_23')
         statusClass = $(this).find('.kn-detail-body span span span').attr('class');
 
@@ -44,15 +44,15 @@ var details = "";
 
 for (const detail in information) {
 
-    let value = information[detail].value;
+    var value = information[detail].value;
     if (detail === 'field_24') {
-        let formatted_date = formatDate(value.substring(0, 10));
-        let time = value.substring(10, value.length);
+        var formatted_date = formatDate(value.substring(0, 10));
+        var time = value.substring(10, value.length);
         value = formatted_date.concat(' at', time);
     }
 
-    let row = `
-        <div class="ti-content-row">
+    var row = `
+        <div class="ti-content-row ${detail}">
             <span class="ti-row-label">${information[detail].label}</span>
             <span class="ti-row-value">${value || '-'}</span>
         </div>
@@ -64,3 +64,7 @@ for (const detail in information) {
 var template = `<div class="ti-content">${details}</div>`;
 information_container.append(template);
 
+// Payback amount placeholder
+
+var payback_amount = $("#view_142 .kn-detail.field_64 .kn-detail-body span span").text();
+$("#view_143 .bank-account-payback .amount-to-pay .value").text(payback_amount);
