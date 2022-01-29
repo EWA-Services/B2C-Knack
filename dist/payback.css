@@ -65,12 +65,12 @@
     background: #fff;
 }
 
-#view_141 .information-container .ti-content.field_64 {
+#view_141 .information-container .ti-content-row.field_64 {
     border-top: 2px solid lightgray;
     padding-top: 15px;
 }
 
-#view_141 .information-container .ti-content.field_64 .ti-row-value {
+#view_141 .information-container .ti-content-row.field_64 .ti-row-value {
     color: #027470;
     font-weight: 800;
 }
