@@ -1,10 +1,10 @@
-#view_115 {
+#view_143 {
     padding: 12px;
     background: #fff;
     margin-bottom: 20px !important;
 }
 
-#view_115 .bank-account-payback > p {
+#view_143 .bank-account-payback > p {
     font-family: Inter!important;
     font-style: normal;
     font-weight: 700;
@@ -14,24 +14,24 @@
     display: block;
 }
 
-#view_115 .bank-details {
+#view_143 .bank-details {
     display: flex;
 }
 
-#view_115 .bank-details .bank-logo {
+#view_143 .bank-details .bank-logo {
     width: 17%;
     margin-right: 20px;
 }
 
-#view_115 .bank-details .account-details .account-name,
-#view_115 .bank-details .account-details .account-number,
-#view_115 .bank-details .account-details .bank-name {
+#view_143 .bank-details .account-details .account-name,
+#view_143 .bank-details .account-details .account-number,
+#view_143 .bank-details .account-details .bank-name {
     display: flex;
 }
 
-#view_115 .bank-details .account-details .account-name .label,
-#view_115 .bank-details .account-details .account-number .label,
-#view_115 .bank-details .account-details .bank-name .label {
+#view_143 .bank-details .account-details .account-name .label,
+#view_143 .bank-details .account-details .account-number .label,
+#view_143 .bank-details .account-details .bank-name .label {
     min-width: 115px;
 
     font-family: Inter!important;
@@ -44,9 +44,9 @@
     margin-right: 10px;
 }
 
-#view_115 .bank-details .account-details .account-name .value,
-#view_115 .bank-details .account-details .account-number .value,
-#view_115 .bank-details .account-details .bank-name .value {
+#view_143 .bank-details .account-details .account-name .value,
+#view_143 .bank-details .account-details .account-number .value,
+#view_143 .bank-details .account-details .bank-name .value {
     font-family: Inter!important;
     font-style: normal;
     font-weight: 500;
@@ -56,11 +56,11 @@
     display: block;
 }
 
-#view_117 {
+#view_141 {
     margin-bottom: 20px !important;
 }
 
-#view_117 .information-container .ti-content {
+#view_141 .information-container .ti-content {
     width: 100%;
     margin: auto;
     border-bottom-left-radius: 4px;
@@ -71,15 +71,15 @@
     background: #fff;
 }
 
-#view_114 {
+#view_142 {
     display: none !important;
 }
 
-#view_113 #kn-input-field_101 div.control {
+#view_144 #kn-input-field_147 div.control {
     margin-bottom: 0 !important;
 }
 
-#view_113 input {
+#view_144 input {
     width: 100%;
     margin: auto;
     box-shadow: none!important;
@@ -97,13 +97,13 @@
     border: 2px solid #f4f4f4!important;
 }
 
-#view_113 .kn-instructions {
+#view_144 .kn-instructions {
     font-weight: 400;
     font-size: 11px;
     color: #666;
 }
 
-#view_113 button.kn-button.is-primary {
+#view_144 button.kn-button.is-primary {
     outline: 0!important;
     box-shadow: none!important;
     border: none!important;
@@ -124,11 +124,11 @@
     background: #8e4842!important;
 }
 
-#kn-scene_22 {
+#kn-scene_35 {
     margin-bottom: 30px;
 }
 
-#kn-scene_22 .kn-back-link {
+#kn-scene_35 .kn-back-link {
     display: none;
 }
 

@@ -16,7 +16,7 @@ function formatDate(stringDate) {
 
 var information = {};
 
-$("#view_114 .kn-table").find('.kn-detail').each(function () {
+$("#view_142 .kn-table").find('.kn-detail').each(function () {
     let classes = $(this).attr('class').split(' ');
     let label = $(this).find('.kn-detail-label span span').text();
 
@@ -38,7 +38,7 @@ $("#view_114 .kn-table").find('.kn-detail').each(function () {
 });
 
 var formatted_date = formatDate(information.field_24.value.substring(0, 10));
-var information_container = $('#view_117 .information-container');
+var information_container = $('#view_141 .information-container');
 
 var details = "";
 

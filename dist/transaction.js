@@ -58,7 +58,7 @@ function parseTransactions() {
             let detailKey = classes.find(cls => cls.includes('field'));
             let detailVal = $(this).find('.kn-detail-body span span').text();
 
-            if (detailKey === 'field_59' || detailKey === 'field_23' || detailKey === 'field_98')
+            if (detailKey === 'field_59' || detailKey === 'field_23' || detailKey === 'field_148')
                 detailVal = $(this).find('.kn-detail-body span span span').text();
 
             let statusClass  = "";
@@ -66,14 +66,14 @@ function parseTransactions() {
                 statusClass = $(this).find('.kn-detail-body span span span').attr('class');
 
             let paybackClass  = "";
-            if(detailKey === 'field_98')
+            if(detailKey === 'field_148')
                 paybackClass = $(this).find('.kn-detail-body span span span').attr('class');
 
             transaction[detailKey] = {
                 "label": label,
                 "value": detailVal,
                 ...(detailKey === 'field_23') && {"class": statusClass},
-                ...(detailKey === 'field_98') && {"class": paybackClass},
+                ...(detailKey === 'field_148') && {"class": paybackClass},
             };
         });
 
@@ -108,7 +108,7 @@ function createDetailRows(transaction) {
     for (const detail in transaction) {
 
         if (detail === 'field_64' || detail === 'edit') continue;
-        if (detail === 'field_98' && transaction['field_23'].class != 'paid-out') continue;
+        if (detail === 'field_148' && transaction['field_23'].class != 'paid-out') continue;
 
         let value = transaction[detail].value;
         if (detail === 'field_24') {
@@ -155,9 +155,9 @@ function createTransactionList() {
     transactions.forEach(transaction => {
 
         let formattedDate = formatDate(transaction.field_24.value.substring(0, 10));
-        var payback_link_display = transaction.field_98.class == "not-paid" && transaction.field_23.class == "paid-out" ? "" : "display: none;";
-        var progress_display = transaction.field_98.class == "uploaded" && transaction.field_23.class == "paid-out" ? "" : "display: none;";
-        var paid_display = transaction.field_98.class == "paid" && transaction.field_23.class == "paid-out" ? "" : "display: none;";
+        var payback_link_display = transaction.field_148.class == "not-paid" && transaction.field_23.class == "paid-out" ? "" : "display: none;";
+        var progress_display = transaction.field_148.class == "uploaded" && transaction.field_23.class == "paid-out" ? "" : "display: none;";
+        var paid_display = transaction.field_148.class == "paid" && transaction.field_23.class == "paid-out" ? "" : "display: none;";
 
         let transactionTemplate = `
             <div class="transaction-item ${getStatusClass(transaction.field_23.class)}">
