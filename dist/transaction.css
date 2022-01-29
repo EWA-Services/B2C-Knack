@@ -286,7 +286,8 @@
     line-height: 17px;
 }
 
-#view_74 .transaction-list-container a.upload-payslip {
+#view_74 .transaction-list-container a.upload-payslip,
+#view_92 .transaction-list-container a.upload-payslip {
     padding: 5px 10px;
     background: #8b0000;
     border-radius: 40px;
@@ -298,7 +299,8 @@
     font-weight: 600;
 }
 
-#view_74 .transaction-list-container a.pending-approval {
+#view_74 .transaction-list-container a.pending-approval,
+#view_92 .transaction-list-container a.pending-approval {
     padding: 5px 10px;
     background: #d79c05;
     border-radius: 40px;
@@ -308,9 +310,11 @@
     min-width: 85px;
     text-align: center;
     font-weight: 600;
+    cursor: default;
 }
 
-#view_74 .transaction-list-container a.paid {
+#view_74 .transaction-list-container a.paid,
+#view_92 .transaction-list-container a.paid {
     padding: 5px 10px;
     background: #027470;
     border-radius: 40px;
@@ -320,4 +324,5 @@
     min-width: 85px;
     text-align: center;
     font-weight: 600;
+    cursor: default;
 }
