@@ -23,15 +23,11 @@
     margin-right: 20px;
 }
 
-#view_143 .bank-details .account-details .account-name,
-#view_143 .bank-details .account-details .account-number,
-#view_143 .bank-details .account-details .bank-name {
+#view_143 .bank-details .account-details > div {
     display: flex;
 }
 
-#view_143 .bank-details .account-details .account-name .label,
-#view_143 .bank-details .account-details .account-number .label,
-#view_143 .bank-details .account-details .bank-name .label {
+#view_143 .bank-details .account-details > div .label {
     min-width: 115px;
 
     font-family: Inter!important;
@@ -44,9 +40,7 @@
     margin-right: 10px;
 }
 
-#view_143 .bank-details .account-details .account-name .value,
-#view_143 .bank-details .account-details .account-number .value,
-#view_143 .bank-details .account-details .bank-name .value {
+#view_143 .bank-details .account-details > div .value {
     font-family: Inter!important;
     font-style: normal;
     font-weight: 500;
