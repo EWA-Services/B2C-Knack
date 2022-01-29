@@ -23,13 +23,7 @@
     margin-right: 20px;
 }
 
-#view_143 .bank-details .account-details > div {
-    display: flex;
-}
-
-#view_143 .bank-details .account-details > div .label {
-    min-width: 115px;
-
+#view_143 .bank-details .account-details tr .label {
     font-family: Inter!important;
     font-style: normal;
     font-weight: 500;
@@ -40,7 +34,7 @@
     margin-right: 10px;
 }
 
-#view_143 .bank-details .account-details > div .value {
+#view_143 .bank-details .account-details tr .value {
     font-family: Inter!important;
     font-style: normal;
     font-weight: 500;
