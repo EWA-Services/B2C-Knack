@@ -67,4 +67,4 @@ information_container.append(template);
 // Payback amount placeholder
 
 var payback_amount = $("#view_142 .kn-detail.field_64 .kn-detail-body span span").text();
-$("#view_143 .bank-account-payback .amount-to-pay .value").text(payback_amount);
+$("#view_143 .bank-account-payback .amount-to-pay .value").text("฿" + payback_amount);
