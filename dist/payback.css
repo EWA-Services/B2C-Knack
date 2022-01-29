@@ -65,6 +65,16 @@
     background: #fff;
 }
 
+#view_141 .information-container .ti-content.field_64 {
+    border-top: 2px solid lightgray;
+    padding-top: 15px;
+}
+
+#view_141 .information-container .ti-content.field_64 .ti-row-value {
+    color: #027470;
+    font-weight: 800;
+}
+
 #view_142 {
     display: none !important;
 }
