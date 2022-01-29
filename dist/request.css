@@ -8,8 +8,8 @@
   position: absolute;
 }
 
-#view_133 #kn-input-field_92 div.kn-radio .control:nth-child(3) {
-  display: none;
+#view_133 #kn-input-field_92 div.kn-radio .control:nth-child(3), #view_147 {
+  display: none !important;
 }
 
 .view_133 {

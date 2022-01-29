@@ -1,9 +1,11 @@
-requests_check = function (cutoff_day, nb_requests, max_nb_requests) {
-  // condition1 : cutoff date
-  if (cutoff_day == "-") {
+requests_check = function (cutoff_day, payday, nb_requests, max_nb_requests) {
+  // condition1 : between cutoff date and payroll date
+  if (cutoff_day == "-" || payday == "-") {
     var cond1 = false;
   } else {
-    var cond1 = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()) <= new Date(cutoff_day.split("/")[2], cutoff_day.split("/")[1] - 1, cutoff_day.split("/")[0]);
+    var cond1_cutoff = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()) <= new Date(cutoff_day.split("/")[2], cutoff_day.split("/")[1] - 1, cutoff_day.split("/")[0]);
+    var cond1_payroll = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()) > new Date(payday.split("/")[2], payday.split("/")[1] - 1, payday.split("/")[0]);
+    var cond1 = cond1_cutoff || cond1_payroll;
   }
 
   // condition2: total number of requests per month
@@ -28,14 +30,14 @@ requests_check = function (cutoff_day, nb_requests, max_nb_requests) {
   // compiling all
   if (cond1 && cond2 && cond3 && cond4) {
     return { status : true };
-  } else if (cond1 == false) {
-    return { status : false, error : "We are past cutoff date. Please wait for your payday to submit a new request." };
-  } else if (cond2 == false) {
-    return { status : false, error : "You have reached the maximum number of advance requests for this month. You can request a new advance after you received your next salary." };
   } else if (cond3 == false) {
     return { status : false, error : "Please pay back the advance you have received to be able to submit a new request." };
   } else if (cond4 == false) {
     return { status : false, error : "Please wait until you payslips are approved to be able to submit a new request." };
+  } else if (cond1 == false) {
+    return { status : false, error : "We are past cutoff date. Please wait for your payday to submit a new request." };
+  } else if (cond2 == false) {
+    return { status : false, error : "You have reached the maximum number of advance requests for this month. You can request a new advance after you received your next salary." };
   }
 };
 
@@ -77,7 +79,7 @@ var available_amount = balance - requested_amount;
 
 // Compiling the HTML
 
-var check = requests_check(cutoff_day, requested_transactions, max_number_requests);
+var check = requests_check(cutoff_day, payday, requested_transactions, max_number_requests);
 
 var html = '<section id="custom-view-scene1">' +
   '<div class="payday-wrapper">' +
