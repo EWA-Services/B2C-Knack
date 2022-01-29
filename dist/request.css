@@ -50,6 +50,13 @@
   color: #7a6e6e!important;
   margin-bottom: 15px;
   font-size: 14px;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 #view_133 #security-clause p.sc-instructions span {
