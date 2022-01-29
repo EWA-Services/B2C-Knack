@@ -86,7 +86,7 @@
   margin: 10px 0;
 }
 
-#custom-view-scene1 .max-withdrawable .max-reached {
+#custom-view-scene1 .max-withdrawable .error-message {
   font-family: Inter;
   font-size: 10px;
   color: #8c8c8c;

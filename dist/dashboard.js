@@ -1,5 +1,5 @@
 requests_check = function (cutoff_day, nb_requests, max_nb_requests) {
-    // condition1 : cutoff date
+  // condition1 : cutoff date
   if (cutoff_day == "-") {
     var cond1 = false;
   } else {
@@ -9,15 +9,38 @@ requests_check = function (cutoff_day, nb_requests, max_nb_requests) {
   // condition2: total number of requests per month
   var cond2 = max_nb_requests <= 0 || nb_requests < max_nb_requests;
 
+  // Get requests' count per payback status
+  var requests_by_payback = {};
+  $("#view_146 table tbody tr").each(function () {
+      var status = $(this).find(".kn-pivot-group span").attr("class");
+      var count = parseInt($(this).find(".kn-pivot-calc").text().trim());
+      console.log(count);
+      requests_by_payback[status] = count;
+  })
+  // {not-paid: 1, paid: 0, uploaded: 1}
+
+  // condition3: payslips uploaded
+  var cond3 = requests_by_payback["not-paid"] == 0;
+
+  // condition4: payslips verified
+  var cond4 = requests_by_payback["uploaded"] == 0;
+
   // compiling all
-  if (cond1 && cond2) {
-    return true;
-  } else {
-    return false;
+  if (cond1 && cond2 && cond3 && cond4) {
+    return { status : true };
+  } else if (cond1 == false) {
+    return { status : false, error : "We are past cutoff date. Please wait for your payday to submit a new request." };
+  } else if (cond2 == false) {
+    return { status : false, error : "You have reached the maximum number of advance requests for this month. You can request a new advance after you received your next salary." };
+  } else if (cond3 == false) {
+    return { status : false, error : "Please pay back the advance you have received to be able to submit a new request." };
+  } else if (cond4 == false) {
+    return { status : false, error : "Please wait until you payslips are approved to be able to submit a new request." };
   }
 };
 
 // Payoff and Cutoff Dates
+
 var current_month = new Date().getFullYear() + "-" + ((new Date().getMonth() + 1) < 10 ? "0" + (new Date().getMonth() + 1) : (new Date().getMonth() + 1));
 var payday = "-";
 var cutoff_day = "-";
@@ -35,12 +58,15 @@ $.each(months, function(i,v) {
 
 
 // Withdrawable Amount and Other Conditions
+
 var base_salary = parseFloat($("#view_51 .field_44 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_51 .field_44 .kn-detail-body").text().replace(/,/g, ""));
 var requested_amount = parseFloat($("#view_52 .kn-pivot-calc:eq(0)").text().replace(/,/g, "") == "" ? 0 : $("#view_52 .kn-pivot-calc:eq(0)").text().replace(/,/g, ""));
 var requested_transactions = parseInt($("#view_52 .kn-pivot-calc:eq(1)").text().replace(/,/g, "") == "" ? 0 : $("#view_52 .kn-pivot-calc:eq(1)").text().replace(/,/g, ""));
 
 var max_number_requests = parseFloat($("#view_68 .field_91 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_68 .field_91 .kn-detail-body").text().replace(/,/g, ""));
 var withdrawable_threshold = parseFloat($("#view_68 .field_89 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_68 .field_89 .kn-detail-body").text().replace(/,/g, ""));
+
+var max_per_request = parseFloat($("#view_51 .kn-detail.field_105 .kn-detail-body span span").text().replace(/,/g, "") == "" ? 0 : $("#view_51 .kn-detail.field_105 .kn-detail-body span span").text().replace(/,/g, ""));
 
 var current_date = new Date();
 var mtd = current_date.getDate() - 1;
@@ -65,11 +91,11 @@ var html = '<section id="custom-view-scene1">' +
   '<div class="max-withdrawable">' +
   '<div class="max-withdrawable-label">Maximum Withdrawable Amount</div>' +
   '<div class="max-amount-button">' +
-  '<span>' + (check === true ? (Math.round((Math.min(1000, available_amount * withdrawable_threshold))*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0) + '</span>' +
-  '<a' + (check === true ? ' href="' + window.location.pathname + '#request"' : ' style="pointer-events:none;" class="disabled"') + '>Withdraw</a>' +
+  '<span>' + (check["status"] === true ? (Math.round((Math.min(max_per_request, available_amount * withdrawable_threshold))*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0) + '</span>' +
+  '<a' + (check["status"] === true ? ' href="' + window.location.pathname + '#request"' : ' style="pointer-events:none;" class="disabled"') + '>Withdraw</a>' +
   // '<a href="' + window.location.pathname + "#request\"" + '>Withdraw</a>' +
   '</div>' +
-  (check === true ? "" : "<p class='max-reached'>You have reached the maximum number of advance requests for this month. You can request a new advance after you received your next salary.</p>") +
+  (check["status"] === true ? "" : "<p class='error-message'>" + check["error"] + "</p>") +
   '</div>' +
   '</section>';
 
