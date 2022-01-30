@@ -97,7 +97,7 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
   } else if (cond9 == false) {
     return {status: false, error: "Please wait until your payslips are approved to be able to submit a new request."};
   } else if (cond1 == false) {
-    return {status: false, error: "We are past cutoff date. You can request a new advance requests after you received your next salary."};
+    return {status: false, error: "We are past cutoff date. You can request a new advance after you received your next salary."};
   } else if (cond2 == false) {
     return {status: false, error: "You have reached the maximum number of advance requests for this month. You can request a new advance after you received your next salary."};
   } else if (cond3 == false) {
