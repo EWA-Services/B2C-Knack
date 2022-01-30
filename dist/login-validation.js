@@ -88,6 +88,10 @@ function enableOTPEntryClickEvents() {
 function showOTPEntryView() {
   $(".view-group-2").hide();
   $(".view_72 .form-cont").removeClass("hidden-block");
+  $(".view_87 .form-cont").removeClass("hidden-block");
+  $(".view_88 .form-cont").removeClass("hidden-block");
+  $(".view_89 .form-cont").removeClass("hidden-block");
+  $(".view_90 .form-cont").removeClass("hidden-block");
 
   $(".otp-back-cont").removeClass("hidden");
 
