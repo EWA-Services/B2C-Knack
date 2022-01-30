@@ -1,4 +1,4 @@
-requests_check = function (cutoff_day, payday, nb_requests, max_nb_requests) {
+requests_check = function (cutoff_day, payday, max_nb_requests) {
   // condition1 : between cutoff date and payroll date
   if (cutoff_day == "-" || payday == "-") {
     var cond1 = false;
@@ -9,6 +9,19 @@ requests_check = function (cutoff_day, payday, nb_requests, max_nb_requests) {
   }
 
   // condition2: total number of requests per month
+  var past_requests = {};
+  $("#view_52 .kn-report-content table tbody tr").each(function () {
+    var day = $(this).find(".kn-pivot-group").text().trim();
+    var count = parseInt($(this).find(".kn-pivot-calc:eq(1)").text().trim());
+    past_requests[day] = count;
+  })
+  
+  var nb_requests = 0;
+  for (var key of Object.keys(past_requests)) {
+    if (new Date(2022, key.split("/")[1]-1, key.split("/")[0]) > new Date(payday.split("/")[2], payday.split("/")[1] - 1, payday.split("/")[0])) {
+      var nb_requests = nb_requests + past_requests[key];
+    }
+  }
   var cond2 = max_nb_requests <= 0 || nb_requests < max_nb_requests;
 
   // Get requests' count per payback status
@@ -16,10 +29,9 @@ requests_check = function (cutoff_day, payday, nb_requests, max_nb_requests) {
   $("#view_146 table tbody tr").each(function () {
       var status = $(this).find(".kn-pivot-group span").attr("class");
       var count = parseInt($(this).find(".kn-pivot-calc").text().trim());
-      console.log(count);
       requests_by_payback[status] = count;
   })
-  // {not-paid: 1, paid: 0, uploaded: 1}
+  // requests_by_payback = {not-paid: 1, paid: 0, uploaded: 1}
 
   // condition3: payslips uploaded
   var cond3 = requests_by_payback["not-paid"] == 0;
@@ -63,7 +75,7 @@ $.each(months, function(i,v) {
 
 var base_salary = parseFloat($("#view_51 .field_44 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_51 .field_44 .kn-detail-body").text().replace(/,/g, ""));
 var requested_amount = parseFloat($("#view_52 .kn-pivot-calc:eq(0)").text().replace(/,/g, "") == "" ? 0 : $("#view_52 .kn-pivot-calc:eq(0)").text().replace(/,/g, ""));
-var requested_transactions = parseInt($("#view_52 .kn-pivot-calc:eq(1)").text().replace(/,/g, "") == "" ? 0 : $("#view_52 .kn-pivot-calc:eq(1)").text().replace(/,/g, ""));
+// var requested_transactions = parseInt($("#view_52 .kn-pivot-calc:eq(1)").text().replace(/,/g, "") == "" ? 0 : $("#view_52 .kn-pivot-calc:eq(1)").text().replace(/,/g, ""));
 
 var max_number_requests = parseFloat($("#view_68 .field_91 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_68 .field_91 .kn-detail-body").text().replace(/,/g, ""));
 var withdrawable_threshold = parseFloat($("#view_68 .field_89 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_68 .field_89 .kn-detail-body").text().replace(/,/g, ""));
@@ -79,7 +91,7 @@ var available_amount = balance - requested_amount;
 
 // Compiling the HTML
 
-var check = requests_check(cutoff_day, payday, requested_transactions, max_number_requests);
+var check = requests_check(cutoff_day, payday, max_number_requests);
 
 var html = '<section id="custom-view-scene1">' +
   '<div class="payday-wrapper">' +
