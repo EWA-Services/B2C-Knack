@@ -1,7 +1,5 @@
 requests_check = function (cutoff_day, payday, max_nb_requests, max_per_request) {
-  console.log(max_per_request);
-  console.log(max_per_request == 0);
-  
+
   // condition1 : between cutoff date and payroll date
   if (cutoff_day == "-" || payday == "-") {
     var cond1 = false;
@@ -43,7 +41,7 @@ requests_check = function (cutoff_day, payday, max_nb_requests, max_per_request)
   var cond4 = requests_by_payback["uploaded"] == 0;
 
   // condition5: max allowed per request is 0
-  var cond5 = max_per_request == 0;
+  var cond5 = max_per_request != 0;
 
   // compiling all
   if (cond1 && cond2 && cond3 && cond4) {
