@@ -1,4 +1,7 @@
 requests_check = function (cutoff_day, payday, max_nb_requests, max_per_request) {
+  console.log(max_per_request);
+  console.log(max_per_request == 0);
+  
   // condition1 : between cutoff date and payroll date
   if (cutoff_day == "-" || payday == "-") {
     var cond1 = false;
