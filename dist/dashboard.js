@@ -1,4 +1,4 @@
-requests_check = function (cutoff_day, payday, max_nb_requests) {
+requests_check = function (cutoff_day, payday, max_nb_requests, max_per_request) {
   // condition1 : between cutoff date and payroll date
   if (cutoff_day == "-" || payday == "-") {
     var cond1 = false;
@@ -39,9 +39,14 @@ requests_check = function (cutoff_day, payday, max_nb_requests) {
   // condition4: payslips verified
   var cond4 = requests_by_payback["uploaded"] == 0;
 
+  // condition5: max allowed per request is 0
+  var cond5 = max_per_request == 0;
+
   // compiling all
   if (cond1 && cond2 && cond3 && cond4) {
     return { status : true };
+  } else if (cond5 == false) {
+    return { status : false, error : "Advances are not allowed at the moment." };
   } else if (cond3 == false) {
     return { status : false, error : "Please pay back the advance you have received to be able to submit a new request." };
   } else if (cond4 == false) {
@@ -91,7 +96,7 @@ var available_amount = balance - requested_amount;
 
 // Compiling the HTML
 
-var check = requests_check(cutoff_day, payday, max_number_requests);
+var check = requests_check(cutoff_day, payday, max_number_requests, max_per_request);
 
 var html = '<section id="custom-view-scene1">' +
   '<div class="payday-wrapper">' +
