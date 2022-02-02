@@ -44,7 +44,7 @@ requests_check = function (cutoff_day, payday, max_nb_requests, max_per_request)
   var cond5 = max_per_request != 0;
 
   // compiling all
-  if (cond1 && cond2 && cond3 && cond4) {
+  if (cond1 && cond2 && cond3 && cond4 && cond5) {
     return { status : true };
   } else if (cond5 == false) {
     return { status : false, error : "Advances are not allowed at the moment." };
