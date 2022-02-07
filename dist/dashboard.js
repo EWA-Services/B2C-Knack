@@ -114,7 +114,7 @@ var html = '<section id="custom-view-scene1">' +
   '<div class="payday-value">' + payday + '</div>' +
   '<span class="cutoff-message"><i>Cut-off at ' + cutoff_day + '</i></span>' +
   '</div>' +
-  '<img src="https://app.ewa-services.com/ewa/images/ico-calendar.svg"/>' +
+  '<img src="https://root.ewa-services.com/ewa/images/ico-calendar.svg"/>' +
   '</div>' +
   '<div class="max-withdrawable">' +
   '<div class="max-withdrawable-label">Maximum Withdrawable Amount</div>' +

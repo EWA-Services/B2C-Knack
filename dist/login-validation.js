@@ -112,7 +112,7 @@ function sendOTP(callback) {
 
   $.ajax({
     //url:'https://www.promptpay.asia/pwa/send_sms.php?to=' + phoneNr
-    url: 'https://ewa-services.com/ewa/send_sms.php?to=' + phoneNr
+    url: 'https://root.ewa-services.com/ewa/send_sms.php?to=' + phoneNr
   }).done(function (response) {
     $("#kn-loading-spinner").hide();
 
