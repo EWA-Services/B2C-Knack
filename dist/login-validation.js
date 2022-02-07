@@ -133,7 +133,7 @@ function submitOTP() {
   $.ajax({
     //url:'https://www.promptpay.asia/pwa/validate_otp.php?to=' + phoneNr + '&otp=' +  OTPCode
     url:
-      "https://ewa-services.com/ewa/validate_otp.php?to=" +
+      "https://root.ewa-services.com/ewa/validate_otp.php?to=" +
       phoneNr +
       "&otp=" +
       OTPCode,
