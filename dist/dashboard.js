@@ -13,8 +13,6 @@ requests_check = function (cutoff_day, payday, max_nb_requests, max_per_request,
     var today_asdate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
     var limit_inf = payday_asdate;
     limit_inf.setDate(limit_inf.getDate() - days_to_request);
-    limit_inf_formatted = (limit_inf.getDate() < 10 ? "0" + limit_inf.getDate() : limit_inf.getDate()) + "/" + (limit_inf.getMonth() < 9 ? "0" + limit_inf.getMonth()+1 : limit_inf.getMonth()+1) + "/" + limit_inf.getFullYear();
-    console.log(limit_inf_formatted);
     var cond1 = today_asdate >= limit_inf && today_asdate <= cutoff_asdate;
   }
 
