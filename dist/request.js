@@ -12,16 +12,25 @@ function calculate_withdrawable (base_salary, requested_amount, withdrawable_thr
   return available_amount;
 };
 
-amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowed, cutoff_day, payday, max_nb_requests, input_val) {
+amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowed, cutoff_day, payday, max_nb_requests, input_val, days_to_request) {
   var max_allowed_bis = Math.min(max_allowed, withdrawable_amount);
   
   // condition1 : cutoff date
+  // Update: changed to xx days before payroll day until cutoff day
   if (cutoff_day == "-") {
     var cond1 = false;
   } else {
-    var cond1_cutoff = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()) <= new Date(cutoff_day.split("/")[2], cutoff_day.split("/")[1] - 1, cutoff_day.split("/")[0]);
-    var cond1_payroll = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()) > new Date(payday.split("/")[2], payday.split("/")[1] - 1, payday.split("/")[0]);
-    var cond1 = cond1_cutoff || cond1_payroll;
+    // var cond1_cutoff = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()) <= new Date(cutoff_day.split("/")[2], cutoff_day.split("/")[1] - 1, cutoff_day.split("/")[0]);
+    // var cond1_payroll = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()) > new Date(payday.split("/")[2], payday.split("/")[1] - 1, payday.split("/")[0]);
+    // var cond1 = cond1_cutoff || cond1_payroll;
+    var payday_asdate = new Date(payday.split("/")[2], payday.split("/")[1] - 1, payday.split("/")[0]);
+    var cutoff_asdate = new Date(cutoff_day.split("/")[2], cutoff_day.split("/")[1] - 1, cutoff_day.split("/")[0])
+    var today_asdate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+    var limit_inf = payday_asdate;
+    limit_inf.setDate(limit_inf.getDate() - days_to_request);
+    limit_inf_formatted = (limit_inf.getDate() < 10 ? "0" + limit_inf.getDate() : limit_inf.getDate()) + "/" + (limit_inf.getMonth() < 9 ? "0" + limit_inf.getMonth()+1 : limit_inf.getMonth()+1) + "/" + limit_inf.getFullYear();
+    console.log(limit_inf_formatted);
+    var cond1 = today_asdate >= limit_inf && today_asdate <= cutoff_asdate;
   }
 
   // condition2: total number of requests per month
@@ -97,7 +106,7 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
   } else if (cond9 == false) {
     return {status: false, error: "Please wait until your payslips are approved to be able to submit a new request."};
   } else if (cond1 == false) {
-    return {status: false, error: "We are past cutoff date. You can request a new advance after you received your next salary."};
+    return {status: false, error: "Salary advances are only available starting " + days_to_request + " days before your next payday. Please come back later."};
   } else if (cond2 == false) {
     return {status: false, error: "You have reached the maximum number of advance requests for this month. You can request a new advance after you received your next salary."};
   } else if (cond3 == false) {
@@ -306,6 +315,7 @@ var withdrawable_threshold = parseFloat($("#view_64 .field_89 .kn-detail-body").
 // Conditions Check Variables
 var min_allowed_employee = parseFloat($("#view_65 .field_52 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_65 .field_52 .kn-detail-body").text().replace(/,/g, ""));
 var max_allowed_employee = parseFloat($("#view_65 .field_53 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_65 .field_53 .kn-detail-body").text().replace(/,/g, ""));
+var days_to_request = parseInt($("#view_65 .field_149 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_65 .field_149 .kn-detail-body").text().replace(/,/g, ""));
 // var max_cutoff_allowed_employee = parseFloat($("#view_65 .field_123 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_65 .field_123 .kn-detail-body").text().replace(/,/g, ""));
 
 var min_allowed_company = parseFloat($("#view_64 .field_87 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_64 .field_87 .kn-detail-body").text().replace(/,/g, ""));
@@ -409,7 +419,7 @@ $("input[type=radio][name=view_133-field_92]").change(function () {
   }
   $("#view_133 #field_63").attr("value", withdrawal_fee);
   available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
-  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val);
+  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request);
   display_message(output);
 });
 
@@ -424,7 +434,7 @@ $("input#field_18").on("input", function (e) {
     withdrawal_fee = cutoff_fee_setting;
   }
   available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
-  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val);
+  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request);
   display_message(output);
 
   $('.view_133 form #kn-input-field_126 .wrapper-tips .control').each(function () {
@@ -460,9 +470,9 @@ $("#view_133 #kn-input-field_141 input").on("input", function (e) {
   }
   $("#view_133 #field_63").attr("value", withdrawal_fee);
   available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
-  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val);
+  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request);
   display_message(output);
-  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val);
+  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request);
   display_message(output);
 });
 
@@ -478,9 +488,9 @@ $("#view_133 #kn-input-field_142 input").change(function () {
   }
   $("#view_133 #field_63").attr("value", withdrawal_fee);
   available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
-  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val);
+  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request);
   display_message(output);
-  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val);
+  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request);
   display_message(output);
 })
 
@@ -496,8 +506,8 @@ $("#view_133-field_119").change(function () {
   }
   $("#view_133 #field_63").attr("value", withdrawal_fee);
   available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
-  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val);
+  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request);
   display_message(output);
-  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val);
+  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request);
   display_message(output);
 })
