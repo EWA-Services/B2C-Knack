@@ -509,3 +509,131 @@ $("#view_133-field_119").change(function () {
   var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request);
   display_message(output);
 })
+
+/************************************************************************************/
+// New Tipping Feature
+/************************************************************************************/
+
+$('.mobile-nav').hide();
+
+var selectedTipPercentage = 10;
+var requestAmount = 350;
+
+setTipPercentages(requestAmount);
+
+$('.finish').click(() => {
+  console.log(`Selected tip amount - ${selectedTipPercentage}%`);
+})
+
+$(".modal-wrapper").click(function () {
+  $(this).toggleClass("hidden");
+});
+
+$(".modal-wrapper .modal").click((e) => e.stopPropagation());
+
+$(".custom-tip-link").click(() => {
+  $(".modal-wrapper").toggleClass("hidden");
+});
+
+$(".custom-tip-btn").click(() => {
+  $(".modal-wrapper").toggleClass("hidden");
+});
+
+$(".ftr-btn.cancel").click(() => {
+  clearCustomTipValue();
+  hideConfirmationCheckbox();
+  $(".modal-wrapper").toggleClass("hidden");
+});
+
+$(".ftr-btn.submit").click(() => {
+  const customTipAmount = $("#customTipAmount").val();
+  if (customTipAmount != "") {
+
+    if (customTipAmount == 0 && !$('#confirmationCheck').is(':checked')) return;
+
+    selectedTipPercentage = customTipAmount;
+    $('#custom-tip-value').text(`${selectedTipPercentage}%`);
+
+    $(".modal-wrapper").toggleClass("hidden");
+    removeTipSelection();
+    showCustomTipValue();
+  }
+});
+
+$(".tip-instance").click(function () {
+  removeTipSelection();
+  hideCustomTipValue();
+  clearCustomTipValue();
+
+  if (!$(this).hasClass('selected')) {
+    $(this).addClass('selected');
+  }
+
+  selectedTipPercentage = $(this).data('tip-percent');
+});
+
+$("#customTipAmount").on("input", function () {
+  const minPercentage = 0;
+  const maxPercentage = 25;
+
+  const inputVal = $(this).val();
+
+  if (inputVal != "") {
+    if (parseInt(inputVal) < minPercentage) {
+      $(this).val(minPercentage);
+    }
+    if (parseInt(inputVal) > maxPercentage) {
+      $(this).val(maxPercentage);
+    }
+
+    if ($(this).val() == '0') {
+      $('.check-box-cont').removeClass('hidden');
+    } else {
+      hideConfirmationCheckbox();
+    }
+  }
+
+});
+
+function removeTipSelection() {
+  $('.tip-box').find('.tip-instance').each(function () {
+    $(this).removeClass('selected');
+  });
+}
+
+function showCustomTipValue() {
+  if (!$('.custom-tip-link').hasClass('hidden')) {
+    $('.custom-tip-link').addClass('hidden');
+  }
+
+  $('.custom-tip-btn').removeClass('hidden');
+}
+
+function hideCustomTipValue() {
+  if (!$('.custom-tip-btn').hasClass('hidden')) {
+    $('.custom-tip-btn').addClass('hidden');
+  }
+
+  $('.custom-tip-link').removeClass('hidden');
+}
+
+function clearCustomTipValue() {
+  $("#customTipAmount").val('');
+}
+
+function hideConfirmationCheckbox() {
+  $("#confirmationCheck").removeAttr('checked');
+  if (!$('.check-box-cont').hasClass('hidden')) {
+    $('.check-box-cont').addClass('hidden');
+  }
+}
+
+function setTipPercentages(tipAmount) {
+  let percent_5 = Math.round(tipAmount * 5 / 100);
+  let percent_10 = Math.round(tipAmount * 10 / 100);
+  let percent_15 = Math.round(tipAmount * 15 / 100);
+
+  $('#tip-5-percent .tip-amount').text(`${percent_5}฿`)
+  $('#tip-10-percent .tip-amount').text(`${percent_10}฿`)
+  $('#tip-15-percent .tip-amount').text(`${percent_15}฿`)
+}
