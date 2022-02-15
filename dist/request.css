@@ -1052,6 +1052,10 @@ button.finish {
   color: #263238;
 }
 
+#view_133 .back-tip.hidden {
+  display: none;
+}
+
 /* button.finish {
   width: 100%;
   display: flex;

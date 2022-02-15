@@ -514,12 +514,17 @@ $("#view_133-field_119").change(function () {
 // New Tipping Feature
 /************************************************************************************/
 
+$('<button class="back-tip hidden">Back</button>').insertBefore($("#view_133 form .kn-submit"));
+
 proceed_tip_screen = function() {
   $("#view_148").show();
   $("#view_149").show();
   $("#view_150").show();
   $("#view_151").show();
   $("#view_152").show();
+  $("#view_133 .back-tip").show();
+  $("#view_133").hide();
+  $("#view_153").hide();
 }
 $("#view_153 .proceed-tip").on("click", proceed_tip_screen);
 
