@@ -514,6 +514,15 @@ $("#view_133-field_119").change(function () {
 // New Tipping Feature
 /************************************************************************************/
 
+proceed_tip_screen = function() {
+  $("#view_148").show();
+  $("#view_149").show();
+  $("#view_150").show();
+  $("#view_151").show();
+  $("#view_152").show();
+}
+$("#view_153 .proceed-tip").on("click", proceed_tip_screen);
+
 $('.mobile-nav').hide();
 
 var selectedTipPercentage = 10;
