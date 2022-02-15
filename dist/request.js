@@ -514,7 +514,7 @@ $("#view_133-field_119").change(function () {
 // New Tipping Feature
 /************************************************************************************/
 
-$('<button class="back-tip hidden">Back</button>').insertAfter($("#view_133 form"));
+$('<button class="back-tip hidden">Back</button>').insertAfter($("#view_133"));
 
 proceed_tip_screen = function() {
   $("#view_148").show();
