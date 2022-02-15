@@ -522,11 +522,23 @@ proceed_tip_screen = function() {
   $("#view_150").show();
   $("#view_151").show();
   $("#view_152").show();
-  $("#view_133 .back-tip").show();
+  $("#view_133 .back-tip").removeClass("hidden");
   $("#view_133").hide();
   $("#view_153").hide();
 }
 $("#view_153 .proceed-tip").on("click", proceed_tip_screen);
+
+back_tip_screen = function() {
+  $("#view_148").hide();
+  $("#view_149").hide();
+  $("#view_150").hide();
+  $("#view_151").hide();
+  $("#view_152").hide();
+  $("#view_133 .back-tip").addClass("hidden");
+  $("#view_133").show();
+  $("#view_153").show();
+}
+$("#view_133 .back-tip").on("click", back_tip_screen);
 
 $('.mobile-nav').hide();
 
