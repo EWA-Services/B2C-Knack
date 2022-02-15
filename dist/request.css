@@ -369,3 +369,9 @@
   font-size: 12px;
   color: #666;
 }
+
+/* New Tipping Screen */
+
+#view_148, #view_149, #view_150, #view_151, #view_152 {
+  display: none;
+}
