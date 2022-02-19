@@ -612,28 +612,6 @@ p.tip-info {
   padding-bottom: 16px;
 }
 
-button.finish {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 16px;
-  height: 50px;
-  background: #4FDAA6;
-  box-shadow: 0px 4px 26px rgb(118 114 114 / 4%);
-  border-radius: 4px;
-  border: none !important;
-  font-family: "Inter" !important;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 19px;
-  text-align: center;
-  color: #FFFFFF;
-  transition: all 0.2s ease-in-out;
-}
-
 .modal-wrapper {
   display: flex;
   align-items: center;
@@ -1077,3 +1055,9 @@ button.finish {
   color: #FFFFFF;
   transition: all 0.2s ease-in-out;
 } */
+
+/* Test-run 2 Adjustments */
+
+#security-clause, #kn-input-field_141 {
+  display: none;
+}

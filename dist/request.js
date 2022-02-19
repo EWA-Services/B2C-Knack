@@ -12,7 +12,7 @@ function calculate_withdrawable (base_salary, requested_amount, withdrawable_thr
   return available_amount;
 };
 
-amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowed, cutoff_day, payday, max_nb_requests, input_val, days_to_request) {
+amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowed, cutoff_day, payday, max_nb_requests, input_val, days_to_request, next_payday) {
   var max_allowed_bis = Math.min(max_allowed, withdrawable_amount);
   
   // condition1 : cutoff date
@@ -98,6 +98,9 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
   // condition9: payslips verified
   var cond9 = requests_by_payback["uploaded"] == 0;
 
+  // condition10: next payday filled in
+  var cond10 = (next_payday != "");
+
   // compiling all
   if (cond8 == false) {
     return {status: false, error: "Please pay back the advance you have received to be able to submit a new request."};
@@ -113,6 +116,8 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
     return {status: false, error: "Please provide an amount between " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " and " + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
   } else if (cond4 == false) {
     return {status: false, error: "Please provide an amount greater than " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
+  } else if (cond10 == false) {
+    return {status: false, error: "Please provide your next payday to proceed"};
   } else if (cond5 == false || cond7 == false) {
     return {status: false, error: "Please accept the terms & conditions to proceed"};
   } else if (cond6 == false) {
@@ -144,6 +149,11 @@ function display_message (json_obj) {
 // Change the type of the input field of the amount to "number"
 
 $("#view_133 #field_18").prop("type", "number");
+
+// Wrapping the tipping feature views
+
+$("#view_148, #view_149, #view_150, #view_151, #view_152").wrapAll("<div id='tipping-feature-wrapper'></div>");
+$("#tipping-feature-wrapper").prependTo("#view_133 .kn-submit");
 
 // Wrapping the tips amount for styling purposes
 
@@ -417,7 +427,33 @@ $("input[type=radio][name=view_133-field_92]").change(function () {
   }
   $("#view_133 #field_63").attr("value", withdrawal_fee);
   available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
-  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request);
+  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request, next_payday);
+  display_message(output);
+});
+
+$("#view_133 form #view_133-field_151").change(function () {
+  var input_val = $("#field_18").val();
+  var speed = $('input[name="view_133-field_92"]:checked').val();
+  var next_payday = $("#view_133 form #view_133-field_151").val();
+
+  if (next_payday != "") {
+    $("#security-clause").show();
+    $("#kn-input-field_141").show();
+  } else {
+    $("#security-clause").hide();
+    $("#kn-input-field_141").hide();
+  }
+
+  if (speed.toLowerCase().indexOf("normal") > -1) {
+    withdrawal_fee = normal_fee_setting;
+  } else if (speed.toLowerCase().indexOf("fast") > -1) {
+    withdrawal_fee = fast_fee_setting;
+  } else if (speed.toLowerCase().indexOf("cutoff") > -1) {
+    withdrawal_fee = cutoff_fee_setting;
+  }
+  $("#view_133 #field_63").attr("value", withdrawal_fee);
+  available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
+  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request, next_payday);
   display_message(output);
 });
 
@@ -432,7 +468,7 @@ $("input#field_18").on("input", function (e) {
     withdrawal_fee = cutoff_fee_setting;
   }
   available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
-  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request);
+  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request, next_payday);
   display_message(output);
 
   $('.view_133 form #kn-input-field_126 .wrapper-tips .control').each(function () {
@@ -468,9 +504,9 @@ $("#view_133 #kn-input-field_141 input").on("input", function (e) {
   }
   $("#view_133 #field_63").attr("value", withdrawal_fee);
   available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
-  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request);
+  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request, next_payday);
   display_message(output);
-  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request);
+  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request, next_payday);
   display_message(output);
 });
 
@@ -486,9 +522,9 @@ $("#view_133 #kn-input-field_142 input").change(function () {
   }
   $("#view_133 #field_63").attr("value", withdrawal_fee);
   available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
-  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request);
+  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request, next_payday);
   display_message(output);
-  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request);
+  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request, next_payday);
   display_message(output);
 })
 
@@ -504,9 +540,9 @@ $("#view_133-field_119").change(function () {
   }
   $("#view_133 #field_63").attr("value", withdrawal_fee);
   available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
-  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request);
+  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request, next_payday);
   display_message(output);
-  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request);
+  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request, next_payday);
   display_message(output);
 })
 
@@ -525,6 +561,14 @@ proceed_tip_screen = function() {
   $("#view_133 .back-tip").removeClass("hidden");
   $("#view_133").hide();
   $("#view_153").hide();
+  $("#kn-input-field_18").hide();
+  $("#kn-input-field_59").hide();
+  $("#kn-input-field_92").hide();
+  $("#kn-input-field_80").hide();
+  $("#kn-input-field_142").hide();
+  $("#security-clause").hide();
+  $("#kn-input-field_141").hide();
+  $("#kn-input-field_119").hide();
 }
 $("#view_153 .proceed-tip").on("click", proceed_tip_screen);
 
@@ -543,9 +587,8 @@ $("#view_133 .back-tip").on("click", back_tip_screen);
 $('.mobile-nav').hide();
 
 var selectedTipPercentage = 10;
-var requestAmount = 350;
 
-setTipPercentages(requestAmount);
+setTipPercentages(input_val);
 
 $('.finish').click(() => {
   console.log(`Selected tip amount - ${selectedTipPercentage}%`);
