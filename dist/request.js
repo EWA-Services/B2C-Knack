@@ -153,7 +153,7 @@ $("#view_133 #field_18").prop("type", "number");
 // Wrapping the tipping feature views
 
 $("#view_148, #view_149, #view_150, #view_151, #view_152").wrapAll("<div id='tipping-feature-wrapper'></div>");
-$("#tipping-feature-wrapper").prependTo("#view_133 .kn-submit");
+$("#tipping-feature-wrapper").insertBefore("#view_133 .kn-submit");
 
 // Wrapping the tips amount for styling purposes
 
@@ -556,7 +556,7 @@ $("#view_133-field_119").change(function () {
 // New Tipping Feature
 /************************************************************************************/
 
-$('<button class="back-tip hidden">Back</button>').insertAfter($("#view_133"));
+$('<button class="back-tip hidden">Back</button>').insertBefore($("#view_133 .kn-submit"));
 
 proceed_tip_screen = function() {
   $("#view_148").show();
@@ -565,7 +565,17 @@ proceed_tip_screen = function() {
   $("#view_151").show();
   $("#view_152").show();
   $("#view_133 .back-tip").removeClass("hidden");
-  $("#view_133").hide();
+  $("#kn-input-field_18").hide();
+  $("#kn-input-field_59").hide();
+  $("#kn-input-field_92").hide();
+  $("#kn-input-field_92").hide();
+  $("#kn-input-field_126").show();
+  $("#kn-input-field_80").hide();
+  $("#kn-input-field_142").hide();
+  $("#view_133-field_151").hide();
+  $(".sc-instructions").hide();
+  $("#kn-input-field_18").hide();
+  $("#view_133-field_119").hide();
   $("#view_153").hide();
   $("#kn-input-field_18").hide();
   $("#kn-input-field_59").hide();
@@ -585,8 +595,26 @@ back_tip_screen = function() {
   $("#view_151").hide();
   $("#view_152").hide();
   $("#view_133 .back-tip").addClass("hidden");
-  $("#view_133").show();
+  $("#kn-input-field_18").show();
+  $("#kn-input-field_59").show();
+  $("#kn-input-field_92").show();
+  $("#kn-input-field_92").show();
+  $("#kn-input-field_126").hide();
+  $("#kn-input-field_80").show();
+  $("#kn-input-field_142").show();
+  $("#view_133-field_151").show();
+  $(".sc-instructions").show();
+  $("#kn-input-field_18").show();
+  $("#view_133-field_119").show();
   $("#view_153").show();
+  $("#kn-input-field_18").show();
+  $("#kn-input-field_59").show();
+  $("#kn-input-field_92").show();
+  $("#kn-input-field_80").show();
+  $("#kn-input-field_142").show();
+  $("#security-clause").show();
+  $("#kn-input-field_141").show();
+  $("#kn-input-field_119").show();
 }
 $("#view_133 .back-tip").on("click", back_tip_screen);
 
