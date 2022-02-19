@@ -358,6 +358,7 @@ if (max_allowed_employee > 0 && max_allowed_company > 0) {
 // Get withdrawal fee value
 
 var speed = $('input[name="view_133-field_92"]:checked').val();
+var next_payday = $("#view_133 form #view_133-field_151").val();
 if (speed.toLowerCase().indexOf("normal") > -1) {
   var withdrawal_fee = normal_fee_setting;
 } else if (speed.toLowerCase().indexOf("fast") > -1) {
@@ -418,6 +419,7 @@ $(increase_statement).insertAfter("#view_133 #field_18");
 $("input[type=radio][name=view_133-field_92]").change(function () {
   var input_val = $("#field_18").val();
   var speed = $('input[name="view_133-field_92"]:checked').val();
+  var next_payday = $("#view_133 form #view_133-field_151").val();
   if (speed.toLowerCase().indexOf("normal") > -1) {
     withdrawal_fee = normal_fee_setting;
   } else if (speed.toLowerCase().indexOf("fast") > -1) {
@@ -460,6 +462,7 @@ $("#view_133 form #view_133-field_151").change(function () {
 $("input#field_18").on("input", function (e) {
   var input_val = $(this).val();
   var speed = $('input[name="view_133-field_92"]:checked').val();
+  var next_payday = $("#view_133 form #view_133-field_151").val();
   if (speed.toLowerCase().indexOf("normal") > -1) {
     withdrawal_fee = normal_fee_setting;
   } else if (speed.toLowerCase().indexOf("fast") > -1) {
@@ -495,6 +498,7 @@ $("input#field_18").on("input", function (e) {
 $("#view_133 #kn-input-field_141 input").on("input", function (e) {
   var input_val = $("#field_18").val();
   var speed = $('input[name="view_133-field_92"]:checked').val();
+  var next_payday = $("#view_133 form #view_133-field_151").val();
   if (speed.toLowerCase().indexOf("normal") > -1) {
     withdrawal_fee = normal_fee_setting;
   } else if (speed.toLowerCase().indexOf("fast") > -1) {
@@ -513,6 +517,7 @@ $("#view_133 #kn-input-field_141 input").on("input", function (e) {
 $("#view_133 #kn-input-field_142 input").change(function () {
   var input_val = $("#field_18").val();
   var speed = $('input[name="view_133-field_92"]:checked').val();
+  var next_payday = $("#view_133 form #view_133-field_151").val();
   if (speed.toLowerCase().indexOf("normal") > -1) {
     withdrawal_fee = normal_fee_setting;
   } else if (speed.toLowerCase().indexOf("fast") > -1) {
@@ -531,6 +536,7 @@ $("#view_133 #kn-input-field_142 input").change(function () {
 $("#view_133-field_119").change(function () {
   var input_val = $("#field_18").val();
   var speed = $('input[name="view_133-field_92"]:checked').val();
+  var next_payday = $("#view_133 form #view_133-field_151").val();
   if (speed.toLowerCase().indexOf("normal") > -1) {
     withdrawal_fee = normal_fee_setting;
   } else if (speed.toLowerCase().indexOf("fast") > -1) {
