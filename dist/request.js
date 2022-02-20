@@ -271,14 +271,6 @@ $('.view_133 form #kn-input-field_92.kn-input .kn-radio .control').each(function
 
 $("div.fast").parents("label").find("input").attr("disabled", true);
 
-/* $('.view_133 form .kn-radio input[type=radio][name=view_133-field_92]').change(function (e) {
-  $('.view_133 form .kn-radio input').each(function () {
-      $(this).closest('.control').removeClass('selected');
-  });
-  if (!$(e.target).closest('.control').hasClass('selected'))
-      $(e.target).closest('.control').addClass('selected');
-}); */
-
 // Tipping Feature
 
 $('.view_133 form #kn-input-field_126.kn-input .kn-radio .control').each(function () {
@@ -297,6 +289,8 @@ $('.view_133 form #kn-input-field_126 .kn-radio input[type=radio][name=view_133-
 
   if (!$(e.target).closest('.control').hasClass('selected'))
       $(e.target).closest('.control').addClass('selected');
+
+      $(`#view_133 span.chosen-amount`).replaceWith($('<span class="chosen-amount"></span>'));
 });
 
 // Hide error and validation message on form submit
@@ -624,6 +618,7 @@ proceed_tip_screen = function() {
   $("#view_148").css({"visibility":"unset", "position":"unset"});
   $("#view_150").css({"visibility":"unset", "position":"unset"});
   $("#view_151").css({"visibility":"unset", "position":"unset"});
+  $("#view_153").css({"visibility":"hidden", "position":"absolute"});
   $("#view_133 .back-tip").removeClass("hidden");
   $("#kn-input-field_18").css({"visibility":"hidden", "position":"absolute"});
   $("#kn-input-field_59").css({"visibility":"hidden", "position":"absolute"});
@@ -639,7 +634,6 @@ proceed_tip_screen = function() {
   $("#kn-input-field_18").css({"visibility":"hidden", "position":"absolute"});
   $("#view_133-field_119").css({"visibility":"hidden", "position":"absolute"});
   $("#view_133 button.submission").css({"visibility":"unset", "position":"unset"});
-  $("#view_153").css({"visibility":"hidden", "position":"absolute"});
   $("#kn-input-field_18").css({"visibility":"hidden", "position":"absolute"});
   $("#kn-input-field_59").css({"visibility":"hidden", "position":"absolute"});
   $("#kn-input-field_92").css({"visibility":"hidden", "position":"absolute"});
@@ -656,6 +650,7 @@ back_tip_screen = function() {
   $("#view_148").css({"visibility":"hidden", "position":"absolute"});
   $("#view_150").css({"visibility":"hidden", "position":"absolute"});
   $("#view_151").css({"visibility":"hidden", "position":"absolute"});
+  $("#kn-input-field_153").css({"visibility":"unset", "position":"unset"});
   $("#view_133 .back-tip").addClass("hidden");
   $("#kn-input-field_18").css({"visibility":"unset", "position":"unset"});
   $("#kn-input-field_59").css({"visibility":"unset", "position":"unset"});
@@ -666,7 +661,6 @@ back_tip_screen = function() {
   $("#kn-input-field_142").css({"visibility":"unset", "position":"unset"});
   $("#kn-input-field_151").css({"visibility":"unset", "position":"unset"});
   $("#kn-input-field_152").css({"visibility":"unset", "position":"unset"});
-  $("#kn-input-field_153").css({"visibility":"unset", "position":"unset"});
   $(".sc-instructions").css({"visibility":"unset", "position":"unset"});
   $("#kn-input-field_18").css({"visibility":"unset", "position":"unset"});
   $("#view_133-field_119").css({"visibility":"unset", "position":"unset"});
@@ -722,9 +716,9 @@ $(".custom-tip-btn").click(() => {
 });
 
 $(".ftr-btn.cancel").click(() => {
-  // clearCustomTipValue();
-  // hideConfirmationCheckbox();
   $(".modal-wrapper").toggleClass("hidden");
+  $(".modal-wrapper #customTipAmount").val("");
+  $('.modal-wrapper .check-box-cont input').prop('checked', false);
 });
 
 $('.modal-wrapper .check-box-cont > input').change(function() {
@@ -768,108 +762,5 @@ $("#ftr-btn-submit").click(() => {
     $(this).removeClass('selected');
   });
 
-  /* if (customTipAmount != "" && customTipAmount != 0) {
-    
-
-    $("#view_133 #field_127").attr("value", customTipAmount);
-    $(".modal-wrapper").toggleClass("hidden");
-  } else if (customTipAmount == 0) {
-    $(".modal-wrapper .check-box-cont").removeClass("hidden");
-
-  } else {
-    $(".modal-wrapper .empty-tip-msg").show().delay(5000).fadeOut();
-  } */
+  $(`#view_133 span.chosen-amount`).replaceWith($('<span class="chosen-amount">You chose to give a ฿' + customTipAmount + ' tip</span>'));
 })
-
-/* $(".ftr-btn.submit").click(() => {
-  const customTipAmount = $("#customTipAmount").val();
-  if (customTipAmount != "") {
-
-    if (customTipAmount == 0 && !$('#confirmationCheck').is(':checked')) return;
-
-    selectedTipPercentage = customTipAmount;
-    $('#custom-tip-value').text(`${selectedTipPercentage}%`);
-
-    $(".modal-wrapper").toggleClass("hidden");
-    removeTipSelection();
-    showCustomTipValue();
-  }
-});
-
-$(".tip-instance").click(function () {
-  removeTipSelection();
-  hideCustomTipValue();
-  clearCustomTipValue();
-
-  if (!$(this).hasClass('selected')) {
-    $(this).addClass('selected');
-  }
-
-  selectedTipPercentage = $(this).data('tip-percent');
-});
-
-$("#customTipAmount").on("input", function () {
-  const minPercentage = 0;
-  const maxPercentage = 25;
-
-  const inputVal = $(this).val();
-
-  if (inputVal != "") {
-    if (parseInt(inputVal) < minPercentage) {
-      $(this).val(minPercentage);
-    }
-    if (parseInt(inputVal) > maxPercentage) {
-      $(this).val(maxPercentage);
-    }
-
-    if ($(this).val() == '0') {
-      $('.check-box-cont').removeClass('hidden');
-    } else {
-      hideConfirmationCheckbox();
-    }
-  }
-
-});
-
-function removeTipSelection() {
-  $('.tip-box').find('.tip-instance').each(function () {
-    $(this).removeClass('selected');
-  });
-}
-
-function showCustomTipValue() {
-  if (!$('.custom-tip-link').hasClass('hidden')) {
-    $('.custom-tip-link').addClass('hidden');
-  }
-
-  $('.custom-tip-btn').removeClass('hidden');
-}
-
-function hideCustomTipValue() {
-  if (!$('.custom-tip-btn').hasClass('hidden')) {
-    $('.custom-tip-btn').addClass('hidden');
-  }
-
-  $('.custom-tip-link').removeClass('hidden');
-}
-
-function clearCustomTipValue() {
-  $("#customTipAmount").val('');
-}
-
-function hideConfirmationCheckbox() {
-  $("#confirmationCheck").removeAttr('checked');
-  if (!$('.check-box-cont').hasClass('hidden')) {
-    $('.check-box-cont').addClass('hidden');
-  }
-}
-
-function setTipPercentages(tipAmount) {
-  let percent_5 = Math.round(tipAmount * 5 / 100);
-  let percent_10 = Math.round(tipAmount * 10 / 100);
-  let percent_15 = Math.round(tipAmount * 15 / 100);
-
-  $('#tip-5-percent .tip-amount').text(`${percent_5}฿`)
-  $('#tip-10-percent .tip-amount').text(`${percent_10}฿`)
-  $('#tip-15-percent .tip-amount').text(`${percent_15}฿`)
-} */

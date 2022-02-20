@@ -1162,3 +1162,9 @@ button.back-tip {
 #view_133 #kn-input-field_153 {
   display: none;
 }
+
+#view_150 span.chosen-amount {
+  text-align: center;
+  font-weight: 700;
+  color: #027470;
+}
