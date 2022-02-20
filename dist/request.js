@@ -104,31 +104,31 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
 
   // compiling all
   if (cond8 == false) {
-    return {status: false, error: "Please pay back the advance you have received to be able to submit a new request."};
+    return {status: false, error: "Please pay back the advance you have received to be able to submit a new request.", position: "#view_133 form > ul"};
   } else if (cond9 == false) {
-    return {status: false, error: "Please wait until your payslips are approved to be able to submit a new request."};
+    return {status: false, error: "Please wait until your payslips are approved to be able to submit a new request.", position: "#view_133 form > ul"};
   } else if (cond1 == false) {
-    return {status: false, error: "Salary advances are only available starting " + days_to_request + " days before your next payday. Please come back later."};
+    return {status: false, error: "Salary advances are only available starting " + days_to_request + " days before your next payday. Please come back later.", position: "#view_133 form > ul"};
   } else if (cond2 == false) {
-    return {status: false, error: "You have reached the maximum number of advance requests for this month. You can request a new advance after you received your next salary."};
+    return {status: false, error: "You have reached the maximum number of advance requests for this month. You can request a new advance after you received your next salary.", position: "#view_133 form > ul"};
   } else if (cond3 == false) {
-    return {status: false, error: "The remaining balance (" + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ") is lower than the minimum withdrawal amount allowed (" + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ")"};
+    return {status: false, error: "The remaining balance (" + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ") is lower than the minimum withdrawal amount allowed (" + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ")", position: "#view_133 form > ul"};
   } else if (cond4 == false && max_allowed > 0) {
-    return {status: false, error: "Please provide an amount between " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " and " + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
+    return {status: false, error: "Please provide an amount between " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " and " + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","), position: "#view_133 form > ul"};
   } else if (cond4 == false) {
-    return {status: false, error: "Please provide an amount greater than " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
+    return {status: false, error: "Please provide an amount greater than " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","), position: "#view_133 form > ul"};
   } else if (cond5 == false) {
-    return {status: false, error: "Please accept the terms & conditions to proceed"};
+    return {status: false, error: "Please accept the terms & conditions to proceed", position: "#view_133 form #kn-input-field_142 > label"};
   } else if (cond10 == false) {
-    return {status: false, error: "Please provide your next payday to proceed"};
+    return {status: false, error: "Please provide your next payday to proceed", position: "#view_133 form #kn-input-field_151"};
   } else if (cond11 == false) {
-    return {status: false, error: "Please make sure the payday you selected is in the future"};
+    return {status: false, error: "Please make sure the payday you selected is in the future", position: "#view_133 form #kn-input-field_151"};
   } else if (cond7 == false) {
-    return {status: false, error: "Please fill in the clause to proceed"};
+    return {status: false, error: "Please fill in the clause to proceed", position: "#view_133 form #security-clause"};
   } else if (cond6 == false) {
-    return {status: false, error: "Please sign the form to proceed"};
+    return {status: false, error: "Please sign the form to proceed", position: "#view_133 form #kn-input-field_119"};
   } else {
-    return { status: true };
+    return {status: true};
   }
 };
 
@@ -137,7 +137,7 @@ function display_message (json_obj) {
     var error_msg = json_obj["error"];
     $(".error-message-custom").remove();
     $(".validation-message-custom").remove();
-    $("<div class='error-message-custom'><strong>" + error_msg + "</strong></div>").insertBefore($("#view_133 form > ul"));
+    $("<div class='error-message-custom'><strong>" + error_msg + "</strong></div>").insertBefore($(json_obj["position"]));
     // setTimeout(hide_error, 5000);
   }
 
@@ -457,7 +457,7 @@ $("#view_133 form #view_133-field_151").change(function () {
   var new_clause_html = `Please write <span class="clause">"I authorize EWA Co., Ltd. to deduct the amount owned including tip on my salary day ({payday_current}) automatically from my account."</span> below to proceed`.replace("{payday_current}", next_payday);
   $("#view_133 #security-clause p.sc-instructions").replaceWith('<p class="sc-instructions">' + new_clause_html + "</p>");
 
-  if (next_payday != "") {
+  if (next_payday != "" && new Date(next_payday.split("/")[2], next_payday.split("/")[1] - 1, next_payday.split("/")[0]) > new Date()) {
     $("#security-clause").show();
     $("#kn-input-field_141").show();
   } else {

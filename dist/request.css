@@ -362,9 +362,13 @@
 
 /* New Tipping Screen */
 
-#view_148, #view_150, #view_151, #view_152 {
+#view_148, #view_150, #view_151 {
   visibility: hidden;
   position: absolute;
+}
+
+#view_152 {
+  display: none;
 }
 
 .tip-graphic-cont {
