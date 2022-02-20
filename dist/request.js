@@ -156,7 +156,7 @@ $("#view_133 #field_18").prop("type", "number");
 
 // Wrapping the tipping feature views
 
-$("#view_148, #view_149, #view_150, #view_151, #view_152").wrapAll("<div id='tipping-feature-wrapper'></div>");
+$("#view_148, #view_150, #view_151, #view_152").wrapAll("<div id='tipping-feature-wrapper'></div>");
 $("#tipping-feature-wrapper").insertBefore("#view_133 button.submission");
 
 // Wrapping the tips amount for styling purposes and moving it
@@ -167,6 +167,7 @@ $("#kn-input-field_126").insertAfter("#view_148")
 // Adding tip amounts on load -> all zeros
 
 $('.view_133 form #kn-input-field_126 .tip-box .control').each(function () {
+  console.log("adding tip amount to card");
   $("<span class='tip-amount'>฿0</span>").insertAfter($(this).find("label"));
 });
 
@@ -281,6 +282,8 @@ $('.view_133 form #kn-input-field_126.kn-input .kn-radio .control').each(functio
 });
 
 $('.view_133 form #kn-input-field_126 .kn-radio input[type=radio][name=view_133-field_126]').change(function (e) {
+  console.log("selected tip changed");
+  
   $('.view_133 form #kn-input-field_126 .kn-radio input').each(function () {
       $(this).closest('.control').removeClass('selected');
   });
@@ -570,11 +573,12 @@ $("#view_133-field_119").change(function () {
 // New Tipping Feature
 /************************************************************************************/
 
-$('<button class="back-tip hidden">Back</button><button class="submission hidden">Submit</button>').insertBefore($("#view_133 button.submission"));
+$('<button class="back-tip hidden">Back</button><button class="submission hidden">Submit</button>').insertBefore($("#view_133 .kn-submit"));
+$('#kn-input-field_126 .kn-radio .tip-box div.control:nth-child(2)').addClass("popular");
+$('#kn-input-field_126 .kn-radio .tip-box div.control:nth-child(2)').append('<span class="popular-tag">Popular</span>');
 
 proceed_tip_screen = function() {
   $("#view_148").show();
-  $("#view_149").show();
   $("#view_150").show();
   $("#view_151").show();
   $("#view_152").show();
@@ -606,7 +610,6 @@ $("#view_153 .proceed-tip").on("click", proceed_tip_screen);
 
 back_tip_screen = function() {
   $("#view_148").hide();
-  $("#view_149").hide();
   $("#view_150").hide();
   $("#view_151").hide();
   $("#view_152").hide();

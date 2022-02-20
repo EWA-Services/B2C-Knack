@@ -362,7 +362,7 @@
 
 /* New Tipping Screen */
 
-#view_148, #view_149, #view_150, #view_151, #view_152 {
+#view_148, #view_150, #view_151, #view_152 {
   display: none;
 }
 
@@ -462,6 +462,8 @@
   box-sizing: border-box;
   border-radius: 2px;
   transition: all 0.2s ease-in-out;
+
+  margin-bottom: 0px !important;
 }
 
 .tip-box > div.control > label > input {
