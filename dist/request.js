@@ -675,8 +675,8 @@ $(".custom-tip-btn").click(() => {
 });
 
 $(".ftr-btn.cancel").click(() => {
-  clearCustomTipValue();
-  hideConfirmationCheckbox();
+  // clearCustomTipValue();
+  // hideConfirmationCheckbox();
   $(".modal-wrapper").toggleClass("hidden");
 });
 

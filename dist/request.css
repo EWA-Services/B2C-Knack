@@ -118,6 +118,7 @@
   height: 46px;
   color: #fff!important;
   background: #8e4842!important;
+  margin-bottom: 100px !important;
 }
 
 .view_133 form button.submission:hover {
@@ -145,14 +146,13 @@
   transition: all 0.2s ease-in-out;
 }
 
-.view_133 form .kn-input .kn-radio .control.selected {
+/* .view_133 form .kn-input .kn-radio .control.selected {
   background: #FFFFFF !important;
   border: 1.5px solid rgba(38, 50, 56, 0.1) !important;
-}
+} */
 
 .view_133 form .kn-input .kn-radio .option.radio {
   width: 100%;
-  margin: auto;
   display: flex;
   justify-content: center;
 }
@@ -462,8 +462,6 @@
   box-sizing: border-box;
   border-radius: 2px;
   transition: all 0.2s ease-in-out;
-
-  margin-bottom: 0px !important;
 }
 
 .tip-box > div.control > label > input {
@@ -1108,4 +1106,8 @@ button.back-tip {
 
 #kn-input-field_126 > label {
   display: none;
+}
+
+#view_153 {
+  margin-bottom: 50px !important;
 }
