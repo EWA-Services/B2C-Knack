@@ -132,15 +132,15 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
 function display_message (json_obj) {
   if (json_obj["status"] == false) {
     var error_msg = json_obj["error"];
-    $(".error-message-custom").hide();
-    $(".validation-message-custom").hide();
+    $(".error-message-custom").remove();
+    $(".validation-message-custom").remove();
     $("<div class='error-message-custom'><strong>" + error_msg + "</strong></div>").insertBefore($("#view_133 form > ul"));
     // setTimeout(hide_error, 5000);
   }
 
   if (json_obj["status"] == true) {
-    $(".error-message-custom").hide();
-    $(".validation-message-custom").hide();
+    $(".error-message-custom").remove();
+    $(".validation-message-custom").remove();
     $("<div class='validation-message-custom'><strong>All inputs are correct</strong></div>").insertBefore($("#view_133 form > ul"));
     $("#view_133 form button.submission").prop("disabled", false);
     $(".proceed-tip").prop("disabled", false);
@@ -157,7 +157,7 @@ $("#view_133 #field_18").prop("type", "number");
 // Wrapping the tipping feature views
 
 $("#view_148, #view_150, #view_151, #view_152").wrapAll("<div id='tipping-feature-wrapper'></div>");
-$("#tipping-feature-wrapper").insertBefore("#view_133 button.submission");
+$("#tipping-feature-wrapper").insertBefore("#view_133 .kn-submit");
 
 // Wrapping the tips amount for styling purposes and moving it
 
@@ -282,8 +282,7 @@ $('.view_133 form #kn-input-field_126.kn-input .kn-radio .control').each(functio
 });
 
 $('.view_133 form #kn-input-field_126 .kn-radio input[type=radio][name=view_133-field_126]').change(function (e) {
-  console.log("selected tip changed");
-  
+
   $('.view_133 form #kn-input-field_126 .kn-radio input').each(function () {
       $(this).closest('.control').removeClass('selected');
   });
@@ -295,8 +294,8 @@ $('.view_133 form #kn-input-field_126 .kn-radio input[type=radio][name=view_133-
 // Hide error and validation message on form submit
 
 $(document).on("knack-form-submit.view_133", function (event, view, record) {
-  $(".error-message-custom").hide();
-  $(".validation-message-custom").hide();
+  $(".error-message-custom").remove();
+  $(".validation-message-custom").remove();
 });
 
 // Disable the Submission Button
@@ -644,7 +643,10 @@ submission_fun = function() {
 }
 $("#view_133 button.submission").on("click", submission_fun)
 
-$('.mobile-nav').hide();
+
+
+
+/* $('.mobile-nav').hide();
 
 var selectedTipPercentage = 10;
 
@@ -656,7 +658,7 @@ $('.finish').click(() => {
 
 $('.finish').click(() => {
   console.log(`Selected tip amount - ${selectedTipPercentage}%`);
-})
+}) */
 
 $(".modal-wrapper").click(function () {
   $(this).toggleClass("hidden");
@@ -678,7 +680,7 @@ $(".ftr-btn.cancel").click(() => {
   $(".modal-wrapper").toggleClass("hidden");
 });
 
-$(".ftr-btn.submit").click(() => {
+/* $(".ftr-btn.submit").click(() => {
   const customTipAmount = $("#customTipAmount").val();
   if (customTipAmount != "") {
 
@@ -769,4 +771,4 @@ function setTipPercentages(tipAmount) {
   $('#tip-5-percent .tip-amount').text(`${percent_5}฿`)
   $('#tip-10-percent .tip-amount').text(`${percent_10}฿`)
   $('#tip-15-percent .tip-amount').text(`${percent_15}฿`)
-}
+} */
