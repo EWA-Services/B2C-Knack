@@ -363,7 +363,8 @@
 /* New Tipping Screen */
 
 #view_148, #view_150, #view_151, #view_152 {
-  display: none;
+  visibility: hidden;
+  position: absolute;
 }
 
 .tip-graphic-cont {
@@ -1042,7 +1043,8 @@ p.tip-info {
 }
 
 #view_133 .back-tip.hidden, #view_133 .submission.hidden {
-  display: none;
+  visibility: hidden;
+  position: absolute;
 }
 
 button.proceed-tip {
@@ -1101,7 +1103,8 @@ button.back-tip {
 }
 
 #kn-input-field_126 {
-  display: none;
+  visibility: hidden;
+  position: absolute;
 }
 
 #kn-input-field_126 > label {
