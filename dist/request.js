@@ -399,6 +399,9 @@ if (tipping_options.toLowerCase().indexOf("5%") > -1) {
 $("#view_133 #field_127").attr("value", (Math.round(requested_amount*tip_perc*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
 $("input[type=radio][name=view_133-field_126]").change(function () {
+  $(".modal-wrapper #customTipAmount").val("");
+  $('.modal-wrapper .check-box-cont input').prop('checked', false);
+  
   var input_val = $("#field_18").val();
   var tipping_options = $('input[name="view_133-field_126"]:checked').val();
   if (tipping_options.toLowerCase().indexOf("5%") > -1) {
@@ -684,21 +687,6 @@ submission_fun = function() {
 $("#view_133 button.submission").on("click", submission_fun)
 
 
-
-
-/* $('.mobile-nav').hide();
-
-var selectedTipPercentage = 10;
-
-setTipPercentages(input_val);
-
-$('.finish').click(() => {
-  console.log(`Selected tip amount - ${selectedTipPercentage}%`);
-})
-
-$('.finish').click(() => {
-  console.log(`Selected tip amount - ${selectedTipPercentage}%`);
-}) */
 
 $(".modal-wrapper").click(function () {
   $(this).toggleClass("hidden");
