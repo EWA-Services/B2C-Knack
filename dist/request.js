@@ -456,6 +456,8 @@ $("#view_133 form #view_133-field_151").change(function () {
   var speed = $('input[name="view_133-field_92"]:checked').val();
   var next_payday = $("#view_133 form #view_133-field_151").val();
 
+  $("kn-input-field_141 input").val("");
+
   // var new_clause_html = $("#view_133 #security-clause p.sc-instructions").html().replace("{payday_current}", next_payday);
   var new_clause_html = `Please write <span class="clause">"I authorize EWA Co., Ltd. to deduct the amount owned including tip on my salary day ({payday_current}) automatically from my account."</span> below to proceed`.replace("{payday_current}", next_payday);
   $("#view_133 #security-clause p.sc-instructions").replaceWith('<p class="sc-instructions">' + new_clause_html + "</p>");
