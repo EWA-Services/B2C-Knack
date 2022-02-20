@@ -401,7 +401,7 @@ $("#view_133 #field_127").attr("value", (Math.round(requested_amount*tip_perc*10
 $("input[type=radio][name=view_133-field_126]").change(function () {
   $(".modal-wrapper #customTipAmount").val("");
   $('.modal-wrapper .check-box-cont input').prop('checked', false);
-  
+
   var input_val = $("#field_18").val();
   var tipping_options = $('input[name="view_133-field_126"]:checked').val();
   if (tipping_options.toLowerCase().indexOf("5%") > -1) {
@@ -742,6 +742,8 @@ $('.modal-wrapper #customTipAmount').on("input", function (e) {
 });
 
 $("#ftr-btn-submit").click(() => {
+  $("#kn-input-field_126 input[name='view_133-field_126']").prop('checked', false);
+
   const customTipAmount = $("#customTipAmount").val();
   $("#view_133 #field_127").attr("value", customTipAmount);
   $(".modal-wrapper").toggleClass("hidden");
@@ -752,3 +754,7 @@ $("#ftr-btn-submit").click(() => {
 
   $(`#view_133 span.chosen-amount`).replaceWith($('<span class="chosen-amount">You chose to give a ฿' + customTipAmount + ' tip</span>'));
 })
+
+$("#kn-input-field_126 div.control").click(function() {
+  $(this).closest("input[name='view_133-field_126']").prop('checked', true);
+});
