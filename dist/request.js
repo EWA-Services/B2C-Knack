@@ -98,8 +98,9 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
   // condition9: payslips verified
   var cond9 = requests_by_payback["uploaded"] == 0;
 
-  // condition10: next payday filled in
+  // condition10: next payday filled in and is in the future
   var cond10 = (next_payday != "");
+  var cond11 = new Date(next_payday.split("/")[2], next_payday.split("/")[1] - 1, next_payday.split("/")[0]) > new Date();
 
   // compiling all
   if (cond8 == false) {
@@ -120,6 +121,8 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
     return {status: false, error: "Please accept the terms & conditions to proceed"};
   } else if (cond10 == false) {
     return {status: false, error: "Please provide your next payday to proceed"};
+  } else if (cond11 == false) {
+    return {status: false, error: "Please make sure the payday you selected is in the future"};
   } else if (cond7 == false) {
     return {status: false, error: "Please fill in the clause to proceed"};
   } else if (cond6 == false) {
@@ -679,6 +682,20 @@ $(".ftr-btn.cancel").click(() => {
   // hideConfirmationCheckbox();
   $(".modal-wrapper").toggleClass("hidden");
 });
+
+$("#ftr-btn-submit").click(() => {
+  const customTipAmount = $("#customTipAmount").val();
+  if (customTipAmount != "") {
+    $('.tip-box').find('.control').each(function () {
+      $(this).removeClass('selected');
+    });
+
+    $("#view_133 #field_127").attr("value", customTipAmount);
+    $(".modal-wrapper").toggleClass("hidden");
+  } else {
+    $(".modal-wrapper .empty-tip-msg").show().delay(5000).fadeOut();
+  }
+})
 
 /* $(".ftr-btn.submit").click(() => {
   const customTipAmount = $("#customTipAmount").val();

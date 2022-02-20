@@ -118,7 +118,7 @@
   height: 46px;
   color: #fff!important;
   background: #8e4842!important;
-  margin-bottom: 100px !important;
+  margin-bottom: 30px !important;
 }
 
 .view_133 form button.submission:hover {
@@ -146,10 +146,10 @@
   transition: all 0.2s ease-in-out;
 }
 
-/* .view_133 form .kn-input .kn-radio .control.selected {
+.view_133 form .kn-input#kn-input-field_92 .kn-radio .control.selected {
   background: #FFFFFF !important;
   border: 1.5px solid rgba(38, 50, 56, 0.1) !important;
-} */
+}
 
 .view_133 form .kn-input .kn-radio .option.radio {
   width: 100%;
@@ -292,12 +292,12 @@
   text-align: center;
 } */
 
-/* .view_133 form #kn-input-field_126.kn-input .kn-radio .wrapper-tips .control:nth-child(1),
-.view_133 form #kn-input-field_126.kn-input .kn-radio .wrapper-tips .control:nth-child(3) {
-  padding: 16px 8px;
+.view_133 form #kn-input-field_126.kn-input .kn-radio .tip-box .control:nth-child(1),
+.view_133 form #kn-input-field_126.kn-input .kn-radio .tip-box .control:nth-child(3) {
+  width: 30%;
 }
 
-.view_133 form #kn-input-field_126.kn-input .kn-radio .wrapper-tips .control:nth-child(2) {
+/* .view_133 form #kn-input-field_126.kn-input .kn-radio .wrapper-tips .control:nth-child(2) {
   margin: 0 2px 8px 2px;
   padding: 16px 8px;
 } */
@@ -1113,4 +1113,13 @@ button.back-tip {
 
 #view_153 {
   margin-bottom: 50px !important;
+}
+
+#kn-input-field_151 .kn-datetime > div {
+  width: 100%;
+}
+
+.modal-wrapper .empty-tip-msg {
+  color: #FF0000;
+  display: none;
 }
