@@ -1,4 +1,4 @@
-#view_133 {
+.proceed-tip {
   margin-bottom: 50px!important;
 }
 
@@ -160,9 +160,9 @@
   justify-content: center;
 }
 
-.view_133 form .kn-input .kn-radio .wrapper-tips .option.radio {
+/* .view_133 form .kn-input .kn-radio .wrapper-tips .option.radio {
   margin-bottom: 2px;
-}
+} */
 
 .view_133 form #kn-input-field_92.kn-input .kn-radio .option.radio div {
   flex-grow: 1;
@@ -280,9 +280,9 @@
   font-weight: 500;
 }
 
-#kn-input-field_126 div.kn-radio .wrapper-tips {
+/* #kn-input-field_126 div.kn-radio .wrapper-tips {
   display: flex;
-}
+} */
 
 .view_133 form #kn-input-field_126.kn-input .kn-radio .control {
   width: 100%;
@@ -295,7 +295,7 @@
   text-align: center;
 }
 
-.view_133 form #kn-input-field_126.kn-input .kn-radio .wrapper-tips .control:nth-child(1),
+/* .view_133 form #kn-input-field_126.kn-input .kn-radio .wrapper-tips .control:nth-child(1),
 .view_133 form #kn-input-field_126.kn-input .kn-radio .wrapper-tips .control:nth-child(3) {
   padding: 16px 8px;
 }
@@ -303,7 +303,7 @@
 .view_133 form #kn-input-field_126.kn-input .kn-radio .wrapper-tips .control:nth-child(2) {
   margin: 0 2px 8px 2px;
   padding: 16px 8px;
-}
+} */
 
 .view_133 form #kn-input-field_126.kn-input .kn-radio .control input {
   margin-right: 5px;
@@ -314,12 +314,12 @@
   position: absolute;
 }
 
-.view_133 form #kn-input-field_126.kn-input .kn-radio .wrapper-tips span.tip-amt {
+/* .view_133 form #kn-input-field_126.kn-input .kn-radio .wrapper-tips span.tip-amt {
   font-weight: 300;
   font-style: oblique;
   margin-top: 2px;
   font-size: 13px;
-}
+} */
 
 #view_133 .information-increase {
   display: flex;
@@ -1034,7 +1034,7 @@ p.tip-info {
   display: none;
 }
 
-/* button.finish {
+button.proceed-tip {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -1054,11 +1054,33 @@ p.tip-info {
   text-align: center;
   color: #FFFFFF;
   transition: all 0.2s ease-in-out;
-} */
+}
+
+button.back-tip {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  height: 50px;
+  background: #D3D3D3;
+  box-shadow: 0px 4px 26px rgb(118 114 114 / 4%);
+  border-radius: 4px;
+  border: none !important;
+  font-family: "Inter" !important;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  color: #FFFFFF;
+  transition: all 0.2s ease-in-out;
+}
 
 /* Test-run 2 Adjustments */
 
-#security-clause, #kn-input-field_141 {
+#security-clause, #kn-input-field_141, #view_133 .kn-submit {
   display: none;
 }
 

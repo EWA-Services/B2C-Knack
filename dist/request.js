@@ -141,8 +141,10 @@ function display_message (json_obj) {
     $(".validation-message-custom").hide();
     $("<div class='validation-message-custom'><strong>All inputs are correct</strong></div>").insertBefore($("#view_133 form > ul"));
     $("#view_133 form .kn-submit .kn-button.is-primary").prop("disabled", false);
+    $(".proceed-tip").prop("disabled", false);
   } else {
     $("#view_133 form .kn-submit .kn-button.is-primary").prop("disabled", true);
+    $(".proceed-tip").prop("disabled", true);
   }
 };
 
@@ -155,13 +157,14 @@ $("#view_133 #field_18").prop("type", "number");
 $("#view_148, #view_149, #view_150, #view_151, #view_152").wrapAll("<div id='tipping-feature-wrapper'></div>");
 $("#tipping-feature-wrapper").insertBefore("#view_133 .kn-submit");
 
-// Wrapping the tips amount for styling purposes
+// Wrapping the tips amount for styling purposes and moving it
 
-$("#kn-input-field_126 .kn-radio .control:lt(3)").wrapAll('<div class="wrapper-tips"></div>');
+$("#kn-input-field_126 .kn-radio .control:lt(3)").wrapAll('<div class="tip-box"></div>');
+$("#kn-input-field_126").insertAfter("#view_149 .content")
 
 // Adding tip amounts on load -> all zeros
 
-$('.view_133 form #kn-input-field_126 .wrapper-tips .control').each(function () {
+$('.view_133 form #kn-input-field_126 .tip-box .control').each(function () {
   $("<span class='tip-amt'>฿0</span>").insertAfter($(this).find("label"));
 });
 
@@ -474,7 +477,7 @@ $("input#field_18").on("input", function (e) {
   var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request, next_payday);
   display_message(output);
 
-  $('.view_133 form #kn-input-field_126 .wrapper-tips .control').each(function () {
+  $('.view_133 form #kn-input-field_126 .tip-box .control').each(function () {
     var perc = $(this).find("label div").text().replace("%","")/100;
     var tip_amount = perc*input_val;
     $(this).find("span.tip-amt").text("฿" + (Math.round(tip_amount*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
@@ -572,10 +575,11 @@ proceed_tip_screen = function() {
   $("#kn-input-field_126").show();
   $("#kn-input-field_80").hide();
   $("#kn-input-field_142").hide();
-  $("#view_133-field_151").hide();
+  $("#kn-input-field_151").hide();
   $(".sc-instructions").hide();
   $("#kn-input-field_18").hide();
   $("#view_133-field_119").hide();
+  $("#view_133 .kn-submit").hide();
   $("#view_153").hide();
   $("#kn-input-field_18").hide();
   $("#kn-input-field_59").hide();
@@ -602,10 +606,11 @@ back_tip_screen = function() {
   $("#kn-input-field_126").hide();
   $("#kn-input-field_80").show();
   $("#kn-input-field_142").show();
-  $("#view_133-field_151").show();
+  $("#kn-input-field_151").show();
   $(".sc-instructions").show();
   $("#kn-input-field_18").show();
   $("#view_133-field_119").show();
+  $("#view_133 .kn-submit").show();
   $("#view_153").show();
   $("#kn-input-field_18").show();
   $("#kn-input-field_59").show();
@@ -623,6 +628,10 @@ $('.mobile-nav').hide();
 var selectedTipPercentage = 10;
 
 setTipPercentages(input_val);
+
+$('.finish').click(() => {
+  console.log(`Selected tip amount - ${selectedTipPercentage}%`);
+})
 
 $('.finish').click(() => {
   console.log(`Selected tip amount - ${selectedTipPercentage}%`);
