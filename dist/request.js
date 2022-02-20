@@ -685,7 +685,11 @@ $(".ftr-btn.cancel").click(() => {
 
 $('.modal-wrapper .check-box-cont > input').change(function() {
   console.log($(this).val());
-  if ($(this).val() == 0) {
+  if ($(this).val() == "") {
+    console.log("case3");
+    $(".modal-wrapper .check-box-cont").addClass("hidden");
+    $(".modal-wrapper #ftr-btn-submit").prop("disabled", true);
+  } else if ($(this).val() == 0)  {
     console.log("case1");
     $(".modal-wrapper #ftr-btn-submit").prop("disabled", true);
     $(".modal-wrapper .check-box-cont").removeClass("hidden");
@@ -693,10 +697,6 @@ $('.modal-wrapper .check-box-cont > input').change(function() {
       console.log("case2");
       $(".modal-wrapper #ftr-btn-submit").prop("disabled", false);
     }
-  } else if ($(this).val() == "")  {
-    console.log("case3");
-    $(".modal-wrapper .check-box-cont").addClass("hidden");
-    $(".modal-wrapper #ftr-btn-submit").prop("disabled", true);
   } else {
     console.log("case4");
     $(".modal-wrapper .check-box-cont").addClass("hidden");
@@ -706,7 +706,11 @@ $('.modal-wrapper .check-box-cont > input').change(function() {
 
 $('.modal-wrapper #customTipAmount').on("input", function (e) {
   console.log($(this).val());
-  if ($(this).val() == 0) {
+  if ($(this).val() == "") {
+    console.log("case3");
+    $(".modal-wrapper .check-box-cont").addClass("hidden");
+    $(".modal-wrapper #ftr-btn-submit").prop("disabled", true);
+  } else if ($(this).val() == 0)  {
     console.log("case1");
     $(".modal-wrapper #ftr-btn-submit").prop("disabled", true);
     $(".modal-wrapper .check-box-cont").removeClass("hidden");
@@ -714,10 +718,6 @@ $('.modal-wrapper #customTipAmount').on("input", function (e) {
       console.log("case2");
       $(".modal-wrapper #ftr-btn-submit").prop("disabled", false);
     }
-  } else if ($(this).val() == "")  {
-    console.log("case3");
-    $(".modal-wrapper .check-box-cont").addClass("hidden");
-    $(".modal-wrapper #ftr-btn-submit").prop("disabled", true);
   } else {
     console.log("case4");
     $(".modal-wrapper .check-box-cont").addClass("hidden");
