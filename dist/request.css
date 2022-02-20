@@ -99,13 +99,13 @@
   border: 2px solid #f4f4f4 !important;
 }
 
-.view_133 form .kn-submit .kn-button {
+.view_133 form button.submission {
   outline: 0!important;
   box-shadow: none!important;
   border: none!important;
   font-family: Inter!important;
-  font-weight: 400;
-  font-size: 14px;
+  font-weight: 500;
+  font-size: 16px;
   font-style: normal;
   display: flex;
   align-items: center;
@@ -120,7 +120,7 @@
   background: #8e4842!important;
 }
 
-.view_133 form .kn-submit .kn-button.is-primary:hover {
+.view_133 form button.submission:hover {
   background: #663530 !important;
 }
 
@@ -311,13 +311,6 @@
   position: absolute;
 }
 
-/* .view_133 form #kn-input-field_126.kn-input .kn-radio .wrapper-tips span.tip-amt {
-  font-weight: 300;
-  font-style: oblique;
-  margin-top: 2px;
-  font-size: 13px;
-} */
-
 #view_133 .information-increase {
   display: flex;
   align-items: center;
@@ -471,7 +464,11 @@
   transition: all 0.2s ease-in-out;
 }
 
-.tip-box > div.control .percentage {
+.tip-box > div.control > label > input {
+  display: none;
+}
+
+.tip-box > div.control label.option.radio > div {
   font-family: "Inter" !important;
   font-style: normal;
   font-weight: 600;
@@ -500,7 +497,7 @@
   padding: 0px !important;
 }
 
-.tip-box > div.control.popular .percentage {
+.tip-box > div.control.popular label.option.radio > div {
   margin-top: 20px;
 }
 
@@ -527,7 +524,7 @@
   color: #666666;
 }
 
-.tip-box > div.control.popular .percentage {
+.tip-box > div.control.popular label.option.radio > div {
   color: #020674 !important
 }
 
@@ -550,7 +547,7 @@
   border-color: #EF772E !important;
 }
 
-.tip-box > div.control.selected .percentage {
+.tip-box > div.control.selected label.option.radio > div {
   color: #ffffff;
 }
 
@@ -1044,7 +1041,7 @@ p.tip-info {
   color: #263238;
 }
 
-#view_133 .back-tip.hidden {
+#view_133 .back-tip.hidden, #view_133 .submission.hidden {
   display: none;
 }
 
@@ -1093,7 +1090,7 @@ button.back-tip {
   font-size: 16px;
   line-height: 19px;
   text-align: center;
-  color: #FFFFFF;
+  color: #000;
   transition: all 0.2s ease-in-out;
 }
 

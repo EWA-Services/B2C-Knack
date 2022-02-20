@@ -142,10 +142,10 @@ function display_message (json_obj) {
     $(".error-message-custom").hide();
     $(".validation-message-custom").hide();
     $("<div class='validation-message-custom'><strong>All inputs are correct</strong></div>").insertBefore($("#view_133 form > ul"));
-    $("#view_133 form .kn-submit .kn-button.is-primary").prop("disabled", false);
+    $("#view_133 form button.submission").prop("disabled", false);
     $(".proceed-tip").prop("disabled", false);
   } else {
-    $("#view_133 form .kn-submit .kn-button.is-primary").prop("disabled", true);
+    $("#view_133 form button.submission").prop("disabled", true);
     $(".proceed-tip").prop("disabled", true);
   }
 };
@@ -157,7 +157,7 @@ $("#view_133 #field_18").prop("type", "number");
 // Wrapping the tipping feature views
 
 $("#view_148, #view_149, #view_150, #view_151, #view_152").wrapAll("<div id='tipping-feature-wrapper'></div>");
-$("#tipping-feature-wrapper").insertBefore("#view_133 .kn-submit");
+$("#tipping-feature-wrapper").insertBefore("#view_133 button.submission");
 
 // Wrapping the tips amount for styling purposes and moving it
 
@@ -167,7 +167,7 @@ $("#kn-input-field_126").insertAfter("#view_148")
 // Adding tip amounts on load -> all zeros
 
 $('.view_133 form #kn-input-field_126 .tip-box .control').each(function () {
-  $("<span class='tip-amt'>฿0</span>").insertAfter($(this).find("label"));
+  $("<span class='tip-amount'>฿0</span>").insertAfter($(this).find("label"));
 });
 
 // Function that updates the proceed button state on jsignature field change
@@ -298,6 +298,7 @@ $(document).on("knack-form-submit.view_133", function (event, view, record) {
 
 // Disable the Submission Button
 $("#view_133 form .kn-submit .kn-button.is-primary").prop("disabled", true);
+$("#view_133 form button.submission").prop("disabled", true);
 
 // Variables for Global Conditions
 // var requested_transactions = parseInt($("#view_66 .kn-pivot-calc:eq(1)").text().replace(/,/g, "") == "" ? 0 : $("#view_66 .kn-pivot-calc:eq(1)").text().replace(/,/g, ""));
@@ -447,7 +448,8 @@ $("#view_133 form #view_133-field_151").change(function () {
   var speed = $('input[name="view_133-field_92"]:checked').val();
   var next_payday = $("#view_133 form #view_133-field_151").val();
 
-  var new_clause_html = $("#view_133 #security-clause p.sc-instructions").html().replace("{payday_current}", next_payday);
+  // var new_clause_html = $("#view_133 #security-clause p.sc-instructions").html().replace("{payday_current}", next_payday);
+  var new_clause_html = `Please write <span class="clause">"I authorize EWA Co., Ltd. to deduct the amount owned including tip on my salary day ({payday_current}) automatically from my account."</span> below to proceed`.replace("{payday_current}", next_payday);
   $("#view_133 #security-clause p.sc-instructions").replaceWith('<p class="sc-instructions">' + new_clause_html + "</p>");
 
   if (next_payday != "") {
@@ -489,7 +491,7 @@ $("input#field_18").on("input", function (e) {
   $('.view_133 form #kn-input-field_126 .tip-box .control').each(function () {
     var perc = $(this).find("label div").text().replace("%","")/100;
     var tip_amount = perc*input_val;
-    $(this).find("span.tip-amt").text("฿" + (Math.round(tip_amount*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+    $(this).find("span.tip-amount").text("฿" + (Math.round(tip_amount*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
   });
 
   var tipping_options = $('input[name="view_133-field_126"]:checked').val();
@@ -568,7 +570,7 @@ $("#view_133-field_119").change(function () {
 // New Tipping Feature
 /************************************************************************************/
 
-$('<button class="back-tip hidden">Back</button>').insertBefore($("#view_133 .kn-submit"));
+$('<button class="back-tip hidden">Back</button><button class="submission hidden">Submit</button>').insertBefore($("#view_133 button.submission"));
 
 proceed_tip_screen = function() {
   $("#view_148").show();
@@ -588,7 +590,7 @@ proceed_tip_screen = function() {
   $(".sc-instructions").hide();
   $("#kn-input-field_18").hide();
   $("#view_133-field_119").hide();
-  $("#view_133 .kn-submit").show();
+  $("#view_133 button.submission").show();
   $("#view_153").hide();
   $("#kn-input-field_18").hide();
   $("#kn-input-field_59").hide();
@@ -620,7 +622,7 @@ back_tip_screen = function() {
   $(".sc-instructions").show();
   $("#kn-input-field_18").show();
   $("#view_133-field_119").show();
-  $("#view_133 .kn-submit").hide();
+  $("#view_133 button.submission").hide();
   $("#view_153").show();
   $("#kn-input-field_18").show();
   $("#kn-input-field_59").show();
@@ -632,6 +634,12 @@ back_tip_screen = function() {
   $("#kn-input-field_119").show();
 }
 $("#view_133 .back-tip").on("click", back_tip_screen);
+
+submission_fun = function() {
+  $("#view_133 .kn-submit .kn-button.is-primary").prop("disabled", false);
+  $("#view_133 .kn-submit .kn-button.is-primary").click();
+}
+$("#view_133 button.submission").on("click", submission_fun)
 
 $('.mobile-nav').hide();
 
