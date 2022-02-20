@@ -1,6 +1,5 @@
 
-#view_97,
-#view_133 .kn-message.is-error {
+#view_97, #view_133 .kn-message.is-error {
   visibility: hidden;
   position: absolute;
 }
@@ -1134,4 +1133,33 @@ button.back-tip {
 
 .modal-wrapper .check-box-cont label {
   margin-left: 10px;
+}
+
+#view_133 #kn-input-field_152 label span i {
+  font-weight: 400;
+}
+
+#view_133 #kn-input-field_152 .kn-radio {
+  display: flex;
+  align-items: center;
+}
+
+#view_133 #kn-input-field_152 .kn-radio .control {
+  padding: 16px;
+  background: #fff;
+  border-radius: 4px;
+  width: 45%;
+}
+
+#view_133 #kn-input-field_152 .kn-radio .control:nth-child(1) {
+  margin-right: 5%;
+}
+
+#view_133 #kn-input-field_152 .kn-radio .control:nth-child(2) {
+  margin-left: 5%;
+}
+
+#view_133 #kn-input-field_153 {
+  visibility: hidden;
+  position: absolute;
 }

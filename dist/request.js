@@ -98,9 +98,12 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
   // condition9: payslips verified
   var cond9 = requests_by_payback["uploaded"] == 0;
 
-  // condition10: next payday filled in and is in the future
+  // conditions 10 & 11: next payday filled in and is in the future
   var cond10 = (next_payday != "");
   var cond11 = new Date(next_payday.split("/")[2], next_payday.split("/")[1] - 1, next_payday.split("/")[0]) > new Date();
+
+  // Condition12: Employer change
+  var cond12 = ($('#view_133 input[name="view_133-field_152"]:checked').val().toLowerCase().trim() == "yes") && ($("#view_133 #kn-input-field_153 input").val().length >= 5);
 
   // compiling all
   if (cond8 == false) {
@@ -125,6 +128,8 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
     return {status: false, display: (next_payday != ""), error: "Please make sure the payday you selected is in the future", position: "#view_133 form #kn-input-field_151"};
   } else if (cond7 == false) {
     return {status: false, display: true, error: "Please fill in the clause to proceed", position: "#view_133 form #security-clause"};
+  } else if (cond12 == false) {
+    return {status: false, display: true, error: "Please fill in the name of your new employer to proceed", position: "#view_133 form #kn-input-field_153"};
   } else if (cond6 == false) {
     return {status: false, display: !($("#kn-input-field_141 input").is(":focus")), error: "Please sign the form to proceed", position: "#view_133 form #kn-input-field_119"};
   } else {
@@ -572,6 +577,31 @@ $("#view_133-field_119").change(function () {
   display_message(output);
 })
 
+$("input[type=radio][name=view_133-field_152]").change(function () {
+  var input_val = $("#field_18").val();
+  var speed = $('input[name="view_133-field_92"]:checked').val();
+  var next_payday = $("#view_133 form #view_133-field_151").val();
+  if (speed.toLowerCase().indexOf("normal") > -1) {
+    withdrawal_fee = normal_fee_setting;
+  } else if (speed.toLowerCase().indexOf("fast") > -1) {
+    withdrawal_fee = fast_fee_setting;
+  } else if (speed.toLowerCase().indexOf("cutoff") > -1) {
+    withdrawal_fee = cutoff_fee_setting;
+  }
+
+  var selected_employer = $('#view_133 input[name="view_133-field_152"]:checked').val();
+  if (selected_employer.toLowerCase().trim() == "yes") {
+    $("#view_133 #kn-input-field_153").css({"visibility":"unset", "position":"unset"});
+  } else {
+    $("#view_133 #kn-input-field_153").css({"visibility":"hidden", "position":"absolute"});
+  }
+
+  $("#view_133 #field_63").attr("value", withdrawal_fee);
+  available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
+  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request, next_payday);
+  display_message(output);
+});
+
 /************************************************************************************/
 // New Tipping Feature
 /************************************************************************************/
@@ -593,6 +623,7 @@ proceed_tip_screen = function() {
   $("#kn-input-field_80").css({"visibility":"hidden", "position":"absolute"});
   $("#kn-input-field_142").css({"visibility":"hidden", "position":"absolute"});
   $("#kn-input-field_151").css({"visibility":"hidden", "position":"absolute"});
+  $("#kn-input-field_152").css({"visibility":"hidden", "position":"absolute"});
   $(".sc-instructions").css({"visibility":"hidden", "position":"absolute"});
   $("#kn-input-field_18").css({"visibility":"hidden", "position":"absolute"});
   $("#view_133-field_119").css({"visibility":"hidden", "position":"absolute"});
@@ -623,6 +654,7 @@ back_tip_screen = function() {
   $("#kn-input-field_80").css({"visibility":"unset", "position":"unset"});
   $("#kn-input-field_142").css({"visibility":"unset", "position":"unset"});
   $("#kn-input-field_151").css({"visibility":"unset", "position":"unset"});
+  $("#kn-input-field_152").css({"visibility":"unset", "position":"unset"});
   $(".sc-instructions").css({"visibility":"unset", "position":"unset"});
   $("#kn-input-field_18").css({"visibility":"unset", "position":"unset"});
   $("#view_133-field_119").css({"visibility":"unset", "position":"unset"});
@@ -721,10 +753,12 @@ $("#ftr-btn-submit").click(() => {
   $("#view_133 #field_127").attr("value", customTipAmount);
   $(".modal-wrapper").toggleClass("hidden");
 
+  $('.tip-box').find('.control').each(function () {
+    $(this).removeClass('selected');
+  });
+
   /* if (customTipAmount != "" && customTipAmount != 0) {
-    $('.tip-box').find('.control').each(function () {
-      $(this).removeClass('selected');
-    });
+    
 
     $("#view_133 #field_127").attr("value", customTipAmount);
     $(".modal-wrapper").toggleClass("hidden");
