@@ -1,5 +1,5 @@
 function hide_error() {
-  $(".error-message-custom").hide();
+  $(".error-message-custom").remove();
   // $(".validation-message-custom").hide();
 };
 
@@ -116,10 +116,12 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
     return {status: false, error: "Please provide an amount between " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " and " + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
   } else if (cond4 == false) {
     return {status: false, error: "Please provide an amount greater than " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
-  } else if (cond5 == false || cond7 == false) {
+  } else if (cond5 == false) {
     return {status: false, error: "Please accept the terms & conditions to proceed"};
   } else if (cond10 == false) {
     return {status: false, error: "Please provide your next payday to proceed"};
+  } else if (cond7 == false) {
+    return {status: false, error: "Please fill in the clause to proceed"};
   } else if (cond6 == false) {
     return {status: false, error: "Please sign the form to proceed"};
   } else {
@@ -160,7 +162,7 @@ $("#tipping-feature-wrapper").insertBefore("#view_133 .kn-submit");
 // Wrapping the tips amount for styling purposes and moving it
 
 $("#kn-input-field_126 .kn-radio .control:lt(3)").wrapAll('<div class="tip-box"></div>');
-$("#kn-input-field_126").insertAfter("#view_149 .content")
+$("#kn-input-field_126").insertAfter("#view_148")
 
 // Adding tip amounts on load -> all zeros
 
@@ -186,7 +188,7 @@ $('.view_133 form #kn-input-field_126 .tip-box .control').each(function () {
                       </div>`; */
 
 var security_clause = `<div id="security-clause">
-                          <p class="sc-instructions">I authorize EWA Co., Ltd. to deduct the amount owned including tip on my salary day ({payday_current}) automatically from my account.</p>
+                          <p class="sc-instructions">Please write <span class="clause">"I authorize EWA Co., Ltd. to deduct the amount owned including tip on my salary day ({payday_current}) automatically from my account."</span> below to proceed</p>
                       </div>`
 
 $(security_clause).insertBefore($("#view_133 #kn-input-field_141"));
@@ -586,7 +588,7 @@ proceed_tip_screen = function() {
   $(".sc-instructions").hide();
   $("#kn-input-field_18").hide();
   $("#view_133-field_119").hide();
-  $("#view_133 .kn-submit").hide();
+  $("#view_133 .kn-submit").show();
   $("#view_153").hide();
   $("#kn-input-field_18").hide();
   $("#kn-input-field_59").hide();
@@ -596,6 +598,7 @@ proceed_tip_screen = function() {
   $("#security-clause").hide();
   $("#kn-input-field_141").hide();
   $("#kn-input-field_119").hide();
+  $(".validation-message-custom").remove();
 }
 $("#view_153 .proceed-tip").on("click", proceed_tip_screen);
 
@@ -617,7 +620,7 @@ back_tip_screen = function() {
   $(".sc-instructions").show();
   $("#kn-input-field_18").show();
   $("#view_133-field_119").show();
-  $("#view_133 .kn-submit").show();
+  $("#view_133 .kn-submit").hide();
   $("#view_153").show();
   $("#kn-input-field_18").show();
   $("#kn-input-field_59").show();
