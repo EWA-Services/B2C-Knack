@@ -241,12 +241,12 @@ $('.view_133 form #kn-input-field_92.kn-input .kn-radio .control').each(function
   let radioContent = $(this).find('.option.radio div');
   let radioContentText = $(radioContent).text().trim().split('-');
 
-  if ($(radioContent).text().toLowerCase().indexOf("normal") > -1) {
+  if ($(radioContent).attr("class").toLowerCase().indexOf("normal") > -1) {
       $(this).addClass("selected");
       var fee_message = normal_fee_message;
       var withdrawal_speed = normal_withdrawal_speed.trim();
       var speed_type = "normal";
-  } else if ($(radioContent).text().toLowerCase().indexOf("fast") > -1) {
+  } else if ($(radioContent).attr("class").toLowerCase().indexOf("fast") > -1) {
     var fee_message = fast_fee_message;
     var withdrawal_speed = fast_withdrawal_speed.trim();
     var speed_type = "fast";
