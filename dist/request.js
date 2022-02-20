@@ -104,29 +104,29 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
 
   // compiling all
   if (cond8 == false) {
-    return {status: false, error: "Please pay back the advance you have received to be able to submit a new request.", position: "#view_133 form > ul"};
+    return {status: false, display: true, error: "Please pay back the advance you have received to be able to submit a new request.", position: "#view_133 form > ul"};
   } else if (cond9 == false) {
-    return {status: false, error: "Please wait until your payslips are approved to be able to submit a new request.", position: "#view_133 form > ul"};
+    return {status: false, display: true, error: "Please wait until your payslips are approved to be able to submit a new request.", position: "#view_133 form > ul"};
   } else if (cond1 == false) {
-    return {status: false, error: "Salary advances are only available starting " + days_to_request + " days before your next payday. Please come back later.", position: "#view_133 form > ul"};
+    return {status: false, display: true, error: "Salary advances are only available starting " + days_to_request + " days before your next payday. Please come back later.", position: "#view_133 form > ul"};
   } else if (cond2 == false) {
-    return {status: false, error: "You have reached the maximum number of advance requests for this month. You can request a new advance after you received your next salary.", position: "#view_133 form > ul"};
+    return {status: false, display: true, error: "You have reached the maximum number of advance requests for this month. You can request a new advance after you received your next salary.", position: "#view_133 form > ul"};
   } else if (cond3 == false) {
-    return {status: false, error: "The remaining balance (" + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ") is lower than the minimum withdrawal amount allowed (" + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ")", position: "#view_133 form > ul"};
+    return {status: false, display: true, error: "The remaining balance (" + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ") is lower than the minimum withdrawal amount allowed (" + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ")", position: "#view_133 form > ul"};
   } else if (cond4 == false && max_allowed > 0) {
-    return {status: false, error: "Please provide an amount between " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " and " + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","), position: "#view_133 form > ul"};
+    return {status: false, display: true, error: "Please provide an amount between " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " and " + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","), position: "#view_133 form > ul"};
   } else if (cond4 == false) {
-    return {status: false, error: "Please provide an amount greater than " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","), position: "#view_133 form > ul"};
+    return {status: false, display: true, error: "Please provide an amount greater than " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","), position: "#view_133 form > ul"};
   } else if (cond5 == false) {
-    return {status: false, error: "Please accept the terms & conditions to proceed", position: "#view_133 form #kn-input-field_142 > label"};
+    return {status: false, display: true, error: "Please accept the terms & conditions to proceed", position: "#view_133 form #kn-input-field_142 > label"};
   } else if (cond10 == false) {
-    return {status: false, error: "Please provide your next payday to proceed", position: "#view_133 form #kn-input-field_151"};
+    return {status: false, display: true, error: "Please provide your next payday to proceed", position: "#view_133 form #kn-input-field_151"};
   } else if (cond11 == false) {
-    return {status: false, error: "Please make sure the payday you selected is in the future", position: "#view_133 form #kn-input-field_151"};
+    return {status: false, display: (next_payday != ""), error: "Please make sure the payday you selected is in the future", position: "#view_133 form #kn-input-field_151"};
   } else if (cond7 == false) {
-    return {status: false, error: "Please fill in the clause to proceed", position: "#view_133 form #security-clause"};
+    return {status: false, display: true, error: "Please fill in the clause to proceed", position: "#view_133 form #security-clause"};
   } else if (cond6 == false) {
-    return {status: false, error: "Please sign the form to proceed", position: "#view_133 form #kn-input-field_119"};
+    return {status: false, display: not($("#kn-input-field_141 input").is(":focus")), error: "Please sign the form to proceed", position: "#view_133 form #kn-input-field_119"};
   } else {
     return {status: true};
   }
@@ -137,8 +137,9 @@ function display_message (json_obj) {
     var error_msg = json_obj["error"];
     $(".error-message-custom").remove();
     $(".validation-message-custom").remove();
-    $("<div class='error-message-custom'><strong>" + error_msg + "</strong></div>").insertBefore($(json_obj["position"]));
-    // setTimeout(hide_error, 5000);
+    if (json_obj["display"]) {
+      $("<div class='error-message-custom'><strong>" + error_msg + "</strong></div>").insertBefore($(json_obj["position"]));
+    } // setTimeout(hide_error, 5000);
   }
 
   if (json_obj["status"] == true) {
@@ -583,7 +584,6 @@ proceed_tip_screen = function() {
   $("#view_148").css({"visibility":"unset", "position":"unset"});
   $("#view_150").css({"visibility":"unset", "position":"unset"});
   $("#view_151").css({"visibility":"unset", "position":"unset"});
-  $("#view_152").css({"visibility":"unset", "position":"unset"});
   $("#view_133 .back-tip").removeClass("hidden");
   $("#kn-input-field_18").css({"visibility":"hidden", "position":"absolute"});
   $("#kn-input-field_59").css({"visibility":"hidden", "position":"absolute"});
@@ -614,7 +614,6 @@ back_tip_screen = function() {
   $("#view_148").css({"visibility":"hidden", "position":"absolute"});
   $("#view_150").css({"visibility":"hidden", "position":"absolute"});
   $("#view_151").css({"visibility":"hidden", "position":"absolute"});
-  $("#view_152").css({"visibility":"hidden", "position":"absolute"});
   $("#view_133 .back-tip").addClass("hidden");
   $("#kn-input-field_18").css({"visibility":"unset", "position":"unset"});
   $("#kn-input-field_59").css({"visibility":"unset", "position":"unset"});
