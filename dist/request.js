@@ -103,7 +103,7 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
   var cond11 = new Date(next_payday.split("/")[2], next_payday.split("/")[1] - 1, next_payday.split("/")[0]) > new Date();
 
   // Condition12: Employer change
-  var cond12 = ($('#view_133 input[name="view_133-field_152"]:checked').val().toLowerCase().trim() == "yes") && ($("#view_133 #kn-input-field_153 input").val().length >= 5);
+  var cond12 = !(($('#view_133 input[name="view_133-field_152"]:checked').val().toLowerCase().trim() == "yes") && ($("#view_133 #kn-input-field_153 input").val().length == 0));
 
   // compiling all
   if (cond8 == false) {
@@ -176,7 +176,6 @@ $("#kn-input-field_126").insertAfter("#view_148")
 // Adding tip amounts on load -> all zeros
 
 $('.view_133 form #kn-input-field_126 .tip-box .control').each(function () {
-  console.log("adding tip amount to card");
   $("<span class='tip-amount'>฿0</span>").insertAfter($(this).find("label"));
 });
 
@@ -739,7 +738,6 @@ $('.modal-wrapper #customTipAmount').on("input", function (e) {
     $(".modal-wrapper #ftr-btn-submit").prop("disabled", true);
     $(".modal-wrapper .check-box-cont").removeClass("hidden");
     if ($('.modal-wrapper #confirmationCheck').is(':checked')) {
-      console.log("case2");
       $(".modal-wrapper #ftr-btn-submit").prop("disabled", false);
     }
   } else {
