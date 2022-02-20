@@ -534,6 +534,21 @@ $("#view_133 #kn-input-field_141 input").on("input", function (e) {
   available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
   var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request, next_payday);
   display_message(output);
+});
+
+$("#view_133 #kn-input-field_153 input").on("input", function (e) {
+  var input_val = $("#field_18").val();
+  var speed = $('input[name="view_133-field_92"]:checked').val();
+  var next_payday = $("#view_133 form #view_133-field_151").val();
+  if (speed.toLowerCase().indexOf("normal") > -1) {
+    withdrawal_fee = normal_fee_setting;
+  } else if (speed.toLowerCase().indexOf("fast") > -1) {
+    withdrawal_fee = fast_fee_setting;
+  } else if (speed.toLowerCase().indexOf("cutoff") > -1) {
+    withdrawal_fee = cutoff_fee_setting;
+  }
+  $("#view_133 #field_63").attr("value", withdrawal_fee);
+  available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
   var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request, next_payday);
   display_message(output);
 });
@@ -553,8 +568,6 @@ $("#view_133 #kn-input-field_142 input").change(function () {
   available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
   var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request, next_payday);
   display_message(output);
-  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request, next_payday);
-  display_message(output);
 })
 
 $("#view_133-field_119").change(function () {
@@ -570,8 +583,6 @@ $("#view_133-field_119").change(function () {
   }
   $("#view_133 #field_63").attr("value", withdrawal_fee);
   available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
-  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request, next_payday);
-  display_message(output);
   var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, payday, max_number_requests, input_val, days_to_request, next_payday);
   display_message(output);
 })
@@ -590,9 +601,9 @@ $("input[type=radio][name=view_133-field_152]").change(function () {
 
   var selected_employer = $('#view_133 input[name="view_133-field_152"]:checked').val();
   if (selected_employer.toLowerCase().trim() == "yes") {
-    $("#view_133 #kn-input-field_153").css({"visibility":"unset", "position":"unset"});
+    $("#view_133 #kn-input-field_153").show();
   } else {
-    $("#view_133 #kn-input-field_153").css({"visibility":"hidden", "position":"absolute"});
+    $("#view_133 #kn-input-field_153").hide();
   }
 
   $("#view_133 #field_63").attr("value", withdrawal_fee);
@@ -623,6 +634,7 @@ proceed_tip_screen = function() {
   $("#kn-input-field_142").css({"visibility":"hidden", "position":"absolute"});
   $("#kn-input-field_151").css({"visibility":"hidden", "position":"absolute"});
   $("#kn-input-field_152").css({"visibility":"hidden", "position":"absolute"});
+  $("#kn-input-field_153").css({"visibility":"hidden", "position":"absolute"});
   $(".sc-instructions").css({"visibility":"hidden", "position":"absolute"});
   $("#kn-input-field_18").css({"visibility":"hidden", "position":"absolute"});
   $("#view_133-field_119").css({"visibility":"hidden", "position":"absolute"});
@@ -654,6 +666,7 @@ back_tip_screen = function() {
   $("#kn-input-field_142").css({"visibility":"unset", "position":"unset"});
   $("#kn-input-field_151").css({"visibility":"unset", "position":"unset"});
   $("#kn-input-field_152").css({"visibility":"unset", "position":"unset"});
+  $("#kn-input-field_153").css({"visibility":"unset", "position":"unset"});
   $(".sc-instructions").css({"visibility":"unset", "position":"unset"});
   $("#kn-input-field_18").css({"visibility":"unset", "position":"unset"});
   $("#view_133-field_119").css({"visibility":"unset", "position":"unset"});

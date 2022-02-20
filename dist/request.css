@@ -1160,6 +1160,5 @@ button.back-tip {
 }
 
 #view_133 #kn-input-field_153 {
-  visibility: hidden;
-  position: absolute;
+  display: none;
 }
