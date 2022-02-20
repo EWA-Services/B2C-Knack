@@ -126,7 +126,7 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
   } else if (cond7 == false) {
     return {status: false, display: true, error: "Please fill in the clause to proceed", position: "#view_133 form #security-clause"};
   } else if (cond6 == false) {
-    return {status: false, display: not($("#kn-input-field_141 input").is(":focus")), error: "Please sign the form to proceed", position: "#view_133 form #kn-input-field_119"};
+    return {status: false, display: !($("#kn-input-field_141 input").is(":focus")), error: "Please sign the form to proceed", position: "#view_133 form #kn-input-field_119"};
   } else {
     return {status: true};
   }
