@@ -682,18 +682,39 @@ $(".ftr-btn.cancel").click(() => {
   $(".modal-wrapper").toggleClass("hidden");
 });
 
+$('.modal-wrapper #customTipAmount, .modal-wrapper .check-box-cont > input').change(function() {
+  if ($(this).val() == 0) {
+    $(".modal-wrapper .check-box-cont").removeClass("hidden");
+    if ($('.modal-wrapper #confirmationCheck').is(':checked')) {
+      $(".modal-wrapper #ftr-btn-submit").prop("disabled", false);
+    }
+  } else if ($(this).val() == "")  {
+    $(".modal-wrapper .check-box-cont").addClass("hidden");
+    $(".modal-wrapper #ftr-btn-submit").prop("disabled", true);
+  } else {
+    $(".modal-wrapper .check-box-cont").addClass("hidden");
+    $(".modal-wrapper #ftr-btn-submit").prop("disabled", false);
+  }
+});
+
 $("#ftr-btn-submit").click(() => {
   const customTipAmount = $("#customTipAmount").val();
-  if (customTipAmount != "") {
+  $("#view_133 #field_127").attr("value", customTipAmount);
+  $(".modal-wrapper").toggleClass("hidden");
+
+  /* if (customTipAmount != "" && customTipAmount != 0) {
     $('.tip-box').find('.control').each(function () {
       $(this).removeClass('selected');
     });
 
     $("#view_133 #field_127").attr("value", customTipAmount);
     $(".modal-wrapper").toggleClass("hidden");
+  } else if (customTipAmount == 0) {
+    $(".modal-wrapper .check-box-cont").removeClass("hidden");
+
   } else {
     $(".modal-wrapper .empty-tip-msg").show().delay(5000).fadeOut();
-  }
+  } */
 })
 
 /* $(".ftr-btn.submit").click(() => {
