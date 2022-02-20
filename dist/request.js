@@ -682,7 +682,22 @@ $(".ftr-btn.cancel").click(() => {
   $(".modal-wrapper").toggleClass("hidden");
 });
 
-$('.modal-wrapper #customTipAmount, .modal-wrapper .check-box-cont > input').change(function() {
+$('.modal-wrapper .check-box-cont > input').change(function() {
+  if ($(this).val() == 0) {
+    $(".modal-wrapper .check-box-cont").removeClass("hidden");
+    if ($('.modal-wrapper #confirmationCheck').is(':checked')) {
+      $(".modal-wrapper #ftr-btn-submit").prop("disabled", false);
+    }
+  } else if ($(this).val() == "")  {
+    $(".modal-wrapper .check-box-cont").addClass("hidden");
+    $(".modal-wrapper #ftr-btn-submit").prop("disabled", true);
+  } else {
+    $(".modal-wrapper .check-box-cont").addClass("hidden");
+    $(".modal-wrapper #ftr-btn-submit").prop("disabled", false);
+  }
+});
+
+$('.modal-wrapper #customTipAmount').on("input", function (e) {
   if ($(this).val() == 0) {
     $(".modal-wrapper .check-box-cont").removeClass("hidden");
     if ($('.modal-wrapper #confirmationCheck').is(':checked')) {

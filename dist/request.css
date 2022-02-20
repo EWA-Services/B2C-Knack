@@ -748,10 +748,7 @@ p.tip-info {
 
 .modal .footer .ftr-btn.submit:disabled,
 .modal .footer .ftr-btn.submit[disabled] {
-  background: #b3d5d4;;
-  border-radius: 4px;
-  color: #fff;
-  margin-left: 4px;
+  background: #b3d5d4 !important;
 }
 
 .modal .content .input-cont {
