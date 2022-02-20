@@ -116,10 +116,10 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
     return {status: false, error: "Please provide an amount between " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " and " + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
   } else if (cond4 == false) {
     return {status: false, error: "Please provide an amount greater than " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
-  } else if (cond10 == false) {
-    return {status: false, error: "Please provide your next payday to proceed"};
   } else if (cond5 == false || cond7 == false) {
     return {status: false, error: "Please accept the terms & conditions to proceed"};
+  } else if (cond10 == false) {
+    return {status: false, error: "Please provide your next payday to proceed"};
   } else if (cond6 == false) {
     return {status: false, error: "Please sign the form to proceed"};
   } else {
@@ -181,9 +181,13 @@ $('.view_133 form #kn-input-field_126 .tip-box .control').each(function () {
   }
 }); */
 
-var security_clause = `<div id="security-clause">
+/* var security_clause = `<div id="security-clause">
                         <p class="sc-instructions">Please write <span class="clause">"I will pay back the salary advance on {payday_current} before 10am"</span> below to proceed</p>
-                      </div>`;
+                      </div>`; */
+
+var security_clause = `<div id="security-clause">
+                          <p class="sc-instructions">I authorize EWA Co., Ltd. to deduct the amount owned including tip on my salary day ({payday_current}) automatically from my account.</p>
+                      </div>`
 
 $(security_clause).insertBefore($("#view_133 #kn-input-field_141"));
 
@@ -315,8 +319,8 @@ $.each(months, function(i,v) {
 var cutoff_day = cutoff_day == "" ? "-" : cutoff_day;
 var payday = payday == "" ? "-" : payday;
 
-var new_clause_html = $("#view_133 #security-clause p.sc-instructions").html().replace("{payday_current}", payday);
-$("#view_133 #security-clause p.sc-instructions").replaceWith('<p class="sc-instructions">' + new_clause_html + "</p>");
+/* var new_clause_html = $("#view_133 #security-clause p.sc-instructions").html().replace("{payday_current}", payday);
+$("#view_133 #security-clause p.sc-instructions").replaceWith('<p class="sc-instructions">' + new_clause_html + "</p>"); */
 
 // Calculate Withdrawable Amount Variables
 var base_salary = parseFloat($("#view_65 .field_44 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_65 .field_44 .kn-detail-body").text().replace(/,/g, ""));
@@ -440,6 +444,9 @@ $("#view_133 form #view_133-field_151").change(function () {
   var input_val = $("#field_18").val();
   var speed = $('input[name="view_133-field_92"]:checked').val();
   var next_payday = $("#view_133 form #view_133-field_151").val();
+
+  var new_clause_html = $("#view_133 #security-clause p.sc-instructions").html().replace("{payday_current}", next_payday);
+  $("#view_133 #security-clause p.sc-instructions").replaceWith('<p class="sc-instructions">' + new_clause_html + "</p>");
 
   if (next_payday != "") {
     $("#security-clause").show();
