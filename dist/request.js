@@ -716,7 +716,7 @@ $(".modal-wrapper").click(function () {
 
 $(".modal-wrapper .modal").click((e) => e.stopPropagation());
 
-$(".custom-tip-link, .custom-tip-btn").click(() => {
+$(".custom-tip-link").click(() => {
   $(".modal-wrapper").toggleClass("hidden");
 });
 
