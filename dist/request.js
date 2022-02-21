@@ -77,12 +77,12 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
   }
 
   // condition7: security clause not empty
-  var clause_input = $("#view_133 #kn-input-field_141 input").val();
+  /* var clause_input = $("#view_133 #kn-input-field_141 input").val();
   if (clause_input.length <= 10) {
     var cond7 = false;
   } else {
     var cond7 = true;
-  }
+  } */
 
   // Get requests' count per payback status
   var requests_by_payback = {};
@@ -126,18 +126,18 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
     return {status: false, display: true, error: "Please provide an amount between " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " and " + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","), position: "#view_133 form > ul"};
   } else if (cond4 == false) {
     return {status: false, display: true, error: "Please provide an amount greater than " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","), position: "#view_133 form > ul"};
-  } else if (cond5 == false) {
-    return {status: false, display: true, error: "Please accept the terms & conditions to proceed", position: "#view_133 form #kn-input-field_142 > label"};
   } else if (cond10 == false) {
     return {status: false, display: true, error: "Please provide your next payday to proceed", position: "#view_133 form #kn-input-field_151"};
   } else if (cond11 == false) {
     return {status: false, display: (next_payday != ""), error: "Please make sure the payday you selected is in the future", position: "#view_133 form #kn-input-field_151"};
-  } else if (cond7 == false) {
+  } /* else if (cond7 == false) {
     return {status: false, display: true, error: "Please fill in the clause to proceed", position: "#view_133 form #security-clause"};
-  } else if (cond13 == false) {
+  } */ else if (cond13 == false) {
     return {status: false, display: true, error: "Please tell us whether or not your employer changed before proceeding", position: "#view_133 form #kn-input-field_152"};
   } else if (cond12 == false) {
     return {status: false, display: true, error: "Please fill in the name of your new employer to proceed", position: "#view_133 form #kn-input-field_153"};
+  } else if (cond5 == false) {
+    return {status: false, display: true, error: "Please accept the terms & conditions to proceed", position: "#view_133 form #kn-input-field_142 > label"};
   } else if (cond6 == false) {
     return {status: false, display: !($("#kn-input-field_141 input").is(":focus")), error: "Please sign the form to proceed", position: "#view_133 form #kn-input-field_119"};
   } else {
@@ -166,6 +166,9 @@ function display_message (json_obj) {
     $(".proceed-tip").prop("disabled", true);
   }
 };
+
+// Get the initial T&C HTML clause
+var initial_tnc_clause = $("#view_133 #kn-input-field_142 .control > label span.terms-and-conditions").html();
 
 // Change the type of the input field of the amount to "number"
 
@@ -202,13 +205,13 @@ $('.view_133 form #kn-input-field_126 .tip-box .control').each(function () {
 
 /* var security_clause = `<div id="security-clause">
                         <p class="sc-instructions">Please write <span class="clause">"I will pay back the salary advance on {payday_current} before 10am"</span> below to proceed</p>
-                      </div>`; */
+                      </div>`;
 
 var security_clause = `<div id="security-clause">
                           <p class="sc-instructions">Please write <span class="clause">"I authorize EWA Co., Ltd. to deduct the amount owned including tip on my salary day ({payday_current}) automatically from my account."</span> below to proceed</p>
                       </div>`
 
-$(security_clause).insertBefore($("#view_133 #kn-input-field_141"));
+$(security_clause).insertBefore($("#view_133 #kn-input-field_141")); */
 
 // Add placeholders + classes to the form view (view_133)
 
@@ -470,7 +473,7 @@ $("#view_133 form #view_133-field_151").change(function () {
 
   $("#kn-input-field_141 input").val("");
 
-  // var new_clause_html = $("#view_133 #security-clause p.sc-instructions").html().replace("{payday_current}", next_payday);
+  /* var new_clause_html = $("#view_133 #security-clause p.sc-instructions").html().replace("{payday_current}", next_payday);
   var new_clause_html = `Please write <span class="clause">"I authorize EWA Co., Ltd. to deduct the amount owned including tip on my salary day ({payday_current}) automatically from my account."</span> below to proceed`.replace("{payday_current}", next_payday);
   $("#view_133 #security-clause p.sc-instructions").replaceWith('<p class="sc-instructions">' + new_clause_html + "</p>");
 
@@ -480,7 +483,10 @@ $("#view_133 form #view_133-field_151").change(function () {
   } else {
     $("#security-clause").hide();
     $("#kn-input-field_141").hide();
-  }
+  } */
+
+  var new_clause = initial_tnc_clause.replace("{next_payday}", next_payday);
+  $("#view_133 #kn-input-field_142 .control > label").replaceWith(new_clause);
 
   if (speed.toLowerCase().indexOf("normal") > -1) {
     withdrawal_fee = normal_fee_setting;
@@ -657,7 +663,7 @@ proceed_tip_screen = function() {
   $("#kn-input-field_92").css({"visibility":"hidden", "position":"absolute"});
   $("#kn-input-field_80").css({"visibility":"hidden", "position":"absolute"});
   $("#kn-input-field_142").css({"visibility":"hidden", "position":"absolute"});
-  $("#security-clause").css({"visibility":"hidden", "position":"absolute"});
+  // $("#security-clause").css({"visibility":"hidden", "position":"absolute"});
   $("#kn-input-field_141").css({"visibility":"hidden", "position":"absolute"});
   $("#kn-input-field_119").css({"visibility":"hidden", "position":"absolute"});
   $(".validation-message-custom").remove();
@@ -689,7 +695,7 @@ back_tip_screen = function() {
   $("#kn-input-field_92").css({"visibility":"unset", "position":"unset"});
   $("#kn-input-field_80").css({"visibility":"unset", "position":"unset"});
   $("#kn-input-field_142").css({"visibility":"unset", "position":"unset"});
-  $("#security-clause").css({"visibility":"unset", "position":"unset"});
+  // $("#security-clause").css({"visibility":"unset", "position":"unset"});
   $("#kn-input-field_141").css({"visibility":"unset", "position":"unset"});
   $("#kn-input-field_119").css({"visibility":"unset", "position":"unset"});
 }
@@ -709,7 +715,7 @@ $(".modal-wrapper").click(function () {
 
 $(".modal-wrapper .modal").click((e) => e.stopPropagation());
 
-$(".custom-tip-link").click(() => {
+$(".custom-tip-link, .custom-tip-btn").click(() => {
   $(".modal-wrapper").toggleClass("hidden");
 });
 
@@ -768,7 +774,8 @@ $("#ftr-btn-submit").click(() => {
     $(this).removeClass('selected');
   });
 
-  $(`#view_133 span.chosen-amount`).replaceWith($('<span class="chosen-amount">You chose to give a ฿' + customTipAmount + ' tip</span>'));
+  // $(`#view_133 span.chosen-amount`).replaceWith($('<span class="chosen-amount">You chose to give a ฿' + customTipAmount + ' tip</span>'));
+  $(`#view_133 span.chosen-amount`).replaceWith($('<button class="custom-tip-btn">Custom Tip Percentage - <span id="custom-tip-value">' + customTipAmount + '%</span></button>'));
 })
 
 $("#kn-input-field_126 div.control").click(function() {
