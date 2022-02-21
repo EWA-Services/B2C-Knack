@@ -326,6 +326,10 @@
   color: #666;
 }
 
+#view_133 #kn-input-field_142 {
+  display: none;
+}
+
 #view_133 #kn-input-field_142 > label,
 #view_133 #kn-input-field_141 > label {
   display: none;

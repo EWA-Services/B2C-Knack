@@ -477,15 +477,13 @@ $("#view_133 form #view_133-field_151").change(function () {
 
   /* var new_clause_html = $("#view_133 #security-clause p.sc-instructions").html().replace("{payday_current}", next_payday);
   var new_clause_html = `Please write <span class="clause">"I authorize EWA Co., Ltd. to deduct the amount owned including tip on my salary day ({payday_current}) automatically from my account."</span> below to proceed`.replace("{payday_current}", next_payday);
-  $("#view_133 #security-clause p.sc-instructions").replaceWith('<p class="sc-instructions">' + new_clause_html + "</p>");
+  $("#view_133 #security-clause p.sc-instructions").replaceWith('<p class="sc-instructions">' + new_clause_html + "</p>"); */
 
   if (next_payday != "" && new Date(next_payday.split("/")[2], next_payday.split("/")[1] - 1, next_payday.split("/")[0]) > new Date()) {
-    $("#security-clause").show();
-    $("#kn-input-field_141").show();
+    $("#view_133 #kn-input-field_142").show();
   } else {
-    $("#security-clause").hide();
-    $("#kn-input-field_141").hide();
-  } */
+    $("#view_133 #kn-input-field_142").hide();
+  }
 
   var new_clause = initial_tnc_clause.replace("{next_payday}", next_payday);
   $("#view_133 #kn-input-field_142 .control > label span.terms-and-conditions").replaceWith('<span class="terms-and-conditions">' + new_clause + '</span>');
@@ -767,7 +765,7 @@ $("#ftr-btn-submit").click(() => {
   const customTipPerc = $("#customTipAmount").val();
   var input_val = $("#field_18").val();
   $("#view_133 #kn-input-field_154 input").val(customTipPerc/100);
-  $("#view_133 #field_127").attr("value", (input_val*customTipPerc/100)*toFixed(2));
+  $("#view_133 #field_127").attr("value", (input_val*customTipPerc/100).toFixed(2));
   $(".modal-wrapper").toggleClass("hidden");
 
   $('.tip-box').find('.control').each(function () {
