@@ -127,9 +127,9 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
   } else if (cond4 == false) {
     return {status: false, display: true, error: "Please provide an amount greater than " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","), position: "#view_133 form > ul"};
   } else if (cond10 == false) {
-    return {status: false, display: true, error: "Please provide your next payday to proceed", position: "#view_133 form #kn-input-field_151"};
+    return {status: false, display: true, error: "Please provide your next payday to proceed", position: "#view_133 form #kn-input-field_151 > label.kn-label"};
   } else if (cond11 == false) {
-    return {status: false, display: (next_payday != ""), error: "Please make sure the payday you selected is in the future", position: "#view_133 form #kn-input-field_151"};
+    return {status: false, display: (next_payday != ""), error: "Please make sure the payday you selected is in the future", position: "#view_133 form #kn-input-field_151 > label.kn-label"};
   } /* else if (cond7 == false) {
     return {status: false, display: true, error: "Please fill in the clause to proceed", position: "#view_133 form #security-clause"};
   } */ else if (cond13 == false) {
@@ -486,7 +486,7 @@ $("#view_133 form #view_133-field_151").change(function () {
   } */
 
   var new_clause = initial_tnc_clause.replace("{next_payday}", next_payday);
-  $("#view_133 #kn-input-field_142 .control > label").replaceWith(new_clause);
+  $("#view_133 #kn-input-field_142 .control > label span.terms-and-conditions").replaceWith('<span class="terms-and-conditions">' + new_clause + '</span>');
 
   if (speed.toLowerCase().indexOf("normal") > -1) {
     withdrawal_fee = normal_fee_setting;
