@@ -305,7 +305,8 @@ $('.view_133 form #kn-input-field_126 .kn-radio input[type=radio][name=view_133-
   if (!$(e.target).closest('.control').hasClass('selected'))
       $(e.target).closest('.control').addClass('selected');
 
-      $(`#view_133 span.chosen-amount`).replaceWith($('<span class="chosen-amount"></span>'));
+  $(`#view_133 span.chosen-amount`).replaceWith($('<span class="chosen-amount"></span>'));
+  $("#view_150 .custom-tip-link").show();
 });
 
 // Hide error and validation message on form submit
@@ -776,6 +777,7 @@ $("#ftr-btn-submit").click(() => {
 
   // $(`#view_133 span.chosen-amount`).replaceWith($('<span class="chosen-amount">You chose to give a ฿' + customTipAmount + ' tip</span>'));
   $(`#view_133 span.chosen-amount`).replaceWith($('<button class="custom-tip-btn">Custom Tip Percentage - <span id="custom-tip-value">' + customTipAmount + '%</span></button>'));
+  $("#view_150 .custom-tip-link").hide();
 })
 
 $("#kn-input-field_126 div.control").click(function() {
