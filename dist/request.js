@@ -102,8 +102,14 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
   var cond10 = (next_payday != "");
   var cond11 = new Date(next_payday.split("/")[2], next_payday.split("/")[1] - 1, next_payday.split("/")[0]) > new Date();
 
-  // Condition12: Employer change
-  var cond12 = !(($('#view_133 input[name="view_133-field_152"]:checked').val().toLowerCase().trim() == "yes") && ($("#view_133 #kn-input-field_153 input").val().length == 0));
+  // conditions 12 & 13: Employer change
+  if ($('#view_133 input[name="view_133-field_152"]:checked').val() == undefined) {
+    var cond13 = false;
+    var cond12 = false;
+  } else {
+    var cond13 = true;
+    var cond12 = !(($('#view_133 input[name="view_133-field_152"]:checked').val().toLowerCase().trim() == "yes") && ($("#view_133 #kn-input-field_153 input").val().length == 0));
+  }
 
   // compiling all
   if (cond8 == false) {
@@ -128,6 +134,8 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
     return {status: false, display: (next_payday != ""), error: "Please make sure the payday you selected is in the future", position: "#view_133 form #kn-input-field_151"};
   } else if (cond7 == false) {
     return {status: false, display: true, error: "Please fill in the clause to proceed", position: "#view_133 form #security-clause"};
+  } else if (cond13 == false) {
+    return {status: false, display: true, error: "Please tell us whether or not your employer changed before proceeding", position: "#view_133 form #kn-input-field_152"};
   } else if (cond12 == false) {
     return {status: false, display: true, error: "Please fill in the name of your new employer to proceed", position: "#view_133 form #kn-input-field_153"};
   } else if (cond6 == false) {
@@ -279,6 +287,10 @@ $('.view_133 form #kn-input-field_126.kn-input .kn-radio .control').each(functio
   if ($(radioContent).text().toLowerCase().indexOf("10%") > -1) {
     $(this).addClass("selected");
   }
+});
+
+$('.view_133 form #kn-input-field_152 .kn-radio .control input').each(function () {
+  $(this).prop('checked', false);
 });
 
 $('.view_133 form #kn-input-field_126 .kn-radio input[type=radio][name=view_133-field_126]').change(function (e) {
