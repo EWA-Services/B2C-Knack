@@ -305,7 +305,7 @@ $('.view_133 form #kn-input-field_126 .kn-radio input[type=radio][name=view_133-
   if (!$(e.target).closest('.control').hasClass('selected'))
       $(e.target).closest('.control').addClass('selected');
 
-  $(`#view_133 span.chosen-amount`).replaceWith($('<span class="chosen-amount"></span>'));
+  $(`#view_133 div.chosen-amount`).replaceWith($('<div class="chosen-amount"></div>'));
   $("#view_150 .custom-tip-link").show();
 });
 
@@ -720,11 +720,6 @@ $(".custom-tip-link").click(() => {
   $(".modal-wrapper").toggleClass("hidden");
 });
 
-$(".custom-tip-btn").click(() => {
-  $(".modal-wrapper #ftr-btn-submit").prop("disabled", true);
-  $(".modal-wrapper").toggleClass("hidden");
-});
-
 $(".ftr-btn.cancel").click(() => {
   $(".modal-wrapper").toggleClass("hidden");
   $(".modal-wrapper #customTipAmount").val("");
@@ -776,8 +771,12 @@ $("#ftr-btn-submit").click(() => {
   });
 
   // $(`#view_133 span.chosen-amount`).replaceWith($('<span class="chosen-amount">You chose to give a ฿' + customTipAmount + ' tip</span>'));
-  $(`#view_133 span.chosen-amount`).replaceWith($('<button class="custom-tip-btn">Custom Tip Percentage - <span id="custom-tip-value">' + customTipAmount + '%</span></button>'));
+  $(`#view_133 div.chosen-amount`).replaceWith($('<div class="chosen-amount"><button class="custom-tip-btn">Custom Tip Percentage - <span id="custom-tip-value">' + customTipAmount + '%</span></button></div>'));
   $("#view_150 .custom-tip-link").hide();
+  $(".custom-tip-btn").click(() => {
+    $(".modal-wrapper #ftr-btn-submit").prop("disabled", true);
+    $(".modal-wrapper").toggleClass("hidden");
+  });
 })
 
 $("#kn-input-field_126 div.control").click(function() {

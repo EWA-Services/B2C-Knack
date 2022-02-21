@@ -613,16 +613,6 @@
   top: -24px;
 }
 
-p.tip-info {
-  font-family: "Inter" !important;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 17px;
-  color: #363636;
-  padding-bottom: 16px;
-}
-
 .modal-wrapper {
   display: flex;
   align-items: center;
@@ -868,6 +858,7 @@ p.tip-info {
   line-height: 17px;
   color: #363636;
   padding-bottom: 16px;
+  text-align: center;
 }
 
 #view_152 .modal-wrapper {
