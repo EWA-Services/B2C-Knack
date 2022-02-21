@@ -431,6 +431,7 @@ $("input[type=radio][name=view_133-field_126]").change(function () {
     var tip_perc = 0;
   }
   $("#view_133 #field_127").attr("value", (input_val*tip_perc).toFixed(2));
+  $("#view_133 #kn-input-field_154 input").val(tip_perc);
 });
 
 if (max_allowed > 0) {
@@ -534,6 +535,7 @@ $("input#field_18").on("input", function (e) {
     var tip_perc = 0;
   }
   $("#view_133 #field_127").attr("value", (input_val*tip_perc).toFixed(2));
+  $("#view_133 #kn-input-field_154 input").val(tip_perc);
 });
 
 // Validation of the security clause, T&C checkbox and signature
@@ -762,16 +764,18 @@ $('.modal-wrapper #customTipAmount').on("input", function (e) {
 $("#ftr-btn-submit").click(() => {
   $("#kn-input-field_126 input[name='view_133-field_126']").prop('checked', false);
 
-  const customTipAmount = $("#customTipAmount").val();
-  $("#view_133 #field_127").attr("value", customTipAmount);
+  const customTipPerc = $("#customTipAmount").val();
+  var input_val = $("#field_18").val();
+  $("#view_133 #kn-input-field_154 input").val(customTipPerc/100);
+  $("#view_133 #field_127").attr("value", (input_val*customTipPerc/100)*toFixed(2));
   $(".modal-wrapper").toggleClass("hidden");
 
   $('.tip-box').find('.control').each(function () {
     $(this).removeClass('selected');
   });
 
-  // $(`#view_133 span.chosen-amount`).replaceWith($('<span class="chosen-amount">You chose to give a ฿' + customTipAmount + ' tip</span>'));
-  $(`#view_133 div.chosen-amount`).replaceWith($('<div class="chosen-amount"><button class="custom-tip-btn">Custom Tip Percentage - <span id="custom-tip-value">' + customTipAmount + '%</span></button></div>'));
+  // $(`#view_133 span.chosen-amount`).replaceWith($('<span class="chosen-amount">You chose to give a ฿' + customTipPerc + ' tip</span>'));
+  $(`#view_133 div.chosen-amount`).replaceWith($('<div class="chosen-amount"><button class="custom-tip-btn">Custom Tip Percentage - <span id="custom-tip-value">' + customTipPerc + '%</span></button></div>'));
   $("#view_150 .custom-tip-link").hide();
   $(".custom-tip-btn").click(() => {
     $(".modal-wrapper #ftr-btn-submit").prop("disabled", true);
