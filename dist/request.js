@@ -474,6 +474,7 @@ $("#view_133 form #view_133-field_151").change(function () {
   var next_payday = $("#view_133 form #view_133-field_151").val();
 
   $("#kn-input-field_141 input").val("");
+  // $("#view_133 #kn-input-field_142 .control input").prop("checked", false);
 
   /* var new_clause_html = $("#view_133 #security-clause p.sc-instructions").html().replace("{payday_current}", next_payday);
   var new_clause_html = `Please write <span class="clause">"I authorize EWA Co., Ltd. to deduct the amount owned including tip on my salary day ({payday_current}) automatically from my account."</span> below to proceed`.replace("{payday_current}", next_payday);
@@ -779,6 +780,10 @@ $("#ftr-btn-submit").click(() => {
     $(".modal-wrapper #ftr-btn-submit").prop("disabled", true);
     $(".modal-wrapper").toggleClass("hidden");
   });
+
+  $(".modal-wrapper #customTipAmount").val("");
+  $('.modal-wrapper .check-box-cont input').prop('checked', false);
+  $(".modal-wrapper .check-box-cont").addClass("hidden");
 })
 
 $("#kn-input-field_126 div.control").click(function() {
