@@ -26,7 +26,7 @@ requests_check = function (cutoff_day, payday, max_nb_requests, max_per_request,
   
   var nb_requests = 0;
   for (var key of Object.keys(past_requests)) {
-    if (new Date(2022, key.split("/")[1]-1, key.split("/")[0]) > new Date(payday.split("/")[2], payday.split("/")[1] - 1, payday.split("/")[0])) {
+    if ((new Date(2022, key.split("/")[1]-1, key.split("/")[0]) <= new Date(payday.split("/")[2], payday.split("/")[1] - 1, payday.split("/")[0])) && (new Date(2022, key.split("/")[1]-1, key.split("/")[0]) > new Date(last_payday.split("/")[2], last_payday.split("/")[1] - 1, last_payday.split("/")[0]))) {
       var nb_requests = nb_requests + past_requests[key];
     }
   }
@@ -69,8 +69,12 @@ requests_check = function (cutoff_day, payday, max_nb_requests, max_per_request,
 // Payoff and Cutoff Dates
 
 var current_month = new Date().getFullYear() + "-" + ((new Date().getMonth() + 1) < 10 ? "0" + (new Date().getMonth() + 1) : (new Date().getMonth() + 1));
+var last_month_date_tmp = new Date((new Date()).setMonth((new Date()).getMonth()-1));
+var last_month = last_month_date_tmp.getFullYear() + "-" + ((last_month_date_tmp.getMonth() + 1) < 10 ? "0" + (last_month_date_tmp.getMonth() + 1) : (last_month_date_tmp.getMonth() + 1));
 var payday = "-";
+var last_payday = "-"
 var cutoff_day = "-";
+var last_cutoff_day = "-";
 
 var months = $("#view_96 .kn-table tbody td.field_88 span");
 var paydays = $("#view_96 .kn-table tbody td.field_76 span");
@@ -80,8 +84,17 @@ $.each(months, function(i,v) {
   if (v.textContent.trim() == current_month) {
     payday = paydays[i].textContent.trim() || "-";
     cutoff_day = cutoffs[i].textContent.trim() || "-";
+  } else if (v.textContent.trim() == last_month) {
+    last_payday = paydays[i].textContent.trim() || "-";
+    last_cutoff_day = cutoffs[i].textContent.trim() || "-";
   }
 });
+
+if (last_payday == "-") {
+  var current_payday_tmp = new Date(payday.split("/")[2], payday.split("/")[1]-1, payday.split("/")[0]);
+  var last_payday_tmp = new Date(current_payday_tmp.setMonth(current_payday_tmp.getMonth()-1));
+  var last_payday = (last_payday_tmp.getDate() < 10 ? "0" + last_payday_tmp.getDate() : last_payday_tmp.getDate()) + "/" + (last_payday_tmp.getMonth() < 9 ? "0" + (last_payday_tmp.getMonth()+1) : (last_payday_tmp.getMonth()+1)) + "/" + last_payday_tmp.getFullYear();
+}
 
 
 // Withdrawable Amount and Other Conditions
