@@ -168,7 +168,7 @@ function createTransactionList() {
 
                     <div class="ti-header-amount">
                         <span class="ti-amount">${transaction.field_18.value}</span>
-                        <a class="upload-payslip" style="${payback_link_display}" href="${transaction.edit}">Payback</a>
+                        <a class="upload-payslip" style="${payback_link_display}">Payback</a>
                         <a class="pending-approval" style="${progress_display}">Checking Slip</a>
                         <a class="paid" style="${paid_display}">Paid</a>
                         ${setStatusIcon(transaction.field_23.class)}

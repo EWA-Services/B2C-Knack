@@ -1168,3 +1168,11 @@ button.back-tip {
 #view_133 #kn-input-field_152 .control input {
   margin-right: 10px;
 }
+
+#view_133 #kn-input-field_92 .kn-radio .control:nth-child(2) > label .widthdrawl-radio .wr-title {
+  color: #a9a9a9 !important;
+}
+
+#view_133 #kn-input-field_92 .kn-radio .control:nth-child(2) > label .widthdrawl-radio .wr-desc {
+  color: #a9a9a9 !important;
+}

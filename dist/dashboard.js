@@ -14,6 +14,7 @@ requests_check = function (cutoff_day, payday, max_nb_requests, max_per_request,
     var limit_inf = payday_asdate;
     limit_inf.setDate(limit_inf.getDate() - days_to_request);
     var cond1 = today_asdate >= limit_inf && today_asdate <= cutoff_asdate;
+    var limit_inf_formatted = limit_inf.getDate() + "/" + (limit_inf.getMonth()+1) + "/" + limit_inf.getFullYear()
   }
 
   // condition2: total number of requests per month
@@ -60,7 +61,7 @@ requests_check = function (cutoff_day, payday, max_nb_requests, max_per_request,
   } else if (cond4 == false) {
     return { status : false, error : "Please wait until your payslips are approved to be able to submit a new request." };
   } else if (cond1 == false) {
-    return { status : false, error : "Salary advances are only available starting " + days_to_request + " days before your next payday. Please come back later." };
+    return { status : false, error : "Salary advances are only available starting " + days_to_request + " days before your next payday. You can withdraw again starting from " + limit_inf_formatted };
   } else if (cond2 == false) {
     return { status : false, error : "You have reached the maximum number of advance requests for this month. You can request a new advance after you received your next salary." };
   }
