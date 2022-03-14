@@ -93,10 +93,13 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
   })
 
   // condition8: payslips uploaded
-  var cond8 = requests_by_payback["not-paid"] == 0;
+  var cond8 = requests_by_payback["collection-failed"] == 0 &&
+              requests_by_payback["collection-failed-re"] == 0 &&
+              requests_by_payback["not-paid"] == 0 &&
+              requests_by_payback["partially-paid"] == 0;
 
   // condition9: payslips verified
-  var cond9 = requests_by_payback["uploaded"] == 0;
+  // var cond9 = requests_by_payback["uploaded"] == 0;
 
   // conditions 10 & 11: next payday filled in and is in the future
   var cond10 = (next_payday != "");
@@ -114,9 +117,9 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
   // compiling all
   if (cond8 == false) {
     return {status: false, display: true, error: "Please pay back the advance you have received to be able to submit a new request.", position: "#view_133 form > ul"};
-  } else if (cond9 == false) {
+  } /* else if (cond9 == false) {
     return {status: false, display: true, error: "Please wait until your payslips are approved to be able to submit a new request.", position: "#view_133 form > ul"};
-  } else if (cond1 == false) {
+  } */ else if (cond1 == false) {
     return {status: false, display: true, error: "Salary advances are only available starting " + days_to_request + " days before your next payday. Please come back later.", position: "#view_133 form > ul"};
   } else if (cond2 == false) {
     return {status: false, display: true, error: "You have reached the maximum number of advance requests for this month. You can request a new advance after you received your next salary.", position: "#view_133 form > ul"};

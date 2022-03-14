@@ -286,8 +286,12 @@
     line-height: 17px;
 }
 
-#view_74 .transaction-list-container a.upload-payslip,
-#view_92 .transaction-list-container a.upload-payslip {
+#view_74 .transaction-list-container a.collection-failed,
+#view_92 .transaction-list-container a.collection-failed,
+#view_74 .transaction-list-container a.collection-failed-re,
+#view_92 .transaction-list-container a.collection-failed-re,
+#view_74 .transaction-list-container a.not-paid,
+#view_92 .transaction-list-container a.not-paid {
     padding: 5px 10px;
     background: #8b0000;
     border-radius: 40px;
@@ -297,10 +301,11 @@
     min-width: 85px;
     text-align: center;
     font-weight: 600;
+    cursor: default;
 }
 
-#view_74 .transaction-list-container a.pending-approval,
-#view_92 .transaction-list-container a.pending-approval {
+#view_74 .transaction-list-container a.partially-paid,
+#view_92 .transaction-list-container a.partially-paid {
     padding: 5px 10px;
     background: #d79c05;
     border-radius: 40px;
@@ -314,7 +319,9 @@
 }
 
 #view_74 .transaction-list-container a.paid,
-#view_92 .transaction-list-container a.paid {
+#view_92 .transaction-list-container a.paid,
+#view_74 .transaction-list-container a.overpaid,
+#view_92 .transaction-list-container a.overpaid {
     padding: 5px 10px;
     background: #027470;
     border-radius: 40px;
