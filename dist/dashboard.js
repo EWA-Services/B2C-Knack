@@ -124,6 +124,9 @@ var available_amount = balance - requested_amount;
 
 var check = requests_check(cutoff_day, payday, max_number_requests, max_per_request, days_to_request);
 
+console.log("check");
+console.log(check);
+
 var html = '<section id="custom-view-scene1">' +
   '<div class="payday-wrapper">' +
   '<div>' +
@@ -143,5 +146,8 @@ var html = '<section id="custom-view-scene1">' +
   (check["status"] === true ? "" : "<p class='error-message'>" + check["error"] + "</p>") +
   '</div>' +
   '</section>';
+
+console.log("html");
+console.log(html);
 
 $(html).insertBefore($("#kn-scene_1"));
