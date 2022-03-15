@@ -55,7 +55,7 @@ requests_check = function (cutoff_day, payday, max_nb_requests, max_per_request,
   var cond5 = max_per_request != 0;
 
   // compiling all
-  if (cond1 && cond2 && cond3 && cond4 && cond5) {
+  if (cond1 && cond2 && cond3 && cond5) {
     return { status : true };
   } else if (cond5 == false) {
     return { status : false, error : "Advances are not allowed at the moment." };
@@ -124,9 +124,6 @@ var available_amount = balance - requested_amount;
 
 var check = requests_check(cutoff_day, payday, max_number_requests, max_per_request, days_to_request);
 
-console.log("check");
-console.log(check);
-
 var html = '<section id="custom-view-scene1">' +
   '<div class="payday-wrapper">' +
   '<div>' +
@@ -146,8 +143,5 @@ var html = '<section id="custom-view-scene1">' +
   (check["status"] === true ? "" : "<p class='error-message'>" + check["error"] + "</p>") +
   '</div>' +
   '</section>';
-
-console.log("html");
-console.log(html);
 
 $(html).insertBefore($("#kn-scene_1"));
