@@ -48,40 +48,44 @@ function setStatusIcon(statusClass) {
 function parseTransactions() {
     var transactions = [];
 
-    $("#view_61 .kn-list-content .kn-list-item-container, #view_62 .kn-list-content .kn-list-item-container").each(function () {
-        var transaction = {};
+    if ($("#view_61 .kn-list-content .kn-list-item-container, #view_62 .kn-list-content .kn-list-item-container .kn-list-nodata").text().trim() !== "No Data") {
+    
+        $("#view_61 .kn-list-content .kn-list-item-container, #view_62 .kn-list-content .kn-list-item-container").each(function () {
+            var transaction = {};
 
-        $(this).find('.kn-detail').each(function () {
-            var classes = $(this).attr('class').split(' ');
-            var label = $(this).find('.kn-detail-label span span').text();
+            $(this).find('.kn-detail').each(function () {
+                var classes = $(this).attr('class').split(' ');
+                var label = $(this).find('.kn-detail-label span span').text();
 
-            var detailKey = classes.find(cls => cls.includes('field'));
-            var detailVal = $(this).find('.kn-detail-body span span').text();
+                var detailKey = classes.find(cls => cls.includes('field'));
+                var detailVal = $(this).find('.kn-detail-body span span').text();
 
-            if (detailKey === 'field_59' || detailKey === 'field_23' || detailKey === 'field_148')
-                detailVal = $(this).find('.kn-detail-body span span span').text();
+                if (detailKey === 'field_59' || detailKey === 'field_23' || detailKey === 'field_148')
+                    detailVal = $(this).find('.kn-detail-body span span span').text();
 
-            var statusClass  = "";
-            if(detailKey === 'field_23')
-                statusClass = $(this).find('.kn-detail-body span span span').attr('class');
+                var statusClass  = "";
+                if(detailKey === 'field_23')
+                    statusClass = $(this).find('.kn-detail-body span span span').attr('class');
 
-            var paybackClass  = "";
-            if(detailKey === 'field_148')
-                paybackClass = $(this).find('.kn-detail-body span span span').attr('class');
+                var paybackClass  = "";
+                if(detailKey === 'field_148')
+                    paybackClass = $(this).find('.kn-detail-body span span span').attr('class');
 
-            transaction[detailKey] = {
-                "label": label,
-                "value": detailVal,
-                ...(detailKey === 'field_23') && {"class": statusClass},
-                ...(detailKey === 'field_148') && {"class": paybackClass},
-            };
+                transaction[detailKey] = {
+                    "label": label,
+                    "value": detailVal,
+                    ...(detailKey === 'field_23') && {"class": statusClass},
+                    ...(detailKey === 'field_148') && {"class": paybackClass},
+                };
+            });
+
+            var edit_link = $(this).find('.kn-details-link a').attr('href');
+            transaction["edit"] = edit_link;
+
+            transactions.push(transaction);
         });
-
-        var edit_link = $(this).find('.kn-details-link a').attr('href');
-        transaction["edit"] = edit_link;
-
-        transactions.push(transaction);
-    });
+        
+    }
 
     return transactions;
 }
@@ -239,7 +243,7 @@ function setupEventHandlers() {
 }
 
 // Main method: creates transaction list and calls the event handlers
-function loadCustomTrasactionView() {
+function loadCustomTransactionView() {
     createTransactionList();
     setupEventHandlers();
 }
