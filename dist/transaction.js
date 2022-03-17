@@ -151,7 +151,7 @@ function createTransactionList() {
     var transactions = parseTransactions();
     var transactionsCont = $('.transaction-list-container');
 
-    if (!(transactionsCont === undefined)) {
+    if (!($('.transaction-list-container').text().trim() === "")) {
         
         transactions.forEach(transaction => {
 
