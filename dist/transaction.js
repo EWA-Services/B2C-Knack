@@ -151,46 +151,49 @@ function createTransactionList() {
     var transactions = parseTransactions();
     var transactionsCont = $('.transaction-list-container');
 
-    transactions.forEach(transaction => {
-
-        var formattedDate = formatDate(transaction.field_24.value.substring(0, 10));
+    if (!(transactionsCont === undefined)) {
         
-        var collection_failed_display = transaction.field_148.class == "collection-failed" && transaction.field_23.class == "paid-out" ? "" : "display: none;";
-        var collection_failed_re_display = transaction.field_148.class == "collection-failed-re" && transaction.field_23.class == "paid-out" ? "" : "display: none;";
-        var not_paid_display = transaction.field_148.class == "not-paid" && transaction.field_23.class == "paid-out" ? "" : "display: none;";
-        var overpaid_display = transaction.field_148.class == "overpaid" && transaction.field_23.class == "paid-out" ? "" : "display: none;";
-        var paid_display = transaction.field_148.class == "paid" && transaction.field_23.class == "paid-out" ? "" : "display: none;";
-        var partially_paid_display = transaction.field_148.class == "partially-paid" && transaction.field_23.class == "paid-out" ? "" : "display: none;";
+        transactions.forEach(transaction => {
 
-        var transactionTemplate = `
-            <div class="transaction-item ${getStatusClass(transaction.field_23.class)}">
-                <div class="ti-header">
-                    <div class="ti-header-tgl">
-                        <span class="ti-withdrawal-date">${formattedDate}</span>
-                        <span class="btn-toggle material-icons">expand_more</span>
+            var formattedDate = formatDate(transaction.field_24.value.substring(0, 10));
+            
+            var collection_failed_display = transaction.field_148.class == "collection-failed" && transaction.field_23.class == "paid-out" ? "" : "display: none;";
+            var collection_failed_re_display = transaction.field_148.class == "collection-failed-re" && transaction.field_23.class == "paid-out" ? "" : "display: none;";
+            var not_paid_display = transaction.field_148.class == "not-paid" && transaction.field_23.class == "paid-out" ? "" : "display: none;";
+            var overpaid_display = transaction.field_148.class == "overpaid" && transaction.field_23.class == "paid-out" ? "" : "display: none;";
+            var paid_display = transaction.field_148.class == "paid" && transaction.field_23.class == "paid-out" ? "" : "display: none;";
+            var partially_paid_display = transaction.field_148.class == "partially-paid" && transaction.field_23.class == "paid-out" ? "" : "display: none;";
+
+            var transactionTemplate = `
+                <div class="transaction-item ${getStatusClass(transaction.field_23.class)}">
+                    <div class="ti-header">
+                        <div class="ti-header-tgl">
+                            <span class="ti-withdrawal-date">${formattedDate}</span>
+                            <span class="btn-toggle material-icons">expand_more</span>
+                        </div>
+
+                        <div class="ti-header-amount">
+                            <span class="ti-amount">${transaction.field_18.value}</span>
+
+                            <a class="collection-failed" style="${collection_failed_display}">Collection Failed</a>
+                            <a class="collection-failed-re" style="${collection_failed_re_display}">Collection Failed</a>
+                            <a class="not-paid" style="${not_paid_display}">Not Paid</a>
+                            <a class="overpaid" style="${overpaid_display}">Overpaid</a>
+                            <a class="paid" style="${paid_display}">Paid</a>
+                            <a class="partially-paid" style="${partially_paid_display}">Partially Paid</a>
+
+                            ${setStatusIcon(transaction.field_23.class)}
+                        </div>
                     </div>
 
-                    <div class="ti-header-amount">
-                        <span class="ti-amount">${transaction.field_18.value}</span>
-
-                        <a class="collection-failed" style="${collection_failed_display}">Collection Failed</a>
-                        <a class="collection-failed-re" style="${collection_failed_re_display}">Collection Failed</a>
-                        <a class="not-paid" style="${not_paid_display}">Not Paid</a>
-                        <a class="overpaid" style="${overpaid_display}">Overpaid</a>
-                        <a class="paid" style="${paid_display}">Paid</a>
-                        <a class="partially-paid" style="${partially_paid_display}">Partially Paid</a>
-
-                        ${setStatusIcon(transaction.field_23.class)}
+                    <div class="ti-contnet hidden-detail">
+                        ${createDetailRows(transaction)}
                     </div>
-                </div>
+                </div>`
 
-                <div class="ti-contnet hidden-detail">
-                    ${createDetailRows(transaction)}
-                </div>
-            </div>`
-
-        transactionsCont.append(transactionTemplate);
-    });
+            transactionsCont.append(transactionTemplate);
+        });
+    }
 }
 
 // Setup event handlers
