@@ -290,7 +290,7 @@ $("div.fast").parents("label").find("input").attr("disabled", true);
 $('.view_133 form #kn-input-field_126.kn-input .kn-radio .control').each(function () {
   let radioContent = $(this).find('.option.radio div');
 
-  if ($(radioContent).text().toLowerCase().indexOf("10%") > -1) {
+  if ($(radioContent).text().toLowerCase().indexOf("15%") > -1) {
     $(this).addClass("selected");
   }
 });
@@ -409,6 +409,8 @@ if (tipping_options.toLowerCase().indexOf("5%") > -1) {
   var tip_perc = 0.05;
 } else if (tipping_options.toLowerCase().indexOf("10%") > -1) {
   var tip_perc = 0.1;
+} else if (tipping_options.toLowerCase().indexOf("15%") > -1) {
+  var tip_perc = 0.15;
 } else if (tipping_options.toLowerCase().indexOf("20%") > -1) {
   var tip_perc = 0.2;
 } else {
@@ -428,6 +430,8 @@ $("input[type=radio][name=view_133-field_126]").change(function () {
     var tip_perc = 0.05;
   } else if (tipping_options.toLowerCase().indexOf("10%") > -1) {
     var tip_perc = 0.1;
+  } else if (tipping_options.toLowerCase().indexOf("15%") > -1) {
+    var tip_perc = 0.15;
   } else if (tipping_options.toLowerCase().indexOf("20%") > -1) {
     var tip_perc = 0.2;
   } else {
@@ -531,6 +535,8 @@ $("input#field_18").on("input", function (e) {
     var tip_perc = 0.05;
   } else if (tipping_options.toLowerCase().indexOf("10%") > -1) {
     var tip_perc = 0.1;
+  } else if (tipping_options.toLowerCase().indexOf("15%") > -1) {
+    var tip_perc = 0.15;
   } else if (tipping_options.toLowerCase().indexOf("20%") > -1) {
     var tip_perc = 0.2;
   } else {
