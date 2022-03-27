@@ -405,13 +405,13 @@ var available_amount = calculate_withdrawable(base_salary, requested_amount, wit
 // Tipping amount
 
 var tipping_options = $('input[name="view_133-field_126"]:checked').val();
-if (tipping_options.toLowerCase().indexOf("5%") > -1) {
+if (tipping_options.toLowerCase() == "<div>5%</div>") {
   var tip_perc = 0.05;
-} else if (tipping_options.toLowerCase().indexOf("10%") > -1) {
+} else if (tipping_options.toLowerCase() == "<div>10%</div>") {
   var tip_perc = 0.1;
-} else if (tipping_options.toLowerCase().indexOf("15%") > -1) {
+} else if (tipping_options.toLowerCase() == "<div>15%</div>") {
   var tip_perc = 0.15;
-} else if (tipping_options.toLowerCase().indexOf("20%") > -1) {
+} else if (tipping_options.toLowerCase() == "<div>20%</div>") {
   var tip_perc = 0.2;
 } else {
   var tip_perc = 0;
@@ -426,13 +426,13 @@ $("input[type=radio][name=view_133-field_126]").change(function () {
 
   var input_val = $("#field_18").val();
   var tipping_options = $('input[name="view_133-field_126"]:checked').val();
-  if (tipping_options.toLowerCase().indexOf("5%") > -1) {
+  if (tipping_options.toLowerCase() == "<div>5%</div>") {
     var tip_perc = 0.05;
-  } else if (tipping_options.toLowerCase().indexOf("10%") > -1) {
+  } else if (tipping_options.toLowerCase() == "<div>10%</div>") {
     var tip_perc = 0.1;
-  } else if (tipping_options.toLowerCase().indexOf("15%") > -1) {
+  } else if (tipping_options.toLowerCase() == "<div>15%</div>") {
     var tip_perc = 0.15;
-  } else if (tipping_options.toLowerCase().indexOf("20%") > -1) {
+  } else if (tipping_options.toLowerCase() == "<div>20%</div>") {
     var tip_perc = 0.2;
   } else {
     var tip_perc = 0;
@@ -531,13 +531,13 @@ $("input#field_18").on("input", function (e) {
   });
 
   var tipping_options = $('input[name="view_133-field_126"]:checked').val();
-  if (tipping_options.toLowerCase().indexOf("5%") > -1) {
+  if (tipping_options.toLowerCase() == "<div>5%</div>") {
     var tip_perc = 0.05;
-  } else if (tipping_options.toLowerCase().indexOf("10%") > -1) {
+  } else if (tipping_options.toLowerCase() == "<div>10%</div>") {
     var tip_perc = 0.1;
-  } else if (tipping_options.toLowerCase().indexOf("15%") > -1) {
+  } else if (tipping_options.toLowerCase() == "<div>15%</div>") {
     var tip_perc = 0.15;
-  } else if (tipping_options.toLowerCase().indexOf("20%") > -1) {
+  } else if (tipping_options.toLowerCase() == "<div>20%</div>") {
     var tip_perc = 0.2;
   } else {
     var tip_perc = 0;
