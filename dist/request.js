@@ -730,6 +730,7 @@ $(".modal-wrapper").click(function () {
 $(".modal-wrapper .modal").click((e) => e.stopPropagation());
 
 $(".custom-tip-link").click(() => {
+  $(".modal-wrapper #customTipAmount").val("5");
   $(".modal-wrapper").toggleClass("hidden");
 });
 
