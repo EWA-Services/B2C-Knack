@@ -149,8 +149,12 @@ if (+cutoff_day == +new Date(2025,0,1)) {
   var cutoff_day = (cutoff_day.getDate() < 10 ? "0" + cutoff_day.getDate() : cutoff_day.getDate()) + "/" + (cutoff_day.getMonth() < 9 ? "0" + (cutoff_day.getMonth()+1) : (cutoff_day.getMonth()+1)) + "/" + cutoff_day.getFullYear();
 }
 
-var last_payday = (last_payday.getDate() < 10 ? "0" + last_payday.getDate() : last_payday.getDate()) + "/" + (last_payday.getMonth() < 9 ? "0" + (last_payday.getMonth()+1) : (last_payday.getMonth()+1)) + "/" + last_payday.getFullYear();
-var last_cutoff_day = (last_cutoff_day.getDate() < 10 ? "0" + last_cutoff_day.getDate() : last_cutoff_day.getDate()) + "/" + (last_cutoff_day.getMonth() < 9 ? "0" + (last_cutoff_day.getMonth()+1) : (last_cutoff_day.getMonth()+1)) + "/" + last_cutoff_day.getFullYear();
+if (last_payday != "-") {
+  var last_payday = (last_payday.getDate() < 10 ? "0" + last_payday.getDate() : last_payday.getDate()) + "/" + (last_payday.getMonth() < 9 ? "0" + (last_payday.getMonth()+1) : (last_payday.getMonth()+1)) + "/" + last_payday.getFullYear();
+}
+if (last_cutoff_day != "-") {
+  var last_cutoff_day = (last_cutoff_day.getDate() < 10 ? "0" + last_cutoff_day.getDate() : last_cutoff_day.getDate()) + "/" + (last_cutoff_day.getMonth() < 9 ? "0" + (last_cutoff_day.getMonth()+1) : (last_cutoff_day.getMonth()+1)) + "/" + last_cutoff_day.getFullYear();
+}
 
 // Withdrawable Amount and Other Conditions
 
