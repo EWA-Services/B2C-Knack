@@ -13,7 +13,8 @@ function calculate_withdrawable (base_salary, requested_amount, withdrawable_thr
 };
 
 amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowed, cutoff_day, payday, max_nb_requests, input_val, days_to_request, next_payday) {
-  var max_allowed_bis = Math.min(max_allowed, withdrawable_amount);
+  // var max_allowed_bis = Math.min(max_allowed, withdrawable_amount);
+  var max_allowed_bis = max_allowed;
   
   // condition1 : cutoff date
   // Update: changed to xx days before payroll day until cutoff day
