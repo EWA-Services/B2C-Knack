@@ -56,9 +56,9 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
 
   // condition4: input in range
   if (max_allowed > 0) {
-    var cond4 = input_val > 0 && input_val >= min_allowed && input_val <= max_allowed_bis && input_val <= withdrawable_amount;
+    var cond4 = input_val > 0 && input_val >= min_allowed && input_val <= max_allowed_bis; // && input_val <= withdrawable_amount;
   } else {
-    var cond4 = input_val > 0 && input_val >= min_allowed && input_val <= withdrawable_amount;
+    var cond4 = input_val > 0 && input_val >= min_allowed; //  && input_val <= withdrawable_amount;
   }
 
   // condition5: terms and conditions checked
