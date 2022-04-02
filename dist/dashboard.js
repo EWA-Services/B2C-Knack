@@ -2,20 +2,18 @@ requests_check = function (cutoff_day, payday, max_nb_requests, max_per_request,
 
   // condition1 : between cutoff date and payroll date
   // Update: changed to xx days before payroll day until cutoff day
-  if (cutoff_day == "-" || payday == "-") {
-    var cond1 = false;
-  } else {
-    // var cond1_cutoff = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()) <= new Date(cutoff_day.split("/")[2], cutoff_day.split("/")[1] - 1, cutoff_day.split("/")[0]);
-    // var cond1_payroll = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()) > new Date(payday.split("/")[2], payday.split("/")[1] - 1, payday.split("/")[0]);
-    // var cond1 = cond1_cutoff || cond1_payroll;
-    var payday_asdate = new Date(payday.split("/")[2], payday.split("/")[1] - 1, payday.split("/")[0]);
-    var cutoff_asdate = new Date(cutoff_day.split("/")[2], cutoff_day.split("/")[1] - 1, cutoff_day.split("/")[0])
-    var today_asdate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
-    var limit_inf = payday_asdate;
-    limit_inf.setDate(limit_inf.getDate() - days_to_request);
-    var cond1 = today_asdate >= limit_inf && today_asdate <= cutoff_asdate;
-    var limit_inf_formatted = (limit_inf.getDate() < 10 ? "0" + limit_inf.getDate() : limit_inf.getDate()) + "/" + (limit_inf.getMonth() < 9 ? "0" : "") + (limit_inf.getMonth()+1) + "/" + limit_inf.getFullYear()
-  }
+  var cond6 = !(cutoff_day == "-" || payday == "-");
+
+  // var cond1_cutoff = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()) <= new Date(cutoff_day.split("/")[2], cutoff_day.split("/")[1] - 1, cutoff_day.split("/")[0]);
+  // var cond1_payroll = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()) > new Date(payday.split("/")[2], payday.split("/")[1] - 1, payday.split("/")[0]);
+  // var cond1 = cond1_cutoff || cond1_payroll;
+  var payday_asdate = new Date(payday.split("/")[2], payday.split("/")[1] - 1, payday.split("/")[0]);
+  var cutoff_asdate = new Date(cutoff_day.split("/")[2], cutoff_day.split("/")[1] - 1, cutoff_day.split("/")[0])
+  var today_asdate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+  var limit_inf = payday_asdate;
+  limit_inf.setDate(limit_inf.getDate() - days_to_request);
+  var cond1 = today_asdate >= limit_inf && today_asdate <= cutoff_asdate;
+  var limit_inf_formatted = (limit_inf.getDate() < 10 ? "0" + limit_inf.getDate() : limit_inf.getDate()) + "/" + (limit_inf.getMonth() < 9 ? "0" : "") + (limit_inf.getMonth()+1) + "/" + limit_inf.getFullYear();
 
   // condition2: total number of requests per month
   var past_requests = {};
@@ -55,7 +53,7 @@ requests_check = function (cutoff_day, payday, max_nb_requests, max_per_request,
   var cond5 = max_per_request != 0;
 
   // compiling all
-  if (cond1 && cond2 && cond3 && cond5) {
+  if (cond1 && cond2 && cond3 && cond5 && cond6) {
     return { status : true };
   } else if (cond5 == false) {
     return { status : false, error : "Advances are not allowed at the moment." };
@@ -67,6 +65,8 @@ requests_check = function (cutoff_day, payday, max_nb_requests, max_per_request,
     return { status : false, error : "Salary advances are only available starting " + days_to_request + " days before your next payday. You can withdraw again starting from " + limit_inf_formatted };
   } else if (cond2 == false) {
     return { status : false, error : "You have reached the maximum number of advance requests for this month. You can request a new advance after you received your next salary." };
+  } else if (cond6 == false) {
+    return { status : false, error : "Next payday is not defined. Please contact EWA support" };
   }
 };
 
