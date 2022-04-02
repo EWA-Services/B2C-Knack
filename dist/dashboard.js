@@ -61,12 +61,12 @@ requests_check = function (cutoff_day, payday, max_nb_requests, max_per_request,
     return { status : false, error : "Please pay back the advance you have received to be able to submit a new request." };
   } /* else if (cond4 == false) {
     return { status : false, error : "Please wait until your payslips are approved to be able to submit a new request." };
-  } */ else if (cond1 == false) {
+  } */ else if (cond6 == false) {
+    return { status : false, error : "Next payday is not defined. Please contact EWA support" };
+  } else if (cond1 == false) {
     return { status : false, error : "Salary advances are only available starting " + days_to_request + " days before your next payday. You can withdraw again starting from " + limit_inf_formatted };
   } else if (cond2 == false) {
     return { status : false, error : "You have reached the maximum number of advance requests for this month. You can request a new advance after you received your next salary." };
-  } else if (cond6 == false) {
-    return { status : false, error : "Next payday is not defined. Please contact EWA support" };
   }
 };
 
