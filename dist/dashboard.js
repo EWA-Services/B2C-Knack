@@ -72,7 +72,7 @@ requests_check = function (cutoff_day, payday, max_nb_requests, max_per_request,
 
 // Payoff and Cutoff Dates
 
-var current_month = new Date().getFullYear() + "-" + ((new Date().getMonth() + 1) < 10 ? "0" + (new Date().getMonth() + 1) : (new Date().getMonth() + 1));
+/* var current_month = new Date().getFullYear() + "-" + ((new Date().getMonth() + 1) < 10 ? "0" + (new Date().getMonth() + 1) : (new Date().getMonth() + 1));
 var last_month_date_tmp = new Date((new Date()).setMonth((new Date()).getMonth()-1));
 var last_month = last_month_date_tmp.getFullYear() + "-" + ((last_month_date_tmp.getMonth() + 1) < 10 ? "0" + (last_month_date_tmp.getMonth() + 1) : (last_month_date_tmp.getMonth() + 1));
 var payday = "-";
@@ -98,8 +98,59 @@ if (last_payday == "-") {
   var current_payday_tmp = new Date(payday.split("/")[2], payday.split("/")[1]-1, payday.split("/")[0]);
   var last_payday_tmp = new Date(current_payday_tmp.setMonth(current_payday_tmp.getMonth()-1));
   var last_payday = (last_payday_tmp.getDate() < 10 ? "0" + last_payday_tmp.getDate() : last_payday_tmp.getDate()) + "/" + (last_payday_tmp.getMonth() < 9 ? "0" + (last_payday_tmp.getMonth()+1) : (last_payday_tmp.getMonth()+1)) + "/" + last_payday_tmp.getFullYear();
+} */
+
+var cutoff_day = new Date(2025,0,1);
+var payday = new Date(2025,0,1);
+
+var last_payday = new Date(2020,0,1);
+var last_cutoff_day = new Date(2020,0,1);
+
+var months = $("#view_96 .kn-table tbody td.field_88 span");
+var paydays = $("#view_96 .kn-table tbody td.field_76 span");
+var cutoffs = $("#view_96 .kn-table tbody td.field_82 span");
+
+$.each(months, function(i,v) {
+  var payday_i = new Date(paydays[i].textContent.trim().split("/")[2],paydays[i].textContent.trim().split("/")[1]-1,paydays[i].textContent.trim().split("/")[0]);
+  var cutoff_i = new Date(cutoffs[i].textContent.trim().split("/")[2],cutoffs[i].textContent.trim().split("/")[1]-1,cutoffs[i].textContent.trim().split("/")[0]);
+
+  if (payday_i >= new Date() && payday_i <= payday) {
+    payday = payday_i || "-";
+  } else if (payday_i <= new Date() && payday_i >= last_payday) {
+    last_payday = payday_i || "-";
+  }
+
+  if (cutoff_i >= new Date() && cutoff_i <= cutoff_day) {
+    cutoff_day = cutoff_i || "-";
+  } else if (cutoff_i <= new Date() && cutoff_i >= last_cutoff_day) {
+    last_cutoff_day = cutoff_i || "-";
+  }
+});
+
+if (+payday == +new Date(2025,0,1)) {
+  var payday = "-";
+  var last_payday = "-";
+} else {
+  if (+last_payday == +new Date(2020,0,1)) {
+    var last_payday_tmp = new Date(payday.getFullYear(), payday.getMonth(), payday.getDate());
+    var last_payday = new Date(last_payday_tmp.setMonth(last_payday_tmp.getMonth()-1));
+  }
+  var payday = (payday.getDate() < 10 ? "0" + payday.getDate() : payday.getDate()) + "/" + (payday.getMonth() < 9 ? "0" + (payday.getMonth()+1) : (payday.getMonth()+1)) + "/" + payday.getFullYear();
 }
 
+if (+cutoff_day == +new Date(2025,0,1)) {
+  var cutoff_day = "-";
+  var last_cutoff_day = "-";
+} else {
+  if (+last_cutoff_day == +new Date(2020,0,1)) {
+    var last_cutoff_day_tmp = new Date(cutoff_day.getFullYear(), cutoff_day.getMonth(), cutoff_day.getDate());;
+    var last_cutoff_day = new Date(last_cutoff_day_tmp.setMonth(last_cutoff_day_tmp.getMonth()-1));
+  }
+  var cutoff_day = (cutoff_day.getDate() < 10 ? "0" + cutoff_day.getDate() : cutoff_day.getDate()) + "/" + (cutoff_day.getMonth() < 9 ? "0" + (cutoff_day.getMonth()+1) : (cutoff_day.getMonth()+1)) + "/" + cutoff_day.getFullYear();
+}
+
+var last_payday = (last_payday.getDate() < 10 ? "0" + last_payday.getDate() : last_payday.getDate()) + "/" + (last_payday.getMonth() < 9 ? "0" + (last_payday.getMonth()+1) : (last_payday.getMonth()+1)) + "/" + last_payday.getFullYear();
+var last_cutoff_day = (last_cutoff_day.getDate() < 10 ? "0" + last_cutoff_day.getDate() : last_cutoff_day.getDate()) + "/" + (last_cutoff_day.getMonth() < 9 ? "0" + (last_cutoff_day.getMonth()+1) : (last_cutoff_day.getMonth()+1)) + "/" + last_cutoff_day.getFullYear();
 
 // Withdrawable Amount and Other Conditions
 

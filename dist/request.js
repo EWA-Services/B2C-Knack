@@ -329,23 +329,54 @@ $("#view_133 form button.submission").prop("disabled", true);
 var max_number_requests = parseFloat($("#view_64 .field_91 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_64 .field_91 .kn-detail-body").text().replace(/,/g, ""));
 var input_val = 0;
 
-var current_month = new Date().getFullYear() + "-" + ((new Date().getMonth() + 1) < 10 ? "0" + (new Date().getMonth() + 1) : (new Date().getMonth() + 1));
-var cutoff_day = "-";
+// var current_month = new Date().getFullYear() + "-" + ((new Date().getMonth() + 1) < 10 ? "0" + (new Date().getMonth() + 1) : (new Date().getMonth() + 1));
+// var cutoff_day = "-";
+
+// var months = $("#view_97 .kn-table tbody td.field_88 span");
+// var cutoffs = $("#view_97 .kn-table tbody td.field_82 span");
+// var paydays = $("#view_97 .kn-table tbody td.field_76 span");
+
+// $.each(months, function(i,v) {
+//   if (v.textContent.trim() == current_month) {
+//     cutoff_day = cutoffs[i].textContent.trim();
+//     payday = paydays[i].textContent.trim();
+//   }
+// });
+
+// var cutoff_day = cutoff_day == "" ? "-" : cutoff_day;
+// var payday = payday == "" ? "-" : payday;
+
+var cutoff_day = new Date(2025,0,1);
+var payday = new Date(2025,0,1);
 
 var months = $("#view_97 .kn-table tbody td.field_88 span");
 var cutoffs = $("#view_97 .kn-table tbody td.field_82 span");
 var paydays = $("#view_97 .kn-table tbody td.field_76 span");
 
 $.each(months, function(i,v) {
-  if (v.textContent.trim() == current_month) {
-    cutoff_day = cutoffs[i].textContent.trim();
-    payday = paydays[i].textContent.trim();
+  var payday_i = new Date(paydays[i].textContent.trim().split("/")[2],paydays[i].textContent.trim().split("/")[1]-1,paydays[i].textContent.trim().split("/")[0]);
+  var cutoff_i = new Date(cutoffs[i].textContent.trim().split("/")[2],cutoffs[i].textContent.trim().split("/")[1]-1,cutoffs[i].textContent.trim().split("/")[0]);
+
+  if (payday_i >= new Date() && payday_i <= payday) {
+    payday = payday_i || "-";
+  }
+
+  if (cutoff_i >= new Date() && cutoff_i <= cutoff_day) {
+    cutoff_day = cutoff_i || "-";
   }
 });
 
-var cutoff_day = cutoff_day == "" ? "-" : cutoff_day;
-var payday = payday == "" ? "-" : payday;
+if (+payday == +new Date(2025,0,1)) {
+  var payday = "-";
+} else {
+  var payday = (payday.getDate() < 10 ? "0" + payday.getDate() : payday.getDate()) + "/" + (payday.getMonth() < 9 ? "0" + (payday.getMonth()+1) : (payday.getMonth()+1)) + "/" + payday.getFullYear();
+}
 
+if (+cutoff_day == +new Date(2025,0,1)) {
+  var cutoff_day = "-";
+} else {
+  var cutoff_day = (cutoff_day.getDate() < 10 ? "0" + cutoff_day.getDate() : cutoff_day.getDate()) + "/" + (cutoff_day.getMonth() < 9 ? "0" + (cutoff_day.getMonth()+1) : (cutoff_day.getMonth()+1)) + "/" + cutoff_day.getFullYear();
+}
 /* var new_clause_html = $("#view_133 #security-clause p.sc-instructions").html().replace("{payday_current}", payday);
 $("#view_133 #security-clause p.sc-instructions").replaceWith('<p class="sc-instructions">' + new_clause_html + "</p>"); */
 
