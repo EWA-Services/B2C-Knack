@@ -116,13 +116,9 @@ $.each(months, function(i,v) {
 
   if (payday_i >= new Date() && payday_i <= payday) {
     payday = payday_i || "-";
+    cutoff_day = cutoff_i || "-";
   } else if (payday_i <= new Date() && payday_i >= last_payday) {
     last_payday = payday_i || "-";
-  }
-
-  if (cutoff_i >= new Date() && cutoff_i <= cutoff_day) {
-    cutoff_day = cutoff_i || "-";
-  } else if (cutoff_i <= new Date() && cutoff_i >= last_cutoff_day) {
     last_cutoff_day = cutoff_i || "-";
   }
 });
