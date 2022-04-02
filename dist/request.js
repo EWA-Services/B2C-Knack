@@ -792,6 +792,7 @@ $("#ftr-btn-submit").click(() => {
   $(".custom-tip-btn").click(() => {
     $(".modal-wrapper #ftr-btn-submit").prop("disabled", true);
     $(".modal-wrapper").toggleClass("hidden");
+    $(".modal-wrapper #customTipAmount").val($("#view_133 #kn-input-field_154 input").val()*100);
   });
 
   $(".modal-wrapper #customTipAmount").val("");
