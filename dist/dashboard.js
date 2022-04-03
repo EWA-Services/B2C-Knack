@@ -13,7 +13,7 @@ requests_check = function (cutoff_day, payday, max_nb_requests, max_per_request,
 
   if (cutoff_asdate <= today_asdate && payday_asdate >= today_asdate) {
     var payday = next_payday;
-    var payday_asdate = new Date(payday.split("/")[2], payday.split("/")[1] - 1, payday.split("/")[0]);
+    var payday_asdate = new Date(next_payday.split("/")[2], next_payday.split("/")[1] - 1, next_payday.split("/")[0]);
   }
 
   var limit_inf = payday_asdate;
