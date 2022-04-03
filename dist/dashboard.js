@@ -2,8 +2,6 @@ requests_check = function (cutoff_day, payday, max_nb_requests, max_per_request,
 
   // condition1 : between cutoff date and payroll date
   // Update: changed to xx days before payroll day until cutoff day
-  var cond6 = !(cutoff_day == "-" || payday == "-");
-
   // var cond1_cutoff = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()) <= new Date(cutoff_day.split("/")[2], cutoff_day.split("/")[1] - 1, cutoff_day.split("/")[0]);
   // var cond1_payroll = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()) > new Date(payday.split("/")[2], payday.split("/")[1] - 1, payday.split("/")[0]);
   // var cond1 = cond1_cutoff || cond1_payroll;
@@ -15,6 +13,8 @@ requests_check = function (cutoff_day, payday, max_nb_requests, max_per_request,
     var payday = next_payday;
     var payday_asdate = new Date(next_payday.split("/")[2], next_payday.split("/")[1] - 1, next_payday.split("/")[0]);
   }
+
+  var cond6 = !(cutoff_day == "-" || payday == "-");
 
   var limit_inf = payday_asdate;
   limit_inf.setDate(limit_inf.getDate() - days_to_request);
