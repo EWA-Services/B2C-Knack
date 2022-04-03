@@ -1,4 +1,4 @@
-requests_check = function (cutoff_day, payday, max_nb_requests, max_per_request, days_to_request) {
+requests_check = function (cutoff_day, payday, max_nb_requests, max_per_request, days_to_request, next_payday) {
 
   // condition1 : between cutoff date and payroll date
   // Update: changed to xx days before payroll day until cutoff day
@@ -10,6 +10,12 @@ requests_check = function (cutoff_day, payday, max_nb_requests, max_per_request,
   var payday_asdate = new Date(payday.split("/")[2], payday.split("/")[1] - 1, payday.split("/")[0]);
   var cutoff_asdate = new Date(cutoff_day.split("/")[2], cutoff_day.split("/")[1] - 1, cutoff_day.split("/")[0])
   var today_asdate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+
+  if (cutoff_asdate <= today_asdate && payday_asdate >= today_asdate) {
+    var payday = next_payday;
+    var payday_asdate = new Date(payday.split("/")[2], payday.split("/")[1] - 1, payday.split("/")[0]);
+  }
+
   var limit_inf = payday_asdate;
   limit_inf.setDate(limit_inf.getDate() - days_to_request);
   var cond1 = today_asdate >= limit_inf && today_asdate <= cutoff_asdate;
@@ -124,6 +130,18 @@ $.each(months, function(i,v) {
 });
 
 if (+payday == +new Date(2025,0,1)) {
+  var next_payday = "-";
+} else {
+  var next_payday = new Date(2025,0,1);
+  $.each(months, function(i,v) {
+    var payday_i = new Date(paydays[i].textContent.trim().split("/")[2],paydays[i].textContent.trim().split("/")[1]-1,paydays[i].textContent.trim().split("/")[0]);
+    if (payday_i > payday && payday_i <= next_payday) {
+      next_payday = payday_i || "-";
+    }
+  });
+}
+
+if (+payday == +new Date(2025,0,1)) {
   var payday = "-";
   var last_payday = "-";
 } else {
@@ -173,7 +191,7 @@ var available_amount = balance - requested_amount;
 
 // Compiling the HTML
 
-var check = requests_check(cutoff_day, payday, max_number_requests, max_per_request, days_to_request);
+var check = requests_check(cutoff_day, payday, max_number_requests, max_per_request, days_to_request, next_payday);
 
 var html = '<section id="custom-view-scene1">' +
   '<div class="payday-wrapper">' +
