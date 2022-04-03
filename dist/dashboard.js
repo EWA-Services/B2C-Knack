@@ -139,7 +139,11 @@ if (+payday == +new Date(2025,0,1)) {
       next_payday = payday_i || "-";
     }
   });
-  var next_payday = (next_payday.getDate() < 10 ? "0" + next_payday.getDate() : next_payday.getDate()) + "/" + (next_payday.getMonth() < 9 ? "0" + (next_payday.getMonth()+1) : (next_payday.getMonth()+1)) + "/" + next_payday.getFullYear();
+  if (+next_payday == +new Date(2025,0,1)) {
+    var next_payday = "-";
+  } else {
+    var next_payday = (next_payday.getDate() < 10 ? "0" + next_payday.getDate() : next_payday.getDate()) + "/" + (next_payday.getMonth() < 9 ? "0" + (next_payday.getMonth()+1) : (next_payday.getMonth()+1)) + "/" + next_payday.getFullYear();
+  }
 }
 
 if (+payday == +new Date(2025,0,1)) {
