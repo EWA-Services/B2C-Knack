@@ -94,6 +94,11 @@
   margin-top: 10px;
 }
 
+#custom-view-scene1 .max-withdrawable .error-message span {
+  color: #8b0000;
+  font-weight: 700;
+}
+
 #custom-view-scene1 .max-withdrawable .max-withdrawable-label {
   font-family: Inter;
   font-style: normal;

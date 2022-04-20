@@ -70,7 +70,7 @@ requests_check = function (cutoff_day, payday, max_nb_requests, max_per_request,
   } */ else if (cond6 == false) {
     return { status : false, error : "Next payday is not defined. Please contact EWA support" };
   } else if (cond1 == false) {
-    return { status : false, error : "Salary advances are only available starting " + days_to_request + " days before your next payday. You can withdraw again starting from " + limit_inf_formatted };
+    return { status : false, error : "Salary advances are only available starting " + days_to_request + " days before your next payday. <span>You can withdraw again starting from " + limit_inf_formatted + "</span>"};
   } else if (cond2 == false) {
     return { status : false, error : "You have reached the maximum number of advance requests for this month. You can request a new advance after you received your next salary." };
   }
