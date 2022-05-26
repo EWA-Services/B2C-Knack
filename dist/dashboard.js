@@ -175,6 +175,23 @@ if (last_cutoff_day != "-") {
   var last_cutoff_day = (last_cutoff_day.getDate() < 10 ? "0" + last_cutoff_day.getDate() : last_cutoff_day.getDate()) + "/" + (last_cutoff_day.getMonth() < 9 ? "0" + (last_cutoff_day.getMonth()+1) : (last_cutoff_day.getMonth()+1)) + "/" + last_cutoff_day.getFullYear();
 }
 
+// New Laravel Paybacks API Endpoint
+
+var ionic_user_id = $("#view_158 .field_150 span span").text();
+var paydays_url = encodeURI("http://128.199.123.115/api/staging_knack/users/next-paydays/" + ionic_user_id);
+
+$.ajax({
+    url: paydays_url,
+    type: "POST",
+    headers: {
+      "Authorization": "528bA7490d7f4c056b0hAde4"
+    },
+    success: function(response) {
+        console.log("Payday Received !");
+        console.log(response);
+    }
+});
+
 // Withdrawable Amount and Other Conditions
 
 var base_salary = parseFloat($("#view_51 .field_44 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_51 .field_44 .kn-detail-body").text().replace(/,/g, ""));
