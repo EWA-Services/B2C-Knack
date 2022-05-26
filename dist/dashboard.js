@@ -195,14 +195,14 @@ if (payday_mode.toUpperCase().trim() == "API") {
       type: "POST",
       async: false,
       contentType: "application/json",
-      dataType: "json",
+      dataType: "jsonp",
       data : {
         "apiPath": "requestNextPayday",
         "apiKey": "nYJPMrwQxkNcF_88h4@n",
         "ionicId": ionic_user_id
       },
       headers: {
-        "Access-Control-Allow-Origin" : "*"
+        "Access-Control-Allow-Origin": "*"
       },
       success: function(response) {
           console.log("Payday Received !");
