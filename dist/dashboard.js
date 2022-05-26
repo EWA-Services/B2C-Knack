@@ -177,6 +177,8 @@ if (last_cutoff_day != "-") {
 
 // New Laravel Paybacks API Endpoint
 
+$("head").append('<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">');
+
 var ionic_user_id = $("#view_158 .field_150 span span").text();
 var paydays_url = encodeURI("http://128.199.123.115/api/staging_knack/users/next-paydays/" + ionic_user_id);
 
