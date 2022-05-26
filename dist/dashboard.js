@@ -187,10 +187,10 @@ console.log(ionic_user_id);
 
 if (payday_mode.toUpperCase().trim() == "API") {
   
-  var paydays_url = encodeURI("https://script.google.com/macros/s/AKfycbxjUcslqN__FunFgq7z3DfkTY6HR3xJaQOLkoyP9DsQU403LbeWpaIVoDOv1omX-z7X/exec");
+  var paydays_url = "https://script.google.com/macros/s/AKfycbxjUcslqN__FunFgq7z3DfkTY6HR3xJaQOLkoyP9DsQU403LbeWpaIVoDOv1omX-z7X/exec";
   var paydays_response;
 
-  $.ajax({
+  /* $.ajax({
       url: paydays_url,
       type: "POST",
       async: false,
@@ -209,7 +209,25 @@ if (payday_mode.toUpperCase().trim() == "API") {
           console.log(response);
           paydays_response = response;
       }
+  }); */
+
+  $.ajax({
+    url: paydays_url,
+    type: "POST",
+    contentType: "application/json",
+    dataType: "jsonp",
+    data : {
+      "apiPath": "requestNextPayday",
+      "apiKey": "nYJPMrwQxkNcF_88h4@n",
+      "ionicId": ionic_user_id
+    },
+    success: function(response) {
+        console.log("Payday Received !");
+        console.log(response);
+        paydays_response = response;
+    }
   });
+
   console.log(paydays_response);
 }
 
