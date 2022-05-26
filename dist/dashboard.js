@@ -203,10 +203,8 @@ if (payday_mode.toUpperCase().trim() == "API") {
     }
   });
 
-  console.log("get API payday");
   if (paydays_response["success"] == true) {
     var payday = paydays_response["nextPaydayOptions"][0];
-    console.log(payday);
   }
 }
 

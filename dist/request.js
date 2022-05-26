@@ -329,23 +329,6 @@ $("#view_133 form button.submission").prop("disabled", true);
 var max_number_requests = parseFloat($("#view_64 .field_91 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_64 .field_91 .kn-detail-body").text().replace(/,/g, ""));
 var input_val = 0;
 
-// var current_month = new Date().getFullYear() + "-" + ((new Date().getMonth() + 1) < 10 ? "0" + (new Date().getMonth() + 1) : (new Date().getMonth() + 1));
-// var cutoff_day = "-";
-
-// var months = $("#view_97 .kn-table tbody td.field_88 span");
-// var cutoffs = $("#view_97 .kn-table tbody td.field_82 span");
-// var paydays = $("#view_97 .kn-table tbody td.field_76 span");
-
-// $.each(months, function(i,v) {
-//   if (v.textContent.trim() == current_month) {
-//     cutoff_day = cutoffs[i].textContent.trim();
-//     payday = paydays[i].textContent.trim();
-//   }
-// });
-
-// var cutoff_day = cutoff_day == "" ? "-" : cutoff_day;
-// var payday = payday == "" ? "-" : payday;
-
 var cutoff_day = new Date(2025,0,1);
 var payday = new Date(2025,0,1);
 
@@ -376,6 +359,35 @@ if (+cutoff_day == +new Date(2025,0,1)) {
 }
 /* var new_clause_html = $("#view_133 #security-clause p.sc-instructions").html().replace("{payday_current}", payday);
 $("#view_133 #security-clause p.sc-instructions").replaceWith('<p class="sc-instructions">' + new_clause_html + "</p>"); */
+
+var ionic_user_id = $("#view_159 .field_150 span span").text();
+var payday_mode = $("#view_159 .field_167 span span").text();
+
+if (payday_mode.toUpperCase().trim() == "API") {
+  
+  var paydays_url = "https://script.google.com/macros/s/AKfycbxjUcslqN__FunFgq7z3DfkTY6HR3xJaQOLkoyP9DsQU403LbeWpaIVoDOv1omX-z7X/exec";
+  var paydays_response;
+
+  $.ajax({
+    url: paydays_url,
+    type: "POST",
+    async: false,
+    dataType: "json",
+    data : JSON.stringify({apiPath: "requestNextPayday", apiKey: "nYJPMrwQxkNcF_88h4@n", ionicId: ionic_user_id}),
+    success: function(response) {
+        console.log("success");
+        paydays_response = response;
+    },
+    error: function(xhr, status, error) {
+        console.log("error");
+        console.log(error);
+    }
+  });
+
+  if (paydays_response["success"] == true) {
+    var payday = paydays_response["nextPaydayOptions"][0];
+  }
+}
 
 // Calculate Withdrawable Amount Variables
 var base_salary = parseFloat($("#view_65 .field_44 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_65 .field_44 .kn-detail-body").text().replace(/,/g, ""));
