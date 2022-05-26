@@ -182,17 +182,21 @@ $("head").append('<meta http-equiv="Content-Security-Policy" content="upgrade-in
 var ionic_user_id = $("#view_158 .field_150 span span").text();
 var paydays_url = encodeURI("http://128.199.123.115/api/staging_knack/users/next-paydays/" + ionic_user_id);
 
+var paydays_response;
 $.ajax({
     url: paydays_url,
     type: "GET",
+    async: false,
     headers: {
       "Authorization": "528bA7490d7f4c056b0hAde4"
     },
     success: function(response) {
         console.log("Payday Received !");
-        console.log(response);
+        // console.log(response);
+        paydays_response = response;
     }
 });
+console.log(paydays_response);
 
 // Withdrawable Amount and Other Conditions
 
