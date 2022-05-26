@@ -177,26 +177,35 @@ if (last_cutoff_day != "-") {
 
 // New Laravel Paybacks API Endpoint
 
-$("head").append('<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">');
+// $("head").append('<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">');
 
 var ionic_user_id = $("#view_158 .field_150 span span").text();
-var paydays_url = encodeURI("http://128.199.123.115/api/staging_knack/users/next-paydays/" + ionic_user_id);
+var payday_mode = $("#view_158 .field_167 span span").text();
 
-var paydays_response;
-$.ajax({
-    url: paydays_url,
-    type: "GET",
-    async: false,
-    headers: {
-      "Authorization": "528bA7490d7f4c056b0hAde4"
-    },
-    success: function(response) {
-        console.log("Payday Received !");
-        // console.log(response);
-        paydays_response = response;
-    }
-});
-console.log(paydays_response);
+if (payday_mode.toUpperCase().trim() == "API") {
+  
+  var paydays_url = encodeURI("https://script.google.com/macros/s/AKfycbxjUcslqN__FunFgq7z3DfkTY6HR3xJaQOLkoyP9DsQU403LbeWpaIVoDOv1omX-z7X/exec");
+  var paydays_response;
+
+  $.ajax({
+      url: paydays_url,
+      type: "POST",
+      async: false,
+      contentType: "application/json",
+      dataType: "json",
+      data : {
+        "apiPath": "requestNextPayday",
+        "apiKey": "nYJPMrwQxkNcF_88h4@n",
+        "ionicId": ionic_user_id
+      },
+      success: function(response) {
+          console.log("Payday Received !");
+          // console.log(response);
+          paydays_response = response;
+      }
+  });
+  console.log(paydays_response);
+}
 
 // Withdrawable Amount and Other Conditions
 
