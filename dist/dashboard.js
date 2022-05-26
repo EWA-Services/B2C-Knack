@@ -205,6 +205,7 @@ if (payday_mode.toUpperCase().trim() == "API") {
 
   if (paydays_response["success"] == true) {
     var payday = paydays_response["nextPaydayOptions"][0];
+    var payday = payday.split("-")[2] + "/" + payday.split("-")[1] + "/" + payday.split("-")[0];
   }
 }
 
