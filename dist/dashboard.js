@@ -206,7 +206,7 @@ if (payday_mode.toUpperCase().trim() == "API") {
       },
       success: function(response) {
           console.log("Payday Received !");
-          // console.log(response);
+          console.log(response);
           paydays_response = response;
       }
   });
