@@ -182,9 +182,6 @@ if (last_cutoff_day != "-") {
 var ionic_user_id = $("#view_158 .field_150 span span").text();
 var payday_mode = $("#view_158 .field_167 span span").text();
 
-console.log(payday_mode);
-console.log(ionic_user_id);
-
 if (payday_mode.toUpperCase().trim() == "API") {
   
   var paydays_url = "https://script.google.com/macros/s/AKfycbxjUcslqN__FunFgq7z3DfkTY6HR3xJaQOLkoyP9DsQU403LbeWpaIVoDOv1omX-z7X/exec";
@@ -198,7 +195,6 @@ if (payday_mode.toUpperCase().trim() == "API") {
     data : JSON.stringify({apiPath: "requestNextPayday", apiKey: "nYJPMrwQxkNcF_88h4@n", ionicId: ionic_user_id}),
     success: function(response) {
         console.log("success");
-        console.log(response);
         paydays_response = response;
     },
     error: function(xhr, status, error) {
@@ -207,8 +203,11 @@ if (payday_mode.toUpperCase().trim() == "API") {
     }
   });
 
-  console.log("global variable");
-  console.log(paydays_response);
+  console.log("get API payday");
+  if (paydays_response["success"] == true) {
+    var payday = paydays_response["nextPaydayOptions"][0];
+    console.log(payday);
+  }
 }
 
 // Withdrawable Amount and Other Conditions
