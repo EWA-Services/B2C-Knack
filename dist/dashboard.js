@@ -182,7 +182,7 @@ var paydays_url = encodeURI("http://128.199.123.115/api/staging_knack/users/next
 
 $.ajax({
     url: paydays_url,
-    type: "POST",
+    type: "GET",
     headers: {
       "Authorization": "528bA7490d7f4c056b0hAde4"
     },
