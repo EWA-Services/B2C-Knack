@@ -179,7 +179,7 @@ if (last_cutoff_day != "-") {
 
 // $("head").append('<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">');
 
-var ionic_user_id = $("#view_158 .field_150 span span").text();
+/* var ionic_user_id = $("#view_158 .field_150 span span").text();
 var payday_mode = $("#view_158 .field_167 span span").text();
 
 console.log(payday_mode);
@@ -189,27 +189,6 @@ if (payday_mode.toUpperCase().trim() == "API") {
   
   var paydays_url = "https://script.google.com/macros/s/AKfycbxjUcslqN__FunFgq7z3DfkTY6HR3xJaQOLkoyP9DsQU403LbeWpaIVoDOv1omX-z7X/exec";
   var paydays_response;
-
-  /* $.ajax({
-      url: paydays_url,
-      type: "POST",
-      async: false,
-      contentType: "application/json",
-      dataType: "jsonp",
-      data : {
-        "apiPath": "requestNextPayday",
-        "apiKey": "nYJPMrwQxkNcF_88h4@n",
-        "ionicId": ionic_user_id
-      },
-      headers: {
-        "Access-Control-Allow-Origin": "*"
-      },
-      success: function(response) {
-          console.log("Payday Received !");
-          console.log(response);
-          paydays_response = response;
-      }
-  }); */
 
   $.ajax({
     url: paydays_url,
@@ -229,7 +208,7 @@ if (payday_mode.toUpperCase().trim() == "API") {
   });
 
   console.log(paydays_response);
-}
+} */
 
 // Withdrawable Amount and Other Conditions
 
