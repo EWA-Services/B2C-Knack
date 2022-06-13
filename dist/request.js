@@ -362,6 +362,7 @@ $("#view_133 #security-clause p.sc-instructions").replaceWith('<p class="sc-inst
 
 var ionic_user_id = $("#view_159 .field_150 span span").text();
 var payday_mode = $("#view_159 .field_167 span span").text();
+var cutoff_days_param = parseInt($("#view_65 .field_169 .kn-detail-body").text());
 
 if (payday_mode.toUpperCase().trim() == "API") {
   
@@ -386,7 +387,10 @@ if (payday_mode.toUpperCase().trim() == "API") {
 
   if (paydays_response["success"] == true) {
     var payday = paydays_response["nextPaydayOptions"][0];
+    var cutoff_day = payday;
+    var cutoff_day = cutoff_day.setDate(cutoff_day.getDate() - cutoff_days_param);
     var payday = payday.split("-")[2] + "/" + payday.split("-")[1] + "/" + payday.split("-")[0];
+    var cutoff_day = cutoff_day.split("-")[2] + "/" + cutoff_day.split("-")[1] + "/" + cutoff_day.split("-")[0];
   }
 }
 
