@@ -387,7 +387,7 @@ if (payday_mode.toUpperCase().trim() == "API") {
 
   if (paydays_response["success"] == true) {
     var payday = paydays_response["nextPaydayOptions"][0];
-    var cutoff_day = payday;
+    var cutoff_day = new Date(payday);
     var cutoff_day = cutoff_day.setDate(cutoff_day.getDate() - cutoff_days_param);
     var payday = payday.split("-")[2] + "/" + payday.split("-")[1] + "/" + payday.split("-")[0];
     var cutoff_day = cutoff_day.split("-")[2] + "/" + cutoff_day.split("-")[1] + "/" + cutoff_day.split("-")[0];
