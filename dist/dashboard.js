@@ -208,6 +208,7 @@ if (payday_mode.toUpperCase().trim() == "API") {
     var payday = paydays_response["nextPaydayOptions"][0];
     var cutoff_day = new Date(payday);
     var cutoff_day = cutoff_day.setDate(cutoff_day.getDate() - cutoff_days_param);
+    console.log(cutoff_day)
     var payday = payday.split("-")[2] + "/" + payday.split("-")[1] + "/" + payday.split("-")[0];
     var cutoff_day = (cutoff_day.getDate() < 10 ? "0" + cutoff_day.getDate() : cutoff_day.getDate()) + "/" + (cutoff_day.getMonth() < 9 ? "0" : "") + (cutoff_day.getMonth()+1) + "/" + cutoff_day.getFullYear();
   }
